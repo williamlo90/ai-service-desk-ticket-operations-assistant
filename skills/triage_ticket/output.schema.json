@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:service-desk:skills:triage_ticket:output:v1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "skill": {
+      "const": "triage_ticket"
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "enum": [
+            "access_request",
+            "service_incident",
+            "repeated_ticket",
+            "unsupported"
+          ]
+        },
+        "decision": {
+          "enum": [
+            "prepare",
+            "clarification",
+            "escalate"
+          ]
+        },
+        "missing": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "category",
+        "decision",
+        "missing",
+        "sources"
+      ]
+    }
+  },
+  "required": [
+    "skill",
+    "schema_version",
+    "result"
+  ]
+}

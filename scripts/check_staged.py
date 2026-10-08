@@ -8,7 +8,7 @@ bad = []
 for path in filter(None, paths):
     leaf = path.rsplit('/',1)[-1]
     if ((leaf.startswith('.env') and leaf != '.env.example')
-            or path.startswith(('local/','node_modules/')) or '__pycache__/' in path):
+            or set(path.split('/')) & {'local','node_modules','dist','__pycache__','.venv'}):
         bad.append(path)
         continue
     if path.endswith('.png'):

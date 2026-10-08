@@ -8,3 +8,17 @@ working tree while another phase is being implemented.
 Phase 1 is the initial snapshot and includes work performed before the loop,
 including older Docker evidence. Phase 2–4 contain the incremental changes.
 Connected acceptance is deferred to Phase 5; no offline checkpoint closes it.
+
+## Checkpoint belajar
+
+| Phase | Fokus | Tes pada commit |
+| --- | --- | --- |
+| [1](phase-1.md) | Fondasi API, identitas dan lifecycle | 39 Python |
+| [2](phase-2.md) | Journey dan target simulator | 53 Python |
+| [3](phase-3.md) | SQL/Jira/callback adapter contracts | 62 Python |
+| [4](phase-4.md) | MCP, client, skill dan AI adapter | 74 Python + 6 MCP |
+
+Buka `git log --oneline --reverse` untuk empat commit. Pelajari dengan
+`git show <commit> --stat`, lalu baca catatan phase dan tes yang relevan.
+Tidak perlu menjalankan Docker atau membuka .env untuk belajar checkpoint ini.
+Lanjutannya adalah [handoff Phase 5](../phase-5/HANDOFF.md).

@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:service-desk:skills:verify_resolution:output:v1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "skill": {
+      "const": "verify_resolution"
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "case_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "status": {
+          "enum": [
+            "requested",
+            "accepted",
+            "running",
+            "succeeded",
+            "failed",
+            "unknown"
+          ]
+        },
+        "evidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "matches": {
+              "type": "boolean"
+            },
+            "at": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "reference": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "matches",
+            "at",
+            "reference"
+          ]
+        }
+      },
+      "required": [
+        "case_id",
+        "status",
+        "evidence"
+      ]
+    }
+  },
+  "required": [
+    "skill",
+    "schema_version",
+    "result"
+  ]
+}

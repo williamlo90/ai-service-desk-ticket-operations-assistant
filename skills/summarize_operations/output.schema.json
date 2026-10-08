@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:service-desk:skills:summarize_operations:output:v1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "skill": {
+      "const": "summarize_operations"
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tenant": {
+          "type": "string"
+        },
+        "total": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "closed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reopened": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "escalated": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "tenant",
+        "total",
+        "closed",
+        "reopened",
+        "escalated"
+      ]
+    }
+  },
+  "required": [
+    "skill",
+    "schema_version",
+    "result"
+  ]
+}

@@ -19,8 +19,17 @@ Implemented modules:
 - `cases.py`: synthetic intake, repository protocol and bounded memory implementation.
 - `api.py`: WSGI create/read API tested without running a server. See [API.md](API.md).
 
-Current suite: 39 tests (22 original core tests plus 17 API tests). Docker-backed
-integration is deferred; no API listener or real local API credentials are configured.
+- `journeys.py`, `policy.py`, `store.py`, `simulator.py`: shared deterministic journeys,
+  bounded memory state and an independent synthetic target/effect ledger.
+- `postgres.py`, `migrations.py`, `migrations/`: transactional repositories and schema.
+- `jira_update.py`, `events.py`: guarded update/reconciliation and signed callback hints.
+- `skills.py`, `ai.py`: reusable handlers and four structured-data provider adapters.
+- `bridge.py`: synthetic JSON-lines subprocess API for the TypeScript MCP harness.
+
+Current suite: 74 Python tests; 6 MCP tests run separately in ../mcp-server.
+PostgreSQL adapter uses pinned optional requirements-postgres.txt only during
+runtime integration; unit tests use stdlib spies. No API listener or real local
+API credentials are configured. See ../docs/phase-5/HANDOFF.md for connected gates.
 
 Construct `JiraConnection` from trusted server configuration and an `Actor` only
 after authentication. Ticket text is untrusted data and cannot assign tenant or role.
@@ -28,14 +37,14 @@ The reader has no .env loader and does not call the network until `read` is invo
 Credentials are omitted from repr, but remain secrets in memory: do not dump objects,
 request headers, traceback locals or dataclass dictionaries.
 
-The pure lifecycle predicates do not implement a persisted state machine. In Phase
-1B the application must bind authenticated identity, verify target evidence, and
-run predicates and state/version updates in a database transaction. Durable audit,
-idempotency, concurrency, callback ordering and restarts are not proven by unit tests.
+JourneyService binds the pure predicates to state/version updates and target
+read-back. SQL adapters express transactions, but real PostgreSQL concurrency,
+audit rollback, restarts and RLS are not proven by spies or memory-store tests.
 Do not expose a network endpoint that accepts an Actor/Approval/VerifiedOutcome
-directly from a client. FastAPI deployment, identity-provider integration, migrations
-and the connected n8n prototype remain pending. The in-process WSGI adapter uses
-explicit development token bindings. No read-only test proves a token lacks write access.
+directly from client data. FastAPI deployment, production identity integration,
+actual migrations and connected n8n/code-led comparison remain pending. The WSGI
+adapter uses explicit development identity bindings. The MCP bridge has a separate
+in-memory journey store; connecting entry points to one durable store is Phase 5.
 
 The existing `../scripts/check_jira_read.py` remains the separately authorized
 live diagnostic. It is not run by this unit suite, and its previous live result is

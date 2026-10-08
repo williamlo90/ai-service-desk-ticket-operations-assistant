@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:service-desk:skills:verify_resolution:input:v1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "case_id": {
+      "type": "string",
+      "format": "uuid"
+    }
+  },
+  "required": [
+    "case_id"
+  ]
+}

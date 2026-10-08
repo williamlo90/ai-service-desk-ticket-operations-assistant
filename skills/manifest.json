@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "package_version": "0.1.0",
+  "implementation": "service_desk.skills.SkillRunner.run",
+  "callers": [
+    "interactive",
+    "automation"
+  ],
+  "skills": [
+    {
+      "name": "triage_ticket",
+      "version": 1,
+      "input": "triage_ticket/input.schema.json",
+      "output": "triage_ticket/output.schema.json",
+      "side_effect": "read",
+      "retries": 0,
+      "binding": "service_desk.skills.SkillRunner.run",
+      "documentation": "triage_ticket/SKILL.md"
+    },
+    {
+      "name": "prepare_resolution",
+      "version": 1,
+      "input": "prepare_resolution/input.schema.json",
+      "output": "prepare_resolution/output.schema.json",
+      "side_effect": "proposal_write",
+      "retries": 0,
+      "binding": "service_desk.skills.SkillRunner.run",
+      "documentation": "prepare_resolution/SKILL.md"
+    },
+    {
+      "name": "verify_resolution",
+      "version": 1,
+      "input": "verify_resolution/input.schema.json",
+      "output": "verify_resolution/output.schema.json",
+      "side_effect": "evidence_write",
+      "retries": 0,
+      "binding": "service_desk.skills.SkillRunner.run",
+      "documentation": "verify_resolution/SKILL.md"
+    },
+    {
+      "name": "summarize_operations",
+      "version": 1,
+      "input": "summarize_operations/input.schema.json",
+      "output": "summarize_operations/output.schema.json",
+      "side_effect": "read",
+      "retries": 0,
+      "binding": "service_desk.skills.SkillRunner.run",
+      "documentation": "summarize_operations/SKILL.md"
+    }
+  ]
+}

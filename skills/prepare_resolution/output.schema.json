@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:service-desk:skills:prepare_resolution:output:v1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "skill": {
+      "const": "prepare_resolution"
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "case_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "proposal": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "tenant_id": {
+              "type": "string"
+            },
+            "case_id": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "case_version": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "payload_hash": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "policy_version": {
+              "type": "string"
+            },
+            "requester_id": {
+              "type": "string"
+            },
+            "payload": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "action": {
+                      "const": "grant_read_access"
+                    },
+                    "tenant": {
+                      "type": "string"
+                    },
+                    "requester": {
+                      "type": "string"
+                    },
+                    "resource": {
+                      "const": "reports"
+                    },
+                    "access": {
+                      "const": "read-only"
+                    }
+                  },
+                  "required": [
+                    "action",
+                    "tenant",
+                    "requester",
+                    "resource",
+                    "access"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "action": {
+                      "const": "restart_service"
+                    },
+                    "tenant": {
+                      "type": "string"
+                    },
+                    "requester": {
+                      "type": "string"
+                    },
+                    "service": {
+                      "const": "demo-api"
+                    }
+                  },
+                  "required": [
+                    "action",
+                    "tenant",
+                    "requester",
+                    "service"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "action": {
+                      "const": "link_tickets"
+                    },
+                    "tenant": {
+                      "type": "string"
+                    },
+                    "requester": {
+                      "type": "string"
+                    },
+                    "source": {
+                      "const": "SD-2"
+                    },
+                    "related": {
+                      "const": "SD-1"
+                    }
+                  },
+                  "required": [
+                    "action",
+                    "tenant",
+                    "requester",
+                    "source",
+                    "related"
+                  ]
+                }
+              ]
+            }
+          },
+          "required": [
+            "tenant_id",
+            "case_id",
+            "case_version",
+            "payload_hash",
+            "policy_version",
+            "requester_id",
+            "payload"
+          ]
+        },
+        "approval_required": {
+          "const": true
+        }
+      },
+      "required": [
+        "case_id",
+        "version",
+        "proposal",
+        "approval_required"
+      ]
+    }
+  },
+  "required": [
+    "skill",
+    "schema_version",
+    "result"
+  ]
+}

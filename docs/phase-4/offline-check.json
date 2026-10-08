@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-08",
+  "phase": 4,
+  "status": "offline_passed",
+  "python_version": "3.13.6",
+  "node_version": "22.19.0",
+  "python_tests": 74,
+  "mcp_tests": 6,
+  "typescript_build": "passed",
+  "mcp_protocol": "2025-11-25",
+  "commands": [
+    {
+      "cwd": "backend",
+      "command": "python -B -m unittest discover -s tests"
+    },
+    {
+      "cwd": "mcp-server",
+      "command": "npm test"
+    }
+  ],
+  "docker_used": false,
+  "credential_file_read": false,
+  "jira_live_calls": 0,
+  "model_live_calls": 0,
+  "postgres_connected": false,
+  "frozen_reference_evaluator_passed": false,
+  "model_selection": null,
+  "quality_benchmark": null,
+  "cost": null,
+  "evidence_kind": "local Python unit/contract tests and actual SDK stdio client/server subprocess tests",
+  "limitations": [
+    "Memory state is process-local; no persisted restart proof",
+    "SQL DB-API spies do not prove PostgreSQL semantics",
+    "Provider outputs are fake transport fixtures, not model quality evidence",
+    "No production identity lifecycle or approval UI",
+    "Cancellation after dispatch does not imply rollback",
+    "Package installation required npm registry access; tests are local"
+  ],
+  "sha256": {
+    "backend/service_desk/ai.py": "107af8da55bd9bd370152deb6645fc1da968fa352fce8e4faeed3e67728d80fe",
+    "backend/service_desk/skills.py": "76c65f5f617c01196574938de3631f2dc28dac465f8456bbd7a57349a7fadc40",
+    "backend/service_desk/bridge.py": "d7e6d13d5aa29abf9612e50bee85041f6169578cff9a57ca722138175f61b54f",
+    "mcp-server/src/server.ts": "83acca204fc88e92ecc926714104fdec0fec3c38e75d5730fa13d97391fc683e",
+    "mcp-server/src/backend.ts": "1483a286bc150be29559b78e9b4a7465b26a122b2134fb965bbd2a0d0485726e",
+    "mcp-server/src/client.ts": "df90ed9391b132b9bc4f69e7e15332a86d181908def5b9f6964e9798e348092d",
+    "mcp-server/package-lock.json": "d08966a0c6a4e294de1c8f5775235fca976561e7d2d10723b68db64696ce28e2",
+    "backend/tests/test_ai_skills.py": "8030444f92edfb56a9d3b97c92579854c00784f1c4e7fb0b1a7156ba70a3eb5b",
+    "mcp-server/test/protocol.test.mjs": "ef7a3ad0f6d2916292b91270135a1a8bb7955af3c13ccf128b3ae4a80b1e0fc4",
+    "skills/manifest.json": "95573435d46eba1ee6f71f885215cce669e2e9b97e0395b73797f81ea742e96c"
+  },
+  "checksum_basis": "File content with CRLF normalized to LF for reproducible Windows/Git snapshots"
+}

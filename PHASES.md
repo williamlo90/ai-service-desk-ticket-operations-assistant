@@ -64,15 +64,15 @@ server, durability and Jira write permissions remain Phase 5 requirements.
 
 ## Phase 4 — Client, MCP and AI preparation
 
-- [ ] TypeScript reference client and actual MCP stdio protocol server/client tests.
-- [ ] Read/prepare/approved-execute/verify/reopen tools use the same Python controls.
-- [ ] Strict tool schemas, identity binding, output bounds and sanitized errors.
-- [ ] Four reusable executable skills: triage, prepare, verify, summarize.
-- [ ] Provider adapters for OpenAI, Claude, Grok and Ollama, structured-output
+- [x] TypeScript reference client and actual MCP stdio protocol server/client tests.
+- [x] Read/prepare/approved-execute/verify/reopen tools use the same Python controls.
+- [x] Strict tool schemas, identity binding, output bounds and sanitized errors.
+- [x] Four reusable executable skills: triage, prepare, verify, summarize.
+- [x] Provider adapters for OpenAI, Claude, Grok and Ollama, structured-output
   validation, prompt/schema versions, scoped retrieval and local-only behavior.
-- [ ] Mock-provider tests for invalid output, unsupported citations, failures and
+- [x] Mock-provider tests for invalid output, unsupported citations, failures and
   missing usage; reuse skills from interactive and automation callers.
-- [ ] Learning checkpoints and a concrete integration handoff checklist.
+- [x] Learning checkpoints and a concrete integration handoff checklist.
 
 Gate: client/protocol and skill contracts pass offline. Real credentials, hosted
 canaries, model artifacts/licenses and local inference remain unvalidated.

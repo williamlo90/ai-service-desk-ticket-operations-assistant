@@ -2,7 +2,18 @@
 
 Proyek 01: **AI Service Desk & Ticket Operations Assistant**
 
-Tanggal rencana: 2026-10-08. Status: **rencana implementasi; belum ada implementasi baru dalam folder ini**. Checklist hanya dicentang setelah artefak dan verifikasinya tersedia.
+Tanggal rencana: 2026-10-08. Status: **empat provider adapter tersedia dengan fake-transport tests; canary live dan inference lokal pending**. Checklist hanya dicentang setelah artefak dan verifikasinya tersedia.
+
+Implementasi offline: backend/service_desk/ai.py. Semua provider memiliki
+kontrak data yang sama, source filtering sebelum prompt, validasi kutipan,
+batas input/output, timeout dan error sanitization. Local-only menolak provider
+hosted dan tidak melakukan fallback. Tidak ada default model/key. Retrieval
+masih lexical atas sumber eksplisit, belum embedding/pgvector.
+
+[Catatan Phase 4](docs/learning/phase-4.md) menjelaskan fake-provider tests dan
+referensi API. Tidak ada request live, biaya terukur, model download atau
+inference lokal pada checkpoint ini. Cancellation urllib aktif belum tersedia;
+pemeriksaan cancellation dilakukan sebelum/sesudah transport dengan timeout.
 
 ## Profil yang wajib tersedia
 

@@ -2,7 +2,7 @@
 
 Proyek 01: **AI Service Desk & Ticket Operations Assistant**
 
-Tanggal rencana: 2026-10-08. Status: **rencana implementasi; belum ada implementasi baru dalam folder ini**. Checklist hanya dicentang setelah artefak dan verifikasinya tersedia.
+Tanggal rencana: 2026-10-08. Status: **MCP stdio dan client TypeScript tersedia, 6 protocol tests lulus; platform/SQL connected acceptance pending**. Checklist hanya dicentang setelah artefak dan verifikasinya tersedia.
 
 ## Arsitektur keputusan
 
@@ -21,9 +21,24 @@ MCP server proyek ini punya capability spesifik, bukan server generik yang menge
 | `ticket.verify_outcome` | read | action ID → hasil yang diverifikasi |
 | `ticket.reopen` | write | case ID + evidence + approved reason → status baru |
 
+## Implementasi checkpoint offline
+
+Lihat [MCP README](mcp-server/README.md). Delapan tools memakai shared Python
+service melalui private subprocess bridge; belum HTTP/PostgreSQL/Jira. Input
+identity tidak tersedia pada schema tool. Approval dibuat melalui jalur supervisor
+terpisah; bridge/MCP tidak memiliki approve tool. Request/output caps, scoped
+pagination, sanitized errors dan strict per-tool result schemas sudah tersedia.
+
+Tabel di atas adalah kontrak target produk. V1 apply memakai case_id dan
+expected_version, lalu service mencari approval snapshot dan operation ID
+tersimpan. Verify/reopen menerima case_id dan membaca evidence dari target,
+bukan mempercayai evidence yang dikirim model. create_synthetic dan close juga
+tersedia. Verify adalah evidence/audit write. Credential expiry, durable recovery,
+Jira integration dan correlation lintas platform tetap memerlukan Phase 5/7.
+
 ## Syarat kontrak
 
-- [ ] Pin MCP SDK dan protocol version yang didukung client; gunakan stdio untuk client lokal bila sesuai, authenticated HTTP untuk remote hanya saat deployment terakhir.
+- [x] Pin MCP SDK dan protocol version yang didukung client; gunakan stdio untuk client lokal bila sesuai, authenticated HTTP untuk remote hanya saat deployment terakhir.
 - [ ] Setiap tool memiliki description, strict input/output schema, source references, stable error codes, pagination bila perlu, dan output limits.
 - [ ] Server memverifikasi identity, tenant/record scope, role, approval payload/version, serta idempotency key; input model bukan otorisasi.
 - [ ] Write tools membutuhkan proposal dan approval sesuai risiko. Approval tidak boleh dibuat oleh agent yang hendak melakukan action tersebut.
