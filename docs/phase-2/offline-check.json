@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "tests_total": 53,
+  "journey_tests": 14,
+  "command": "python -B -m unittest discover -s tests -q",
+  "docker_used": false,
+  "network_used": false,
+  "persisted_reference_gate": "pending Phase 5",
+  "reference_fixture_ids": [
+    "access-success-reopen",
+    "wrong-tenant",
+    "stale-approval",
+    "accepted-then-failed",
+    "timeout-after-effect",
+    "duplicate-late-callback",
+    "concurrent-execute",
+    "restart-after-acceptance",
+    "ambiguous-request",
+    "incident-recovery",
+    "related-ticket",
+    "approval-expired",
+    "auditor-write",
+    "missing-policy"
+  ],
+  "limitations": [
+    "not a frozen-contract evaluator run",
+    "no persisted restart or SQL concurrency",
+    "no architecture winner"
+  ]
+}
