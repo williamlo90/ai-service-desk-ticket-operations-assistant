@@ -1,0 +1,11 @@
+{
+  "schema_version": "service-desk-policy-change-v1",
+  "base": "../phase-0/reference-fixtures.json",
+  "policy": {"version": "access-v2", "approval_ttl_seconds": 300},
+  "base_transform": "Rerun all 14 base cases with access-v2; approval-expired advances exactly 300 rather than 900 fake seconds. Other events/expected outcomes stay unchanged.",
+  "additional_cases": [
+    {"id":"approval-at-459","input":"Grant reports read access","preconditions":["access-v2","valid approval"],"events":["execute at 4:59","target succeeds","verify and close"],"expected":{"closed":true,"mutations":1,"target_requests":1}},
+    {"id":"approval-at-500","input":"Grant reports read access","preconditions":["access-v2","approval age exactly 5 minutes"],"events":["execute at 5:00"],"expected":{"closed":false,"mutations":0,"decision":"expired_approval"}},
+    {"id":"policy-version-invalidation","input":"Grant reports read access","preconditions":["approval under access-v1","case version unchanged"],"events":["activate access-v2","execute prior approved proposal"],"expected":{"closed":false,"mutations":0,"decision":"stale_approval"}}
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "checked_at_utc": "2026-10-08T12:46:15.906184+00:00",
+  "scope": "disposable PostgreSQL database; actual Python adapters",
+  "checks": [
+    "fresh migrations, replay and checksum rejection",
+    "runtime role cannot own/alter schema or update audit",
+    "two-connection intake idempotency and conflicting payload rejection",
+    "RLS denies absent/wrong tenant reads and writes; explicit repository scope",
+    "two-connection CAS permits one winner and one matching audit event",
+    "audit insert failure rolls back aggregate update",
+    "SQL-backed approve/dispatch/verify/close/replay and fresh-process persistence"
+  ],
+  "docker_used": true,
+  "project_dotenv_read": false,
+  "database_secret_read_inside_container": true,
+  "secrets_printed": false,
+  "container_restarted": false,
+  "live_saas_calls": 0,
+  "frozen_evaluator_passed": false,
+  "postgres_version": "16.14 (Debian 16.14-1.pgdg12+1)",
+  "connected_checks": [
+    "real HTTP readiness, identity expiry, auditor denial, Origin guard and correlation ID",
+    "MCP to HTTP to PostgreSQL with separate supervisor approval and target read-back closure",
+    "API process termination/restart and fresh MCP process preserve state and replay operation ID",
+    "persisted adverse target evidence reopens through MCP without repeating effect",
+    "abrupt worker exits after reservation and after committed target effect reconcile without duplicate effects"
+  ],
+  "status": "passed",
+  "temporary_database_and_roles_removed": true,
+  "limitations": [
+    "No database/container restart or backup restore",
+    "Abrupt worker recovery tested with durable synthetic target; independent frozen evaluator pending",
+    "Tenant context comes from trusted service; runtime role is not safe for arbitrary user SQL",
+    "Connected tests use a separate SQLite synthetic target; no live entitlement/service action",
+    "n8n comparison, persistent operator deployment and live Jira/model integration remain pending"
+  ]
+}

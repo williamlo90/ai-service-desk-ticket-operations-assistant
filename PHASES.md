@@ -79,8 +79,26 @@ canaries, model artifacts/licenses and local inference remain unvalidated.
 
 ## Phase 5 — Reserved integration session and architecture decision
 
-Only start after resource availability is confirmed and the user resumes runtime
-work. Use this project's bounded stack, one candidate at a time.
+Commit status: William requested an intermediate commit of the validated local
+checkpoint. This supersedes waiting for the entire phase gate before committing;
+Phase 5 remains in progress.
+
+Docker use authorized by William after the offline loop. Initial real PostgreSQL
+adapter checks passed (docs/phase-5/postgres-contract-check.json) in a disposable
+database on the existing project container. MCP/HTTP/PostgreSQL approval flow and
+abrupt-worker recovery against a durable synthetic target also pass. William is
+business owner; live target is not ready. Each reference engine passes 14 base and
+17 policy-v2 cases; ADR-001 retains shared controls without selecting an engine
+before broader scheduling/effort evidence. A separate native wait test passes
+approval/target wait recovery across two abrupt engine restarts per candidate,
+with one target effect each. Seven recovery cases per engine also pass with a
+persisted four-read budget, bounded backoff and review escalation. A separate
+70-second timer crash test passes both engines. Restored baseline unit regression
+passes 47 tests; shared-policy edit/rollback passes three boundaries per copy.
+Short-timer crash, transport retry, distributed leases, full baseline feature
+parity and operator maintenance effort remain open.
+Full Phase 5 gate remains open. Use
+this project's bounded stack, one candidate at a time.
 
 1. Install from pinned dependencies; configure real local service identity; run
    actual HTTP auth/readiness and PostgreSQL migrations/permissions/transactions.

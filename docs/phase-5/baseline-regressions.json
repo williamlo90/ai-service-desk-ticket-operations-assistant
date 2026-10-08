@@ -1,0 +1,31 @@
+{
+  "run_id": "20261008T133156Z",
+  "baseline_revision": "1a88dbb0e55889303ec83c7abb789fade81f16bf",
+  "overlay_applied": true,
+  "snapshot_hashes_verified": true,
+  "dotenv_copied_or_read": false,
+  "suite_files": [
+    "test_action_recovery_policy",
+    "test_review_snapshot",
+    "test_production_validation_faults",
+    "test_case_webhook",
+    "test_action_service",
+    "test_action_gateway",
+    "test_review_authority",
+    "test_review_service",
+    "test_review_action_materialization",
+    "test_case_domain",
+    "test_workflow_evaluation"
+  ],
+  "totals": {
+    "tests": 47,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "exit_code": 0,
+  "raw_evidence": "local/baseline/20261008T133156Z",
+  "baseline_archive_sha256": "68e3642aae73d6bab70224d8c30d20d13a6f73ffd5a6bd47fefba091a266a8eb",
+  "scope": "Baseline unit regressions only; no new-candidate billing/refund parity or connected baseline replay",
+  "candidate_billing_refund_parity": false
+}

@@ -1,6 +1,6 @@
 # Learning checkpoints
 
-Each phase is one commit. Use `git log --oneline` to locate the checkpoints and
+Phases 1–4 each have one commit. Phase 5 has a user-requested intermediate checkpoint; its final gate remains open. Use `git log --oneline` to locate the checkpoints and
 `git show <commit> --stat` to see scope. Read each phase note before its tests.
 Inspect historical files with `git show <commit>:path`; avoid resetting your
 working tree while another phase is being implemented.
@@ -22,3 +22,8 @@ Buka `git log --oneline --reverse` untuk empat commit. Pelajari dengan
 `git show <commit> --stat`, lalu baca catatan phase dan tes yang relevan.
 Tidak perlu menjalankan Docker atau membuka .env untuk belajar checkpoint ini.
 Lanjutannya adalah [handoff Phase 5](../phase-5/HANDOFF.md).
+
+Phase 5 sedang dikerjakan: baca [perbandingan code-led/n8n-led](phase-5-comparison.md)
+untuk eksperimen 14 skenario, perubahan policy lima menit, native wait/restart,
+dan tujuh skenario recovery per engine. Atas instruksi William, checkpoint
+Phase 5 disimpan sekarang; gate arsitektur dan integrasi live belum lengkap.

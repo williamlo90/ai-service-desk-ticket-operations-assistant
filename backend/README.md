@@ -49,3 +49,18 @@ in-memory journey store; connecting entry points to one durable store is Phase 5
 The existing `../scripts/check_jira_read.py` remains the separately authorized
 live diagnostic. It is not run by this unit suite, and its previous live result is
 not a live validation of the new adapter. No .env was inspected during Phase 1A.
+
+## Phase 5 local integration
+
+runtime_api.py composes PostgreSQL repositories, expiring trusted identities,
+journey endpoints and a separate supervisor approval route. It serves a small
+proposal-review page and binds only 127.0.0.1. Configuration arrives as one JSON
+line on stdin; there is no .env loader. The process must use a constrained runtime
+DB role and explicit synthetic mode. Credentials are not echoed or logged.
+
+durable_target.py stores independent synthetic effects in SQLite. This permits
+abrupt-worker and API restart checks without asserting application state is the
+source of target truth. It never changes actual access or services. Unit suite is
+now 81 tests; connected check results are in ../docs/phase-5/. No test server remains
+running after the harness. Final FastAPI/React deployment and intake-to-journey
+mapping remain future integration work.

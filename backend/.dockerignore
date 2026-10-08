@@ -1,0 +1,9 @@
+*
+!Dockerfile.comparison
+!requirements-postgres.txt
+!service_desk/
+!service_desk/**
+!comparison/
+!comparison/**
+**/.env*
+**/__pycache__/

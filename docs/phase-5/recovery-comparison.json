@@ -1,0 +1,169 @@
+{
+  "run_id": "20261008T132506Z-49bf88",
+  "mode": "synthetic",
+  "project_dotenv_read": false,
+  "results": [
+    {
+      "candidate": "code",
+      "profile": "v1",
+      "status": "executed",
+      "recovery": {
+        "status": "passed",
+        "cases": [
+          {
+            "case": "expired",
+            "passed": true,
+            "reason": "approval_rejected",
+            "attempts": 0,
+            "effects_at_decision": 0,
+            "submit_calls": 0
+          },
+          {
+            "case": "revoked",
+            "passed": true,
+            "reason": "approval_rejected",
+            "attempts": 0,
+            "effects_at_decision": 0,
+            "submit_calls": 0
+          },
+          {
+            "case": "delayed",
+            "passed": true,
+            "reason": "closed",
+            "attempts": 3,
+            "effects_at_decision": 1,
+            "submit_calls": 1
+          },
+          {
+            "case": "failed",
+            "passed": true,
+            "reason": "target_failed",
+            "attempts": 1,
+            "effects_at_decision": 0,
+            "submit_calls": 1
+          },
+          {
+            "case": "lost_response",
+            "passed": true,
+            "reason": "closed",
+            "attempts": 1,
+            "effects_at_decision": 1,
+            "submit_calls": 1
+          },
+          {
+            "case": "read_timeout",
+            "passed": true,
+            "reason": "closed",
+            "attempts": 3,
+            "effects_at_decision": 1,
+            "submit_calls": 1
+          },
+          {
+            "case": "exhausted",
+            "passed": true,
+            "reason": "retry_exhausted",
+            "attempts": 4,
+            "effects_at_decision": 0,
+            "submit_calls": 1
+          }
+        ],
+        "trace_sha256": "daf0cd2fd51bb974e24dd5680216fdc129af3db77276d89676e5a6e70369e4a6"
+      },
+      "cleanup_passed": true
+    },
+    {
+      "candidate": "n8n",
+      "profile": "v1",
+      "status": "executed",
+      "recovery": {
+        "status": "passed",
+        "cases": [
+          {
+            "case": "expired",
+            "passed": true,
+            "reason": "approval_rejected",
+            "attempts": 0,
+            "effects_at_decision": 0,
+            "submit_calls": 0
+          },
+          {
+            "case": "revoked",
+            "passed": true,
+            "reason": "approval_rejected",
+            "attempts": 0,
+            "effects_at_decision": 0,
+            "submit_calls": 0
+          },
+          {
+            "case": "delayed",
+            "passed": true,
+            "reason": "closed",
+            "attempts": 3,
+            "effects_at_decision": 1,
+            "submit_calls": 1
+          },
+          {
+            "case": "failed",
+            "passed": true,
+            "reason": "target_failed",
+            "attempts": 1,
+            "effects_at_decision": 0,
+            "submit_calls": 1
+          },
+          {
+            "case": "lost_response",
+            "passed": true,
+            "reason": "closed",
+            "attempts": 1,
+            "effects_at_decision": 1,
+            "submit_calls": 1
+          },
+          {
+            "case": "read_timeout",
+            "passed": true,
+            "reason": "closed",
+            "attempts": 3,
+            "effects_at_decision": 1,
+            "submit_calls": 1
+          },
+          {
+            "case": "exhausted",
+            "passed": true,
+            "reason": "retry_exhausted",
+            "attempts": 4,
+            "effects_at_decision": 0,
+            "submit_calls": 1
+          }
+        ],
+        "trace_sha256": "0f3f96b795ba3abd2f15a4a7e7a2332cc06df7bb1d79206c43048841df08c769"
+      },
+      "cleanup_passed": true
+    }
+  ],
+  "python_image": "sha256:aade412b657d2434853573778c51a0736a79e8986c17a97717f52734a302c9a3",
+  "n8n_image": "docker.n8n.io/n8nio/n8n@sha256:f6dc0d15bc9620baf5ba1df834ef81ae4e969f778c09300e567217be88f04a96",
+  "engine_winner": null,
+  "raw_trace_location": "local/recovery/20261008T132506Z-49bf88",
+  "source_sha256": {
+    "backend/service_desk/recovery.py": "02cebe8e32c337247aa8b4af17e86cab832d03b1bf121fdcb0c6c2d20a2a1ca1",
+    "backend/service_desk/journeys.py": "98f56fcb548ba80c825a7af80b086d4c220a8890a46868be7cf66d37a0b65071",
+    "scripts/recovery_checks.py": "3c7fd6054ba6c79e1a410e850928af562c9408fbdad807283fccada30e3c8e69",
+    "scripts/compare_orchestrators.py": "9ede3ed9cc3559ce78f543f7f0da4754cb85f6de47d5dbbe006993454382a4e6",
+    "scripts/compare_recovery.py": "6c7bfad9f9e19c9473ddae41b4a7ca549953cd736234df8cfbe8aea8b3812d91",
+    "backend/comparison/__init__.py": "c59af6ac58c1cf3350f8adc4c2e4196a6a351db2823e8d75af7fea27ad372901",
+    "backend/comparison/code_worker.py": "8e64c93ca0772dd9050b986a51f9a2354e1d60caa90d7ad7a204092e5112a94d",
+    "backend/comparison/evaluate.py": "8f58e4c2d0fdefbc13bd84a54cb5150627c69a787fbd81164a68962b46cb2ad0",
+    "backend/comparison/plans.py": "89dc6ab1e29f3260a7c8bf2f3d2107bb7535023ee962ca19f8f99501d0e0018c",
+    "backend/comparison/recovery_worker.py": "a205f7fc4047adddc4bad4192a9c848b4fd9ae1974574b4128efea54b85e1393",
+    "backend/comparison/server.py": "f4960792fba104cdd6b3b9c33a0c957e6691d20258ef0084a8232ef298f7f4c8",
+    "backend/comparison/target.py": "5a3082ab0a96ab115cdc0f42f9ed56e8a77a60e628e52f5a11d99d3388addff0",
+    "backend/comparison/wait_worker.py": "39059c7425242c99a51f6b6aea628041177e0016842f658f90865fb208e32be7"
+  },
+  "limitations": [
+    "Synthetic fixture approvals/target; no live credentials or model calls",
+    "Shared single-worker recovery policy; native code/n8n timer scheduling, not independent policy implementations",
+    "n8n waits under 65 seconds are in-process; timer crash/lease and transport retry coverage pending",
+    "Retries are authoritative read-back only; uncertain mutations are never resubmitted",
+    "Review queue is persisted case escalation, not an operator UI or external notification"
+  ]
+}

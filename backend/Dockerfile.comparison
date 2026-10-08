@@ -1,0 +1,9 @@
+FROM python@sha256:2f17fc044b579bab302c2e8054d3a686e2cb9a83de48e70534b94cd8ebbe06a9
+WORKDIR /app
+COPY requirements-postgres.txt ./
+RUN pip install --no-cache-dir -r requirements-postgres.txt
+COPY service_desk ./service_desk
+COPY comparison ./comparison
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
+USER 1000:1000
+CMD ["python", "-m", "comparison.server"]

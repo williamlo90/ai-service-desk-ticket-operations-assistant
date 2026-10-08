@@ -1,0 +1,612 @@
+{
+  "run_id": "20261008T125940Z-4ae63e",
+  "contract_sha256": "376a9cca0661846b908c0ac1d6bf67143eebae11c3311934490ecd0d362c64c9",
+  "fixture_sha256": "ac3a9a5c75983f5b494788e0095b1805c4261977e69b0d264bf10c91987e309d",
+  "candidate_results": [
+    {
+      "candidate": "code",
+      "profile": "v1",
+      "status": "executed",
+      "worker_restarted_at_checkpoint": true,
+      "segment_wall_ms": [
+        3393.238,
+        2055.341
+      ],
+      "trace_sha256": "0d144a06ac0b5d8c555b3839afb2ad6e86da49dd45539f42444c0a9a68bc26b5",
+      "cleanup_passed": true,
+      "cases": [
+        {
+          "id": "access-success-reopen",
+          "passed": true,
+          "failures": [],
+          "observations": 9,
+          "mutations": 1,
+          "domain_elapsed_ms": 547.827
+        },
+        {
+          "id": "wrong-tenant",
+          "passed": true,
+          "failures": [],
+          "observations": 4,
+          "mutations": 0,
+          "domain_elapsed_ms": 129.088
+        },
+        {
+          "id": "stale-approval",
+          "passed": true,
+          "failures": [],
+          "observations": 5,
+          "mutations": 0,
+          "domain_elapsed_ms": 276.492
+        },
+        {
+          "id": "accepted-then-failed",
+          "passed": true,
+          "failures": [],
+          "observations": 7,
+          "mutations": 0,
+          "domain_elapsed_ms": 367.704
+        },
+        {
+          "id": "timeout-after-effect",
+          "passed": true,
+          "failures": [],
+          "observations": 7,
+          "mutations": 1,
+          "domain_elapsed_ms": 341.52
+        },
+        {
+          "id": "duplicate-late-callback",
+          "passed": true,
+          "failures": [],
+          "observations": 9,
+          "mutations": 1,
+          "domain_elapsed_ms": 469.576
+        },
+        {
+          "id": "concurrent-execute",
+          "passed": true,
+          "failures": [],
+          "observations": 7,
+          "mutations": 1,
+          "domain_elapsed_ms": 481.964
+        },
+        {
+          "id": "restart-after-acceptance",
+          "passed": true,
+          "failures": [],
+          "observations": 8,
+          "mutations": 1,
+          "domain_elapsed_ms": 367.765
+        },
+        {
+          "id": "ambiguous-request",
+          "passed": true,
+          "failures": [],
+          "observations": 2,
+          "mutations": 0,
+          "domain_elapsed_ms": 78.205
+        },
+        {
+          "id": "incident-recovery",
+          "passed": true,
+          "failures": [],
+          "observations": 10,
+          "mutations": 1,
+          "domain_elapsed_ms": 479.353
+        },
+        {
+          "id": "related-ticket",
+          "passed": true,
+          "failures": [],
+          "observations": 8,
+          "mutations": 1,
+          "domain_elapsed_ms": 411.731
+        },
+        {
+          "id": "approval-expired",
+          "passed": true,
+          "failures": [],
+          "observations": 5,
+          "mutations": 0,
+          "domain_elapsed_ms": 195.459
+        },
+        {
+          "id": "auditor-write",
+          "passed": true,
+          "failures": [],
+          "observations": 4,
+          "mutations": 0,
+          "domain_elapsed_ms": 185.481
+        },
+        {
+          "id": "missing-policy",
+          "passed": true,
+          "failures": [],
+          "observations": 2,
+          "mutations": 0,
+          "domain_elapsed_ms": 79.697
+        }
+      ],
+      "passed": 14,
+      "total": 14
+    },
+    {
+      "candidate": "n8n",
+      "profile": "v1",
+      "status": "executed",
+      "worker_restarted_at_checkpoint": true,
+      "segment_wall_ms": [
+        18780.681,
+        14625.428
+      ],
+      "trace_sha256": "e39be99fdddf12de3855fccf6bd4f4313161fb4dfb8293ee8af93bf71f46a97b",
+      "cleanup_passed": true,
+      "cases": [
+        {
+          "id": "access-success-reopen",
+          "passed": true,
+          "failures": [],
+          "observations": 9,
+          "mutations": 1,
+          "domain_elapsed_ms": 377.13
+        },
+        {
+          "id": "wrong-tenant",
+          "passed": true,
+          "failures": [],
+          "observations": 4,
+          "mutations": 0,
+          "domain_elapsed_ms": 161.289
+        },
+        {
+          "id": "stale-approval",
+          "passed": true,
+          "failures": [],
+          "observations": 5,
+          "mutations": 0,
+          "domain_elapsed_ms": 425.311
+        },
+        {
+          "id": "accepted-then-failed",
+          "passed": true,
+          "failures": [],
+          "observations": 7,
+          "mutations": 0,
+          "domain_elapsed_ms": 335.076
+        },
+        {
+          "id": "timeout-after-effect",
+          "passed": true,
+          "failures": [],
+          "observations": 7,
+          "mutations": 1,
+          "domain_elapsed_ms": 383.103
+        },
+        {
+          "id": "duplicate-late-callback",
+          "passed": true,
+          "failures": [],
+          "observations": 9,
+          "mutations": 1,
+          "domain_elapsed_ms": 539.294
+        },
+        {
+          "id": "concurrent-execute",
+          "passed": true,
+          "failures": [],
+          "observations": 7,
+          "mutations": 1,
+          "domain_elapsed_ms": 384.381
+        },
+        {
+          "id": "restart-after-acceptance",
+          "passed": true,
+          "failures": [],
+          "observations": 8,
+          "mutations": 1,
+          "domain_elapsed_ms": 353.494
+        },
+        {
+          "id": "ambiguous-request",
+          "passed": true,
+          "failures": [],
+          "observations": 2,
+          "mutations": 0,
+          "domain_elapsed_ms": 81.01
+        },
+        {
+          "id": "incident-recovery",
+          "passed": true,
+          "failures": [],
+          "observations": 10,
+          "mutations": 1,
+          "domain_elapsed_ms": 462.499
+        },
+        {
+          "id": "related-ticket",
+          "passed": true,
+          "failures": [],
+          "observations": 8,
+          "mutations": 1,
+          "domain_elapsed_ms": 360.727
+        },
+        {
+          "id": "approval-expired",
+          "passed": true,
+          "failures": [],
+          "observations": 5,
+          "mutations": 0,
+          "domain_elapsed_ms": 181.399
+        },
+        {
+          "id": "auditor-write",
+          "passed": true,
+          "failures": [],
+          "observations": 4,
+          "mutations": 0,
+          "domain_elapsed_ms": 154.884
+        },
+        {
+          "id": "missing-policy",
+          "passed": true,
+          "failures": [],
+          "observations": 2,
+          "mutations": 0,
+          "domain_elapsed_ms": 41.389
+        }
+      ],
+      "passed": 14,
+      "total": 14
+    },
+    {
+      "candidate": "code",
+      "profile": "v2",
+      "status": "executed",
+      "worker_restarted_at_checkpoint": true,
+      "segment_wall_ms": [
+        3438.104,
+        2990.581
+      ],
+      "trace_sha256": "acd622c69a3521f2d4976a1198d716e6c6a742bef471c2ae364f699247215f15",
+      "cleanup_passed": true,
+      "cases": [
+        {
+          "id": "access-success-reopen",
+          "passed": true,
+          "failures": [],
+          "observations": 9,
+          "mutations": 1,
+          "domain_elapsed_ms": 454.694
+        },
+        {
+          "id": "wrong-tenant",
+          "passed": true,
+          "failures": [],
+          "observations": 4,
+          "mutations": 0,
+          "domain_elapsed_ms": 147.645
+        },
+        {
+          "id": "stale-approval",
+          "passed": true,
+          "failures": [],
+          "observations": 5,
+          "mutations": 0,
+          "domain_elapsed_ms": 294.192
+        },
+        {
+          "id": "accepted-then-failed",
+          "passed": true,
+          "failures": [],
+          "observations": 7,
+          "mutations": 0,
+          "domain_elapsed_ms": 402.37
+        },
+        {
+          "id": "timeout-after-effect",
+          "passed": true,
+          "failures": [],
+          "observations": 7,
+          "mutations": 1,
+          "domain_elapsed_ms": 422.156
+        },
+        {
+          "id": "duplicate-late-callback",
+          "passed": true,
+          "failures": [],
+          "observations": 9,
+          "mutations": 1,
+          "domain_elapsed_ms": 465.909
+        },
+        {
+          "id": "concurrent-execute",
+          "passed": true,
+          "failures": [],
+          "observations": 7,
+          "mutations": 1,
+          "domain_elapsed_ms": 395.253
+        },
+        {
+          "id": "restart-after-acceptance",
+          "passed": true,
+          "failures": [],
+          "observations": 8,
+          "mutations": 1,
+          "domain_elapsed_ms": 339.026
+        },
+        {
+          "id": "ambiguous-request",
+          "passed": true,
+          "failures": [],
+          "observations": 2,
+          "mutations": 0,
+          "domain_elapsed_ms": 77.76
+        },
+        {
+          "id": "incident-recovery",
+          "passed": true,
+          "failures": [],
+          "observations": 10,
+          "mutations": 1,
+          "domain_elapsed_ms": 487.264
+        },
+        {
+          "id": "related-ticket",
+          "passed": true,
+          "failures": [],
+          "observations": 8,
+          "mutations": 1,
+          "domain_elapsed_ms": 315.652
+        },
+        {
+          "id": "approval-expired",
+          "passed": true,
+          "failures": [],
+          "observations": 5,
+          "mutations": 0,
+          "domain_elapsed_ms": 195.629
+        },
+        {
+          "id": "auditor-write",
+          "passed": true,
+          "failures": [],
+          "observations": 4,
+          "mutations": 0,
+          "domain_elapsed_ms": 198.084
+        },
+        {
+          "id": "missing-policy",
+          "passed": true,
+          "failures": [],
+          "observations": 2,
+          "mutations": 0,
+          "domain_elapsed_ms": 69.66
+        },
+        {
+          "id": "approval-at-459",
+          "passed": true,
+          "failures": [],
+          "observations": 8,
+          "mutations": 1,
+          "domain_elapsed_ms": 441.908
+        },
+        {
+          "id": "approval-at-500",
+          "passed": true,
+          "failures": [],
+          "observations": 5,
+          "mutations": 0,
+          "domain_elapsed_ms": 242.826
+        },
+        {
+          "id": "policy-version-invalidation",
+          "passed": true,
+          "failures": [],
+          "observations": 6,
+          "mutations": 0,
+          "domain_elapsed_ms": 284.888
+        }
+      ],
+      "passed": 17,
+      "total": 17
+    },
+    {
+      "candidate": "n8n",
+      "profile": "v2",
+      "status": "executed",
+      "worker_restarted_at_checkpoint": true,
+      "segment_wall_ms": [
+        18832.006,
+        15031.497
+      ],
+      "trace_sha256": "d266d3ed96a759981636ed97902b28725840539c4aadb4cd496aa9004fda4cab",
+      "cleanup_passed": true,
+      "cases": [
+        {
+          "id": "access-success-reopen",
+          "passed": true,
+          "failures": [],
+          "observations": 9,
+          "mutations": 1,
+          "domain_elapsed_ms": 401.713
+        },
+        {
+          "id": "wrong-tenant",
+          "passed": true,
+          "failures": [],
+          "observations": 4,
+          "mutations": 0,
+          "domain_elapsed_ms": 127.263
+        },
+        {
+          "id": "stale-approval",
+          "passed": true,
+          "failures": [],
+          "observations": 5,
+          "mutations": 0,
+          "domain_elapsed_ms": 197.028
+        },
+        {
+          "id": "accepted-then-failed",
+          "passed": true,
+          "failures": [],
+          "observations": 7,
+          "mutations": 0,
+          "domain_elapsed_ms": 295.938
+        },
+        {
+          "id": "timeout-after-effect",
+          "passed": true,
+          "failures": [],
+          "observations": 7,
+          "mutations": 1,
+          "domain_elapsed_ms": 327.845
+        },
+        {
+          "id": "duplicate-late-callback",
+          "passed": true,
+          "failures": [],
+          "observations": 9,
+          "mutations": 1,
+          "domain_elapsed_ms": 420.712
+        },
+        {
+          "id": "concurrent-execute",
+          "passed": true,
+          "failures": [],
+          "observations": 7,
+          "mutations": 1,
+          "domain_elapsed_ms": 437.985
+        },
+        {
+          "id": "restart-after-acceptance",
+          "passed": true,
+          "failures": [],
+          "observations": 8,
+          "mutations": 1,
+          "domain_elapsed_ms": 454.008
+        },
+        {
+          "id": "ambiguous-request",
+          "passed": true,
+          "failures": [],
+          "observations": 2,
+          "mutations": 0,
+          "domain_elapsed_ms": 42.723
+        },
+        {
+          "id": "incident-recovery",
+          "passed": true,
+          "failures": [],
+          "observations": 10,
+          "mutations": 1,
+          "domain_elapsed_ms": 389.351
+        },
+        {
+          "id": "related-ticket",
+          "passed": true,
+          "failures": [],
+          "observations": 8,
+          "mutations": 1,
+          "domain_elapsed_ms": 422.2
+        },
+        {
+          "id": "approval-expired",
+          "passed": true,
+          "failures": [],
+          "observations": 5,
+          "mutations": 0,
+          "domain_elapsed_ms": 263.558
+        },
+        {
+          "id": "auditor-write",
+          "passed": true,
+          "failures": [],
+          "observations": 4,
+          "mutations": 0,
+          "domain_elapsed_ms": 174.271
+        },
+        {
+          "id": "missing-policy",
+          "passed": true,
+          "failures": [],
+          "observations": 2,
+          "mutations": 0,
+          "domain_elapsed_ms": 50.687
+        },
+        {
+          "id": "approval-at-459",
+          "passed": true,
+          "failures": [],
+          "observations": 8,
+          "mutations": 1,
+          "domain_elapsed_ms": 369.637
+        },
+        {
+          "id": "approval-at-500",
+          "passed": true,
+          "failures": [],
+          "observations": 5,
+          "mutations": 0,
+          "domain_elapsed_ms": 125.186
+        },
+        {
+          "id": "policy-version-invalidation",
+          "passed": true,
+          "failures": [],
+          "observations": 6,
+          "mutations": 0,
+          "domain_elapsed_ms": 235.888
+        }
+      ],
+      "passed": 17,
+      "total": 17
+    }
+  ],
+  "policy_change_fixture_sha256": "94d05f94a0e83fd9cd6059aefa13ffd8f16551eedd16354c049e51c68c1e00bf",
+  "n8n_image": "docker.n8n.io/n8nio/n8n@sha256:f6dc0d15bc9620baf5ba1df834ef81ae4e969f778c09300e567217be88f04a96",
+  "model_calls": 0,
+  "project_dotenv_read": false,
+  "winner": null,
+  "gate": "bounded functional reference experiment, not full architecture acceptance",
+  "limitations": [
+    "Linear reference sequences; not autonomous wait/retry schedulers",
+    "Worker restart at explicit persisted boundary, not native n8n Wait-node resume",
+    "Shared domain runtime is newly implemented; full baseline billing/refund regression comparison pending",
+    "Policy-change correctness tested; active editing effort is unmeasured. Native scheduling/recovery and isolated performance measurements pending",
+    "Existing n8n instance/workflows and other projects unchanged; no architecture winner selected"
+  ],
+  "raw_trace_location": "local/comparison/20261008T125940Z-4ae63e",
+  "source_base_commit": "962cb37447b3eefd77a7fd89a9e297def52944b0",
+  "source_hash_basis": "UTF-8 text normalized LF; shared domain, fixture controller, worker and evaluator used for this run",
+  "source_sha256": {
+    "backend/comparison/__init__.py": "c59af6ac58c1cf3350f8adc4c2e4196a6a351db2823e8d75af7fea27ad372901",
+    "backend/comparison/code_worker.py": "8e64c93ca0772dd9050b986a51f9a2354e1d60caa90d7ad7a204092e5112a94d",
+    "backend/comparison/evaluate.py": "8f58e4c2d0fdefbc13bd84a54cb5150627c69a787fbd81164a68962b46cb2ad0",
+    "backend/comparison/plans.py": "89dc6ab1e29f3260a7c8bf2f3d2107bb7535023ee962ca19f8f99501d0e0018c",
+    "backend/comparison/server.py": "5f10eb433a8567ffe85410483485d530a87f33ef28f27a3db4f597c95e50d56d",
+    "backend/comparison/target.py": "52b2121cbcf0b0d7d6c358045b85efaa75aca9da23d3dede79f144d378ba9dd0",
+    "backend/service_desk/__init__.py": "dccadad27393446e2f46e86bc50c44ce17ab8ee0bc48eea8f78044ac19ee7a63",
+    "backend/service_desk/ai.py": "107af8da55bd9bd370152deb6645fc1da968fa352fce8e4faeed3e67728d80fe",
+    "backend/service_desk/api.py": "7fc307c3a75e9e2df1de4947890f0cf7c5ae83786fa2f1b0c07fa236c9865074",
+    "backend/service_desk/auth.py": "ce3294c9244381fbc76aa61ab214d5777209663ff81487f824798106e852b09c",
+    "backend/service_desk/bridge.py": "d7e6d13d5aa29abf9612e50bee85041f6169578cff9a57ca722138175f61b54f",
+    "backend/service_desk/cases.py": "74946405256736eb69a966d8abb926c2434e60678b91547dee6d6358ecdf7df5",
+    "backend/service_desk/contracts.py": "595af1d7a4e84df524c52868530a342a25ca7ddab6b396d1965651afba65f831",
+    "backend/service_desk/durable_target.py": "121d463e86892b061b85fb1289bb4bac2c542eedcf5917d45fe3228c0a4785bb",
+    "backend/service_desk/events.py": "b54d5ff5f0aabff78ec3bd031bbf4d8193ac9478b149579fe0e906cdec157130",
+    "backend/service_desk/jira.py": "8742411bb984cf70feccbf4767e7f249d9ad60418b6caa54baa094a6c3466354",
+    "backend/service_desk/jira_update.py": "02c20dbc22f6f47c2cb9fc4f19408f094716856b0d62416c67725f10b5590bee",
+    "backend/service_desk/journeys.py": "c896a35ab8a8ffe859e3aad5c16c371a6c4cf44d2321c6a358cb1b2aa3895d3d",
+    "backend/service_desk/lifecycle.py": "a8f53e3f61add67f46b3d4192930be3f84d83e622fb9972576554fdd39db9515",
+    "backend/service_desk/migrations.py": "f0187c3bb818846d39ace9d8a667a75f304345bfd8d4c014836e1e7bd195de9e",
+    "backend/service_desk/policy.py": "716814f678089ef3a7f9f8258e3511cc005cd078be46f916107e3a1d567b4f48",
+    "backend/service_desk/postgres.py": "8c256264e17c4be975c29425118fa2476d15c2041e760ea53325048d1eb097de",
+    "backend/service_desk/runtime_api.py": "155377f26269724919f67d5193c88bbf59edd87c423bc001a7a058633879fab6",
+    "backend/service_desk/simulator.py": "cd15a43b9a050d5c06d054b95e42e2b894563d193f05d86829bda3a1239abbe1",
+    "backend/service_desk/skills.py": "76c65f5f617c01196574938de3631f2dc28dac465f8456bbd7a57349a7fadc40",
+    "backend/service_desk/store.py": "25dc79de55e59eb511c3270c6da55331853ee8aa2dfac3c7c59ef965a392dfa5"
+  },
+  "python_image": "sha256:f807be96027ab6a0639d5f65af8dcf33b7f871cf16d69de13f92f7cd4e905ce4"
+}

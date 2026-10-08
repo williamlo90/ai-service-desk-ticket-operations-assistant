@@ -1,0 +1,46 @@
+{
+  "run_id": "20261008T133411Z",
+  "method": "Prospective automated shared-policy patch/test/rollback on two isolated source copies",
+  "change": "access-v1 900s to access-v2 300s; deny old-policy approvals",
+  "results": [
+    {
+      "candidate": "code",
+      "shared_files_changed": 1,
+      "policy_entries_changed": 1,
+      "orchestrator_files_changed": 0,
+      "workflow_nodes_changed": 0,
+      "boundary_checks_passed": 3,
+      "failed_regressions": 0,
+      "rollback_verified": true,
+      "edited_policy_sha256": "2b17c9d8af86e37372e9f7a6030838b624afb4ee83a8aeb9bbf22c92335a91ea",
+      "automated_patch_ms": 0.418,
+      "boundary_test_process_ms": 207.891,
+      "automated_rollback_ms": 21.187,
+      "active_human_editing_seconds": null
+    },
+    {
+      "candidate": "n8n",
+      "shared_files_changed": 1,
+      "policy_entries_changed": 1,
+      "orchestrator_files_changed": 0,
+      "workflow_nodes_changed": 0,
+      "boundary_checks_passed": 3,
+      "failed_regressions": 0,
+      "rollback_verified": true,
+      "edited_policy_sha256": "2b17c9d8af86e37372e9f7a6030838b624afb4ee83a8aeb9bbf22c92335a91ea",
+      "automated_patch_ms": 0.26,
+      "boundary_test_process_ms": 152.062,
+      "automated_rollback_ms": 1.742,
+      "active_human_editing_seconds": null
+    }
+  ],
+  "source_policy_sha256": "716814f678089ef3a7f9f8258e3511cc005cd078be46f916107e3a1d567b4f48",
+  "raw_copies": "local/maintenance/20261008T133411Z",
+  "limitations": [
+    "Identical shared domain implementation; does not differentiate engine editing UX",
+    "Machine patch timings include filesystem overhead; not operator effort or performance ranking",
+    "Three domain boundary checks, not a rerun of full connected candidate acceptance",
+    "No workflow deployment edit, new connector change or operator usability session measured"
+  ],
+  "engine_winner": null
+}

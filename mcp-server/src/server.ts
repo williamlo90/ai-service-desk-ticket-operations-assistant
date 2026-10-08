@@ -4,12 +4,19 @@ import { z } from 'zod';
 import type { RequestHandlerExtra } from '@modelcontextprotocol/sdk/shared/protocol.js';
 import type { ServerRequest, ServerNotification } from '@modelcontextprotocol/sdk/types.js';
 import { Backend } from './backend.js';
+import { HttpBackend } from './http-backend.js';
 
-if (process.env.SERVICE_DESK_MODE !== 'synthetic' || !process.env.SERVICE_DESK_API_TOKEN || !process.env.SERVICE_DESK_BINDINGS) {
+if (process.env.SERVICE_DESK_MODE !== 'synthetic' || !process.env.SERVICE_DESK_API_TOKEN ||
+    (!process.env.SERVICE_DESK_API_URL && !process.env.SERVICE_DESK_BINDINGS)) {
   process.stderr.write('Explicit synthetic mode and identity configuration required.\n');
   process.exit(1);
 }
-const backend = new Backend();
+let backend: Backend | HttpBackend;
+try {
+  backend = process.env.SERVICE_DESK_API_URL
+    ? new HttpBackend(process.env.SERVICE_DESK_API_URL, process.env.SERVICE_DESK_API_TOKEN)
+    : new Backend();
+} catch { process.stderr.write('Local API configuration rejected.\n'); process.exit(1); }
 const server = new McpServer({ name: 'service-desk-local', version: '0.1.0' });
 const id = z.string().uuid();
 const expected = z.number().int().positive();

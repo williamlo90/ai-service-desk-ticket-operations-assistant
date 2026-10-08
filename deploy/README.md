@@ -76,3 +76,32 @@ does not migrate an existing database. Do not use `down -v` as an update mechani
 Upstream references: [pgvector](https://github.com/pgvector/pgvector),
 [Postgres image](https://hub.docker.com/_/postgres),
 [n8n configuration](https://docs.n8n.io/deploy/host-n8n/configure-n8n/basic-configuration.md).
+
+## PostgreSQL adapter integration checks (Phase 5)
+
+With this project's database already running, create the ignored project .venv
+if needed (`python -m venv .venv`). Install dependencies and build MCP first:
+
+```powershell
+& ./.venv/Scripts/python.exe -m pip install -r backend/requirements-postgres.txt
+npm --prefix mcp-server ci --ignore-scripts --no-audit --no-fund
+npm --prefix mcp-server run build
+& ./.venv/Scripts/python.exe -B scripts/check_postgres_contracts.py
+```
+
+This script exercises the actual Python repositories and migration runner through
+TCP. It creates a random sdcheck_* database and separate migration/runtime roles,
+then removes only those resources in cleanup. Existing application/n8n databases
+are untouched. It does not restart containers or read the project's .env. The
+existing database administrator secret is consumed inside the DB container only;
+generated disposable role passwords pass through stdin, never command arguments
+or logs. Results contain fixed check labels, never raw database exceptions.
+
+It verifies migration replay/checksums, least-privilege runtime grants, tenant RLS,
+independent-connection idempotency/CAS, audit rollback and fresh-process reads of
+persisted journey state. It also starts a temporary loopback API and MCP clients,
+checks approval/closure/reopen through real HTTP, terminates/restarts the API and
+crashes workers before/after a durable synthetic target effect. Only those owned
+processes are terminated. It does not prove database restart/backup recovery, live
+target actions or the frozen architecture comparison. All temporary API processes,
+target files, SQL database and generated roles are cleaned up after the check.

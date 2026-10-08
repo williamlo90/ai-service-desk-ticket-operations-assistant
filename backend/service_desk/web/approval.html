@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Service desk · proposal review</title>
+<style>
+body{font:17px/1.6 system-ui,sans-serif;background:#f3f1eb;color:#202b29;margin:0}main{max-width:720px;margin:4rem auto;padding:0 24px}h1{font-size:2.2rem;line-height:1.2}label{display:block;margin-top:20px;font-weight:600}input{display:block;box-sizing:border-box;width:100%;padding:12px;border:1px solid #8a9690;border-radius:4px;font:inherit;background:white}button{margin:20px 8px 0 0;padding:12px 18px;border:0;border-radius:4px;font:inherit;background:#24584a;color:white;cursor:pointer}button:disabled{opacity:.45;cursor:default}pre{white-space:pre-wrap;overflow-wrap:anywhere;padding:20px;background:white;border-left:3px solid #24584a}small{color:#586660}#message{min-height:2em}
+</style>
+<main><small>LOCAL SYNTHETIC LAB</small><h1>Review a resolution proposal</h1>
+<p>Read the proposed action before approving it. Approval permits a separate execution step; it does not perform the action.</p>
+<label for="token">Supervisor access token</label><input id="token" type="password" autocomplete="off" spellcheck="false">
+<small>The token is kept only on this page and is cleared when you leave.</small>
+<label for="case">Case ID</label><input id="case" autocomplete="off" spellcheck="false">
+<button id="load" type="button">Load proposal</button><button id="approve" type="button" disabled>Approve this proposal</button>
+<p id="message" role="status" aria-live="polite"></p><pre id="proposal">No proposal loaded.</pre>
+<script src="/approval.js" defer></script></main></html>

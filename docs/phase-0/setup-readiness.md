@@ -5,7 +5,7 @@ Status: Phase 0A pending. No accounts or services created by the planning work.
 | Item | Status | Responsible role | Evidence / next action | Affected phase |
 | --- | --- | --- | --- | --- |
 | Atlassian account | Created per user; authenticated Jira session observed | User | Login verified through Jira UI on 2026-10-08; email verification not separately inspected | 0A.1 |
-| Business owner and credential custodian | Pending assignment | User to designate | Confirm names and V1 rules | 0A |
+| Business owner and credential custodian | William confirmed as business owner; credential custodian and operational approver still pending | William | User confirmed owner during Phase 5; target live not ready | 0A / 5 |
 | Jira test environment | Site and project verified in browser; Free plan confirmed by user; integration identity pending | Future custodian | william-service-desk-lab.atlassian.net; IT Service Project, key IT; Free (not trial) confirmed by user on 2026-10-08; verify API identity/access next | 0A / 5 |
 | Jira credentials and scopes | Read authentication verified for IT-1; scope inventory and negative permission checks pending | User owns token; operational custodian pending | jira-read-check.json: GET returned HTTP 200 on 2026-10-08; personal-account token loaded locally without displaying credentials | 0A / 5 |
 | Access/service sandbox | Blocked: actual target not selected | Business owner | Select authoritative entitlement and health-check targets; synthetic contract available | 0A / 5 |
@@ -41,3 +41,13 @@ Subscription update 2026-10-08: user inspected Billing and confirmed Free, not a
 ## API read verification — 2026-10-08
 
 Ran scripts/check_jira_read.py with explicit user authorization to load .env internally. One GET through the scoped-token Atlassian gateway returned HTTP 200 for IT-1, summary [TEST] Request read access to reports, status Waiting for support. Evidence: [jira-read-check.json](jira-read-check.json). No Jira write attempted. Credentials, authorization headers, raw responses and exception details were not printed or saved. Offline synthetic checks verified HTTP/network error suppression and redirect blocking. This confirms this ticket's read access only, not absence of write access, cross-tenant isolation, API token scope inventory or connected workflow acceptance.
+
+## Phase 5 update — 2026-10-08
+
+William explicitly confirmed himself as business owner. The live action target is
+not ready, so current integration remains local/synthetic. This does not designate
+an operational supervisor or authorize real entitlement/service changes. Synthetic
+supervisor identities in tests are fixtures, not a record of William approving a
+real action. Project PostgreSQL/n8n were observed healthy; updated connected check
+results are in ../phase-5/postgres-contract-check.json. Earlier runtime blockers
+above are historical snapshots, not the current container status.

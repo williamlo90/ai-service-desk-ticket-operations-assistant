@@ -81,17 +81,27 @@ class JourneyService:
         if not state['proposal']: raise JourneyBlocked('proposal_required')
         return Proposal(**{k:v for k,v in state['proposal'].items() if k!='payload'})
 
-    def approve(self,actor,case_id,expected_version):
+    def approve(self,actor,case_id,expected_version,expected_payload_hash=None):
         state=self.read(actor,case_id)
         if state['version'] != expected_version: raise JourneyBlocked('version_conflict')
         if state['action'] or state['status']!='open': raise JourneyBlocked('action_already_started')
         proposal=self._proposal(state);policy=POLICIES[state['classification']['category']]
+        if expected_payload_hash is not None and proposal.payload_hash!=expected_payload_hash:
+            raise JourneyBlocked('stale_approval')
         if proposal.policy_version != policy.version: raise JourneyBlocked('stale_policy')
         approval=approve(actor,proposal,self.clock(),self.clock()+timedelta(seconds=policy.ttl_seconds))
         state['approval']={'approver_id':approval.approver_id,
             'approved_at':stamp(approval.approved_at),'expires_at':stamp(approval.expires_at),
             'snapshot':{k:v for k,v in state['proposal'].items() if k!='payload'}}
         return self._save(actor,state,'approved')
+
+    def revoke_approval(self,actor,case_id,expected_version):
+        state=self.read(actor,case_id)
+        if actor.role != Role.SUPERVISOR: raise AccessDenied()
+        if state['version']!=expected_version: raise JourneyBlocked('version_conflict')
+        if state['action']: raise JourneyBlocked('action_already_started')
+        state['approval']=None
+        return self._save(actor,state,'approval_revoked')
 
     def revise(self,actor,case_id,text,expected_version):
         writer(actor,actor.tenant_id);state=self.read(actor,case_id)

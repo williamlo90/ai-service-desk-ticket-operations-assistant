@@ -53,3 +53,18 @@ reopen denial, CLI client and cancellation before/after dispatch. Runtime identi
 rotation/expiry, persisted restart, backend timeout recovery, remote transport,
 Jira connection and end-to-end correlation remain Phase 5/7 work. Stdio identity
 is an explicit process binding, not a production credential lifecycle.
+
+## Connected local mode (Phase 5)
+
+Set SERVICE_DESK_API_URL to the exact `http://127.0.0.1:<port>` origin and provide
+SERVICE_DESK_MODE=synthetic plus SERVICE_DESK_API_TOKEN for the staff identity.
+Bindings and PostgreSQL settings remain on the API server; MCP receives neither.
+The reference client forwards this URL explicitly. In this mode, MCP calls HTTP
+instead of creating a private Python memory store. Supervisor approval remains
+outside the exposed tool set and uses /v1/approvals plus the reviewed payload hash.
+
+The HTTP backend forbids remote origins, URL credentials, redirect following and
+unknown commands, bounds streamed responses, and never retries. Cancellation or
+transport ambiguity requires read-back. Eight local Node tests cover both modes;
+the real PostgreSQL + HTTP + MCP scenario is run separately by
+scripts/check_postgres_contracts.py (which invokes test/connected.mjs).

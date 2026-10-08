@@ -1,0 +1,59 @@
+{
+  "run_id": "20261008T133318Z-8049f9",
+  "mode": "synthetic",
+  "project_dotenv_read": false,
+  "results": [
+    {
+      "candidate": "code",
+      "profile": "timer",
+      "status": "executed",
+      "timer": {
+        "status": "passed",
+        "delay_seconds": 70,
+        "abrupt_restarts": 1,
+        "attempts": 2,
+        "submit_calls": 1,
+        "effects": 1,
+        "no_early_retry_observed": true,
+        "same_execution_id": null,
+        "resume_webhook_calls": 0,
+        "trace_sha256": "a41cdc47bacea9512dee988fcd3c255e5421fb2817e49cea1e7ea59e62e9c20f"
+      },
+      "cleanup_passed": true
+    },
+    {
+      "candidate": "n8n",
+      "profile": "timer",
+      "status": "executed",
+      "timer": {
+        "status": "passed",
+        "delay_seconds": 70,
+        "abrupt_restarts": 1,
+        "attempts": 2,
+        "submit_calls": 1,
+        "effects": 1,
+        "no_early_retry_observed": true,
+        "same_execution_id": true,
+        "resume_webhook_calls": 0,
+        "trace_sha256": "9a10f6b5bf742c3ab7d1be5ebc7dda505c97501a5836fbcdb410bb0aa0765394"
+      },
+      "cleanup_passed": true
+    }
+  ],
+  "python_image": "sha256:3fd74f7cddf0e4d295b55ac2afef97ece8273283136dbfe017eadb15bb74b8c4",
+  "n8n_image": "docker.n8n.io/n8nio/n8n@sha256:f6dc0d15bc9620baf5ba1df834ef81ae4e969f778c09300e567217be88f04a96",
+  "raw_trace_location": "local/timer/20261008T133318Z-8049f9",
+  "source_sha256": {
+    "scripts/timer_checks.py": "14387c1456b8b84d60dc8c50f45d5de158bc6c54c4be591b555e1c2067780f50",
+    "scripts/recovery_checks.py": "3c7fd6054ba6c79e1a410e850928af562c9408fbdad807283fccada30e3c8e69",
+    "scripts/compare_orchestrators.py": "74c6e3a2645d330cbc26c8486f1cc4584c2cfa83cd8f1da516382f965aed33a9",
+    "backend/service_desk/recovery.py": "fc8246801cf92c18335412a4467c1f6a5d8c51b1bb213bb1648531afef56baf8",
+    "backend/comparison/server.py": "726e675d7deafcd630dade2b836552c8fbdcb54533daa766953b8337c35eb7eb",
+    "backend/comparison/recovery_worker.py": "a205f7fc4047adddc4bad4192a9c848b4fd9ae1974574b4128efea54b85e1393"
+  },
+  "limitations": [
+    "70-second first backoff only; short in-process n8n waits are not covered",
+    "Engine kill/start and service launch are harness actions; no host supervisor deployment tested",
+    "Business DB and target remain alive; no distributed leases or transport-failure coverage"
+  ]
+}

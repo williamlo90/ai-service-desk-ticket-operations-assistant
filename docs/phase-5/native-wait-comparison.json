@@ -1,0 +1,63 @@
+{
+  "run_id": "20261008T131747Z-10dad3",
+  "mode": "synthetic",
+  "project_dotenv_read": false,
+  "model_calls": 0,
+  "python_image": "sha256:2a025822e77098c160f7e40e4d74ae1c18eea12a50df011393802e64436fb624",
+  "n8n_image": "docker.n8n.io/n8nio/n8n@sha256:f6dc0d15bc9620baf5ba1df834ef81ae4e969f778c09300e567217be88f04a96",
+  "results": [
+    {
+      "candidate": "code",
+      "profile": "v1",
+      "status": "executed",
+      "native_wait": {
+        "status": "passed",
+        "checks": [
+          "persisted approval wait survives abrupt engine kill/start without dispatch",
+          "persisted target wait survives second abrupt engine kill/start with same operation ID",
+          "external target event resumes verification/closure automatically; duplicate event does not repeat effect"
+        ],
+        "abrupt_restarts": 2,
+        "target_effects": 1,
+        "native_execution_same_id": null,
+        "unsigned_callback_denied": null
+      },
+      "trace_sha256": "24753236a8015bca39b059d3ef988ff9afc2346605b6ff32b03209cc69a9fc1c",
+      "cleanup_passed": true
+    },
+    {
+      "candidate": "n8n",
+      "profile": "v1",
+      "status": "executed",
+      "native_wait": {
+        "status": "passed",
+        "checks": [
+          "persisted approval wait survives abrupt engine kill/start without dispatch",
+          "persisted target wait survives second abrupt engine kill/start with same operation ID",
+          "external target event resumes verification/closure automatically; duplicate event does not repeat effect"
+        ],
+        "abrupt_restarts": 2,
+        "target_effects": 1,
+        "native_execution_same_id": true,
+        "unsigned_callback_denied": true
+      },
+      "trace_sha256": "b18fb9009f4d0f6ec4ef1527b69a475fd61d4924a941691b5f1f22d4a0fe5c87",
+      "cleanup_passed": true
+    }
+  ],
+  "engine_winner": null,
+  "source_sha256": {
+    "backend/comparison/wait_worker.py": "39059c7425242c99a51f6b6aea628041177e0016842f658f90865fb208e32be7",
+    "backend/comparison/server.py": "26133be50fcd5aa3ff8bd25c834d7cec813ee40581eb8c77f711188795ea82a2",
+    "scripts/native_wait_checks.py": "a0a668e8c2f9ac7222c0174843096662d0692736f5e37bd87b4c542dc388f572",
+    "scripts/compare_orchestrators.py": "b3091cb631ebc48a2fc947b41e4a83c8cf66f07c4038e6c783fe8b96f7fee0e8"
+  },
+  "raw_trace_location": "local/native-wait/20261008T131747Z-10dad3",
+  "limitations": [
+    "One synthetic access journey, two wait checkpoints per engine",
+    "Code worker is single-instance polling with durable SQLite checkpoint; distributed leases/backoff pending",
+    "External approval and target events are authenticated fixture-controller actions, not live platforms",
+    "Business PostgreSQL and fixture target remain running during engine restarts",
+    "Maintenance effort, broader native negative-case pack and production deployment remain pending"
+  ]
+}
