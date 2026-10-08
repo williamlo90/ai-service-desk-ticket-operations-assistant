@@ -1,0 +1,9 @@
+[project]
+name = "service-desk-core"
+version = "0.1.0"
+description = "Container-free domain, case API and read-only Jira integration core"
+requires-python = ">=3.12,<3.14"
+dependencies = []
+
+# The core and in-process WSGI API use unittest + stdlib. Deployment HTTP server
+# and database dependencies will be locked in the later runtime integration.

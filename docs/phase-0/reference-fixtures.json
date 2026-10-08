@@ -1,0 +1,292 @@
+{
+  "schema_version": "service-desk-reference-v1",
+  "contract_version": 1,
+  "synthetic": true,
+  "clock": "2026-10-08T00:00:00Z",
+  "mutation_definition": "actual business state changes in independent target ledger, not accepted requests or workflow nodes",
+  "cases": [
+    {
+      "input": "Please grant requester-a read access to reports",
+      "preconditions": [
+        "alpha specialist",
+        "access-v1",
+        "no entitlement"
+      ],
+      "expected": {
+        "checkpoints": [
+          "accepted: open",
+          "verified: closed",
+          "new evidence: reopened"
+        ],
+        "mutations": 1,
+        "category": "access_request",
+        "replay_prior_action": false,
+        "entitlement": false
+      },
+      "events": [
+        "propose",
+        "supervisor approves current snapshot",
+        "execute accepted",
+        "target succeeds",
+        "read-back confirms entitlement",
+        "close",
+        "new authenticated evidence: entitlement revoked"
+      ],
+      "id": "access-success-reopen"
+    },
+    {
+      "input": "Read and grant access on beta/reports",
+      "preconditions": [
+        "alpha specialist",
+        "beta resource"
+      ],
+      "expected": {
+        "closed": false,
+        "mutations": 0,
+        "disclosed_beta_records": 0,
+        "decision": "denied"
+      },
+      "events": [
+        "read beta ticket",
+        "prepare beta action",
+        "execute beta action"
+      ],
+      "id": "wrong-tenant"
+    },
+    {
+      "input": "Grant reports read access",
+      "preconditions": [
+        "alpha supervisor approval for case version 1"
+      ],
+      "expected": {
+        "mutations": 0,
+        "closed": false,
+        "decision": "stale_approval"
+      },
+      "events": [
+        "case changes to version 2",
+        "execute version 1 proposal"
+      ],
+      "id": "stale-approval"
+    },
+    {
+      "input": "Grant reports read access",
+      "preconditions": [
+        "valid approval"
+      ],
+      "expected": {
+        "closed": false,
+        "mutations": 0,
+        "action": "failed",
+        "target_requests": 1,
+        "escalation": true
+      },
+      "events": [
+        "target accepts operation",
+        "delayed target failure",
+        "verify no entitlement"
+      ],
+      "id": "accepted-then-failed"
+    },
+    {
+      "input": "Grant reports read access",
+      "preconditions": [
+        "valid approval"
+      ],
+      "expected": {
+        "checkpoints": [
+          "timeout: unknown and open",
+          "retry: blocked",
+          "reconcile: verified",
+          "close: closed"
+        ],
+        "mutations": 1,
+        "target_requests": 1
+      },
+      "events": [
+        "target grants entitlement",
+        "response lost",
+        "attempt retry",
+        "read-only reconcile confirms entitlement",
+        "verify",
+        "close"
+      ],
+      "id": "timeout-after-effect"
+    },
+    {
+      "input": "Grant reports read access",
+      "preconditions": [
+        "valid approval"
+      ],
+      "expected": {
+        "closure_transitions": 1,
+        "closed": true,
+        "mutations": 1,
+        "action": "succeeded",
+        "state_regression": false
+      },
+      "events": [
+        "execute",
+        "success callback version 2",
+        "verify and close",
+        "duplicate success version 2",
+        "late running callback version 1"
+      ],
+      "id": "duplicate-late-callback"
+    },
+    {
+      "input": "Grant reports read access",
+      "preconditions": [
+        "valid approval",
+        "same case/action version"
+      ],
+      "expected": {
+        "losing_command": "conflict_or_idempotent_same_result",
+        "mutations": 1,
+        "distinct_target_operations": 1,
+        "winner_count": 1
+      },
+      "events": [
+        "barrier: two execute commands observe same version",
+        "release barrier",
+        "verify target"
+      ],
+      "id": "concurrent-execute"
+    },
+    {
+      "input": "Grant reports read access",
+      "preconditions": [
+        "valid approval"
+      ],
+      "expected": {
+        "mutations": 1,
+        "closed": true,
+        "distinct_target_operations": 1,
+        "recovery": "from persisted checkpoint"
+      },
+      "events": [
+        "target accepts",
+        "persist checkpoint",
+        "restart workflow worker",
+        "target succeeds",
+        "resume and reconcile",
+        "verify and close"
+      ],
+      "id": "restart-after-acceptance"
+    },
+    {
+      "input": "I need access",
+      "preconditions": [
+        "alpha requester",
+        "resource and entitlement missing"
+      ],
+      "expected": {
+        "mutations": 0,
+        "closed": false,
+        "decision": "clarification",
+        "missing": [
+          "resource",
+          "entitlement"
+        ]
+      },
+      "events": [
+        "triage"
+      ],
+      "id": "ambiguous-request"
+    },
+    {
+      "input": "demo-api is unavailable",
+      "preconditions": [
+        "alpha specialist",
+        "incident-v1",
+        "unhealthy service"
+      ],
+      "expected": {
+        "closed": true,
+        "mutations": 1,
+        "category": "service_incident",
+        "healthy_checks": 3
+      },
+      "events": [
+        "diagnose",
+        "supervisor approves restart",
+        "restart succeeds",
+        "healthy checks at +0 +10 +20 fake seconds",
+        "close"
+      ],
+      "id": "incident-recovery"
+    },
+    {
+      "input": "SD-2 reports the same ongoing outage as SD-1",
+      "preconditions": [
+        "both tickets alpha",
+        "duplicate-v1",
+        "incident unresolved"
+      ],
+      "expected": {
+        "closed": false,
+        "mutations": 1,
+        "category": "repeated_ticket",
+        "relation_count": 1
+      },
+      "events": [
+        "propose relation",
+        "supervisor approves",
+        "link tickets",
+        "read-back link",
+        "duplicate event replay"
+      ],
+      "id": "related-ticket"
+    },
+    {
+      "input": "Grant reports read access",
+      "preconditions": [
+        "approval age exactly 15 fake minutes",
+        "access-v1"
+      ],
+      "expected": {
+        "mutations": 0,
+        "closed": false,
+        "decision": "expired_approval"
+      },
+      "events": [
+        "execute"
+      ],
+      "id": "approval-expired"
+    },
+    {
+      "input": "Grant reports read access",
+      "preconditions": [
+        "alpha auditor",
+        "otherwise valid approval"
+      ],
+      "expected": {
+        "mutations": 0,
+        "closed": false,
+        "decision": "denied"
+      },
+      "events": [
+        "direct execute API"
+      ],
+      "id": "auditor-write"
+    },
+    {
+      "input": "Grant privileged administrator access",
+      "preconditions": [
+        "alpha specialist",
+        "no applicable allowed SOP"
+      ],
+      "expected": {
+        "mutations": 0,
+        "closed": false,
+        "decision": "escalate"
+      },
+      "events": [
+        "triage",
+        "retrieve",
+        "prepare"
+      ],
+      "id": "missing-policy"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "checked_at_utc": "2026-10-08T10:59:10.325560+00:00",
+  "checks": [
+    "/healthz: HTTP 200",
+    "/healthz/readiness: HTTP 200",
+    "/: HTTP 200",
+    "/rest/workflows: HTTP 401",
+    "1 GiB / 1 CPU and loopback-only port enforced"
+  ],
+  "status": "passed",
+  "limitations": "Owner account, workflow execution and business acceptance not tested."
+}

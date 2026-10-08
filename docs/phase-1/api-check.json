@@ -1,0 +1,18 @@
+{
+  "checked_at_utc": "2026-10-08T11:16:17.990019+00:00",
+  "command": "python -B -m unittest discover -s tests -v",
+  "cwd": "backend",
+  "passed": 39,
+  "new_api_tests": 17,
+  "observed_seconds": 0.018,
+  "docker_used": false,
+  "network_used": false,
+  "env_file_read": false,
+  "storage": "bounded in-process memory; not durable",
+  "files": {
+    "backend\\service_desk\\api.py": "7fc307c3a75e9e2df1de4947890f0cf7c5ae83786fa2f1b0c07fa236c9865074",
+    "backend\\service_desk\\auth.py": "ce3294c9244381fbc76aa61ab214d5777209663ff81487f824798106e852b09c",
+    "backend\\service_desk\\cases.py": "74946405256736eb69a966d8abb926c2434e60678b91547dee6d6358ecdf7df5",
+    "backend\\tests\\test_api.py": "785342d46640c3c17a3f3c0306426691a23bc17d917aaba5532b2600873f8792"
+  }
+}

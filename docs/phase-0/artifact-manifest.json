@@ -1,0 +1,10 @@
+{
+  "contract_version": 1,
+  "fixture_sha256": "AC3A9A5C75983F5B494788E0095B1805C4261977E69B0D264BF10C91987E309D",
+  "fixture_count": 14,
+  "backup_path": "C:\\Users\\William\\.codex\\project-backups\\service-desk-phase0-20261008",
+  "archive_sha256": "68E3642AAE73D6BAB70224D8C30D20D13A6F73FFD5A6BD47FEFBA091A266A8EB",
+  "baseline_revision": "1a88dbb0e55889303ec83c7abb789fade81f16bf",
+  "snapshot_scope": "Committed source archive, tracked textual/binary diff and changed/untracked overlay. Excludes ignored runtime data and secrets.",
+  "contract_sha256": "376A9CCA0661846B908C0AC1D6BF67143EEBAE11C3311934490ECD0D362C64C9"
+}

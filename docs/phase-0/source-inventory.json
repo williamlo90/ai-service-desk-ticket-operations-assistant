@@ -1,0 +1,68 @@
+{
+  "inspected_on": "2026-10-08",
+  "source": "C:\\Users\\William\\OneDrive\\Dokumen\\Agentic Project\\case-resolution-copilot-rebuild",
+  "revision": "1a88dbb0e55889303ec83c7abb789fade81f16bf",
+  "status": [
+    " M backend/app/config.py",
+    " M backend/app/production_validation/hooks.py",
+    " M backend/tests/unit/test_production_validation_faults.py",
+    " M deploy/production-validation/k6/Dockerfile",
+    " M deploy/production-validation/k6/entrypoint.sh",
+    " M deploy/production-validation/k6/main.js",
+    " M docs/runbooks/BACKUP_AND_RESTORE.md",
+    " M frontend/package.json",
+    " M frontend/pnpm-workspace.yaml",
+    " M infra/aws/scripts/deploy-production-validation-runtime.ps1",
+    " M infra/aws/scripts/publish-validation-load-image.ps1",
+    " M infra/aws/scripts/run-production-validation-lane.ps1",
+    " M infra/aws/scripts/test-production-validation-dlq.ps1",
+    "?? infra/aws/test/load-runner.test.ts"
+  ],
+  "changed_files": [
+    {
+      "path": "backend/app/config.py",
+      "sha256": "E2A6CAB24C1EF525AE1554324297B4C014DA3EF948AFF1B257A726B46443E300"
+    },
+    {
+      "path": "backend/app/production_validation/hooks.py",
+      "sha256": "DF6E6B8DFB583F2F592BB7D3417C20B67F000BEC88E697115A41AB7B7AA142D7"
+    },
+    {
+      "path": "backend/tests/unit/test_production_validation_faults.py",
+      "sha256": "3D15426C50C07A508FEFA340E0B701A801EE34F7DB929D126C5779C84734BB14"
+    },
+    {
+      "path": "deploy/production-validation/k6/Dockerfile",
+      "sha256": "54F8D3C328602524BFB2966A9E05097B8A8C8C1C04CA682868BB5ABC1D180B34"
+    },
+    {
+      "path": "deploy/production-validation/k6/entrypoint.sh",
+      "sha256": "AB6B9895B0240C2CA9041A011CA4C4316A7DDEAFA88F72D89B376078DD82C608"
+    },
+    {
+      "path": "deploy/production-validation/k6/main.js",
+      "sha256": "948292A33B9AF1C6B358B5F83F6B770D45BE1F204F64CA7C13737FAA2AD65FD2"
+    },
+    {
+      "path": "infra/aws/scripts/deploy-production-validation-runtime.ps1",
+      "sha256": "4BA721EAEDA4C37B3E38A1E340FEF2D5FDCCC62107CF46F59793AE3020E4C8C7"
+    },
+    {
+      "path": "infra/aws/scripts/publish-validation-load-image.ps1",
+      "sha256": "BC2AD3F8E1E325FCCD317E2EA52AFE43EAE8BDEFDBDE9BF4E2D3A7E200BEC514"
+    },
+    {
+      "path": "infra/aws/scripts/run-production-validation-lane.ps1",
+      "sha256": "50203D37B9076E8B544DBB8914738F8C6D486EF1E4F61519537B0A99D1D442A2"
+    },
+    {
+      "path": "infra/aws/scripts/test-production-validation-dlq.ps1",
+      "sha256": "8862828D75A268AC496616933B17B22C96DC71480B2A58441E0984E4C5E95D36"
+    },
+    {
+      "path": "infra/aws/test/load-runner.test.ts",
+      "sha256": "9C66263DE4D20BAF4C70BA66DFCD4CBBCE096B9B9933EAA9EA4396518E377403"
+    }
+  ],
+  "note": "Read-only source inventory; hashes are fingerprints, not a restorable backup. Snapshot required before import or mutation."
+}

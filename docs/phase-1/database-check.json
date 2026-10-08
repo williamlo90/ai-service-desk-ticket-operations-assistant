@@ -1,0 +1,17 @@
+{
+  "checked_at_utc": "2026-10-08T10:54:10.554349+00:00",
+  "checks": [
+    "service_desk_app: authenticated TCP login",
+    "service_desk_app: cross-database connection denied",
+    "service_desk_n8n: authenticated TCP login",
+    "service_desk_n8n: cross-database connection denied",
+    "wrong password denied",
+    "application roles have no cluster administration privileges",
+    "synthetic record survives database container restart",
+    "synthetic probe removed",
+    "512 MiB / 0.5 CPU and loopback-only port enforced"
+  ],
+  "postgres_version": "16.14 (Debian 16.14-1.pgdg12+1)",
+  "pgvector_version": "0.8.4",
+  "status": "passed"
+}

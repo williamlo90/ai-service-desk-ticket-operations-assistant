@@ -1,0 +1,9 @@
+{
+  "checked_at_utc": "2026-10-08T10:32:07.411211+00:00",
+  "operation": "GET issue IT-1",
+  "result": "passed",
+  "http_status": 200,
+  "issue_key": "IT-1",
+  "summary": "[TEST] Request read access to reports",
+  "status": "Waiting for support"
+}

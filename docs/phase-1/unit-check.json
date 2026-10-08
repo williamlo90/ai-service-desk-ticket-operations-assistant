@@ -1,0 +1,40 @@
+{
+  "checked_on": "2026-10-08",
+  "phase": "1A",
+  "command": "python -B -m unittest discover -s tests -v",
+  "working_directory": "backend",
+  "tests": 22,
+  "passed": 22,
+  "failed": 0,
+  "duration_seconds": 0.006,
+  "mode": "serial offline unit tests; fake transport",
+  "env_read": false,
+  "network_used": false,
+  "containers_started": false,
+  "files": [
+    {
+      "path": "backend/service_desk/__init__.py",
+      "sha256": "DCCADAD27393446E2F46E86BC50C44CE17AB8EE0BC48EEA8F78044AC19EE7A63"
+    },
+    {
+      "path": "backend/service_desk/contracts.py",
+      "sha256": "595AF1D7A4E84DF524C52868530A342A25CA7DDAB6B396D1965651AFBA65F831"
+    },
+    {
+      "path": "backend/service_desk/jira.py",
+      "sha256": "8742411BB984CF70FECCBF4767E7F249D9AD60418B6CAA54BAA094A6C3466354"
+    },
+    {
+      "path": "backend/service_desk/lifecycle.py",
+      "sha256": "A8F53E3F61ADD67F46B3D4192930BE3F84D83E622FB9972576554FDD39DB9515"
+    },
+    {
+      "path": "backend/tests/test_jira.py",
+      "sha256": "7436004A691B7AD89548933817D184A09AD598B3BFDD8EFFDF23721F3E64A94F"
+    },
+    {
+      "path": "backend/tests/test_lifecycle.py",
+      "sha256": "FC60058463AE6773FDE17FFAA5E22C5BE74C0DB67B5B2C223761387CB2FFBE3C"
+    }
+  ]
+}

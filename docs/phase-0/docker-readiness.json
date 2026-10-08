@@ -1,0 +1,17 @@
+﻿{
+    "checked_at_utc":  "2026-10-08T10:58:47.7172391+00:00",
+    "docker_engine":  "29.8.2",
+    "compose":  "5.5.1",
+    "platform":  "linux",
+    "engine_memory_gib":  7.61,
+    "host_free_memory_gib":  1.42,
+    "linux_available_memory_gib":  6.31,
+    "running_containers_at_sample":  2,
+    "mode":  "n8n",
+    "required_host_free_memory_gib":  1,
+    "port_conflicts":  [
+
+                       ],
+    "ready_to_start_prototype":  true,
+    "note":  "Project guards, not vendor minima: full stack 4 GiB host; staged DB 1 GiB host / 512 MiB cap; staged n8n 1 GiB host AND 2 GiB Linux available / 1 GiB cap. Host and guest values overlap; never add them. No services changed by this check."
+}

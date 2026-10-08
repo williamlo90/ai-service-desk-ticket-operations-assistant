@@ -1,0 +1,27 @@
+{
+  "checked_at_utc": "2026-10-08T11:12:00.804252+00:00",
+  "workflow_id": "7uxz28tDAJr4J6yC",
+  "url": "http://localhost:5678/workflow/7uxz28tDAJr4J6yC",
+  "nodes": [
+    "Manual Trigger",
+    "Edit Fields (synthetic JSON)",
+    "If (fixture validation)"
+  ],
+  "checks": [
+    {
+      "requested_access": "read-only",
+      "observed": "True Branch: 1 item"
+    },
+    {
+      "requested_access": "admin",
+      "observed": "False Branch: 1 item"
+    },
+    {
+      "restored_requested_access": "read-only",
+      "observed": "Full workflow succeeded; True Branch: 1 item"
+    }
+  ],
+  "status": "passed",
+  "limitations": "Synthetic manual routing smoke only. No Jira requests, real access changes, approval, backend authorization or closure verification. Tenant from input is a fixture check, not trusted identity.",
+  "screenshot": "synthetic-workflow.png"
+}

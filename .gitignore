@@ -1,0 +1,12 @@
+# Local credentials and environment configuration
+.env
+.env.*
+!.env.example
+
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.coverage
+node_modules/
+local/
