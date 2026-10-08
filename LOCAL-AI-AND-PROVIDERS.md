@@ -1,49 +1,61 @@
-# Local AI Deployment & Model Providers
+# Local AI and provider profiles
 
-Proyek 01: **AI Service Desk & Ticket Operations Assistant**
+Phase 6 accepts OpenAI for the advisory lab flow. William explicitly kept Ollama
+experimental and deferred Claude/Grok live validation; see
+[accepted scope](docs/phase-6/accepted-scope.json) and
+[current evidence](docs/phase-6/CURRENT.md).
 
-Tanggal rencana: 2026-10-08. Status: **empat provider adapter tersedia dengan fake-transport tests; canary live dan inference lokal pending**. Checklist hanya dicentang setelah artefak dan verifikasinya tersedia.
-
-Implementasi offline: backend/service_desk/ai.py. Semua provider memiliki
-kontrak data yang sama, source filtering sebelum prompt, validasi kutipan,
-batas input/output, timeout dan error sanitization. Local-only menolak provider
-hosted dan tidak melakukan fallback. Tidak ada default model/key. Retrieval
-masih lexical atas sumber eksplisit, belum embedding/pgvector.
-
-[Catatan Phase 4](docs/learning/phase-4.md) menjelaskan fake-provider tests dan
-referensi API. Tidak ada request live, biaya terukur, model download atau
-inference lokal pada checkpoint ini. Cancellation urllib aktif belum tersedia;
-pemeriksaan cancellation dilakukan sebelum/sesudah transport dengan timeout.
-
-## Profil yang wajib tersedia
-
-| Profil | Implementasi | Bukti selesai |
+| Profile | Implementation | Validation |
 | --- | --- | --- |
-| OpenAI | API adapter dengan tool calling/structured output sesuai kemampuan model | contract test + bounded real canary pada data yang diizinkan |
-| Claude | API adapter dengan kontrak output aplikasi yang sama | contract test + bounded real canary pada data yang diizinkan |
-| Grok | API adapter dengan kontrak output aplikasi yang sama | contract test + bounded real canary pada data yang diizinkan |
-| Local | Ollama sebagai baseline; seluruh model artifact dicatat | inference nyata lokal + quality/performance report + failure recovery |
+| OpenAI | Evidence extraction, structured Responses output, pinned `gpt-4.1-mini-2025-04-14` | Accepted: real synthetic development/held-out reports |
+| Ollama | Same evidence contract, fixed loopback endpoint, no key or hosted fallback | Experimental: pinned `qwen3:4b-instruct`; quality gate not passed |
+| Claude | Original bounded provider adapter | Offline contract tests; live canary deferred |
+| Grok | Original bounded provider adapter | Offline contract tests; live canary deferred |
 
-API integration memakai API resmi, bukan otomatisasi UI ChatGPT/Claude. Tidak wajib menggunakan tiga provider sekaligus dalam satu request. Pilih default berdasarkan hasil benchmark, dan catat capability gap tiap model secara eksplisit. Jika native structured output/tool calling tidak tersedia, validasi schema tetap wajib dan jalur yang belum memenuhi kontrak tidak dinyatakan setara.
+Only OpenAI and Ollama implement the current evidence-first path. The original
+four-provider adapter contract remains in `backend/service_desk/ai.py`; this does
+not establish equivalent quality or capabilities across providers.
 
-Local profile memakai Ollama dan model/embeddings lokal; hosted profile memakai provider yang dipilih. Mode local-only harus menolak fallback ke provider eksternal. Business platform SaaS dapat membutuhkan internet; kemampuan inference lokal tidak otomatis berarti seluruh sistem offline.
+## How recommendations work
 
-## Checklist runtime lokal
+The model associates present fields with exact authorized-source quotes. Python
+validates those quotes, computes missing fields, renders fixed questions and
+recommends the next step. This reduces model responsibility but does not prove
+that every field association is semantically correct. The operator chooses the
+next step; approval, execution and verification remain in the domain service.
+The evaluation/practice path is advisory, with no target credentials or action tools.
+See [ADR 004](docs/architecture/ADR-004-evidence-first-ai.md) for the decision.
 
-- [ ] Catat CPU/GPU/RAM/VRAM, model/license/revision, quantization, context size, runtime version, dan batas concurrency.
-- [ ] Sediakan setup Linux/Docker, health/readiness, warm-up, cancellation, request size limits, dan timeout.
-- [ ] Model/embedding/tokenizer artifacts dipin dan diverifikasi; jelaskan provisioning awal yang memerlukan download.
-- [ ] Uji malformed output, hallucination, input panjang, OOM, unavailable runtime, dan safe degradation.
-- [ ] Bandingkan kualitas, end-to-end latency, resources, serta biaya asumsi hosted/local pada tugas yang sama.
-- [ ] Dokumentasikan upgrade, rollback, caching, data retention, dan mekanisme menghapus data/model jika diperlukan.
+Retrieval is bounded lexical selection over explicit tenant-authorized sources;
+there is no embedding model or vector database. API integrations use official
+endpoints, not provider chat UI automation. Credentials load internally and never
+belong in committed configuration or reports.
 
-llama.cpp dan vLLM adalah alternatif runtime sesuai hardware, bukan kewajiban memasang tiga inference server pada semua proyek. Proyek 07 membandingkan llama.cpp dengan baseline dan menambahkan vLLM hanya jika hardware kompatibel tersedia; ketidaktersediaan GPU bukan bukti vLLM sudah diuji.
+## Local deployment boundary
 
-## Evaluation yang adil
+The Windows lab reuses an existing Ollama 0.40.1 loopback service. Model digest,
+license hash, quantization, hardware, request options, observed GPU offload,
+latencies and token counts are recorded in the local report/freeze. Initial model
+provisioning requires a download; subsequent inference has no hosted fallback.
+Jira still requires SaaS connectivity.
 
-- Pisahkan mocked/stubbed load tests, real-provider canary, dan local-model evaluation.
-- Laporkan model/runtime/hardware, sample count, schema success, correctness, latency, token usage bila tersedia, dan biaya dengan sumber/asumsi harga saat run.
-- Jangan otomatis mengganti provider pada workflow side-effecting tanpa idempotency dan pemeriksaan hasil yang sudah terjadi.
-- Keys yang belum tersedia membuat provider live validation pending; pekerjaan lokal tetap bisa lanjut.
+The [local runbook](docs/phase-6/LOCAL-RUNBOOK.md) covers provisioning, readiness,
+warmup, limits, unload/reload, upgrade, rollback and retention. HTTP timeouts do not
+guarantee immediate cancellation inside Ollama. Model unload/reload tests do not
+establish daemon-crash, OOM or host-reboot recovery. Linux/Docker packaging,
+sustained/concurrent load and those failure modes remain Phase 7 work.
 
-**Selesai ketika:** seluruh adapter terimplementasi, integration status jujur per provider, dan satu local model benar-benar menjalankan workflow. Requirement pengalaman ketiga API baru penuh ketika masing-masing punya canary nyata yang lulus; khusus 07 canary hosted terisolasi dari mode privat.
+## Evaluation interpretation
+
+Both evaluated profiles use the same rubric and evidence schema. The local revision
+adds omission examples, conservative value checks and source-bound quote choices.
+It has its own fresh internally authored synthetic held-out pack;
+these runs are not a paired provider benchmark. Each report retains selected cases
+in its denominator,
+including failures. Source and model versions are frozen before calls. A changed
+prompt needs fresh held-out data; previous holdouts become regression data.
+
+Hosted cost is a token/list-price estimate, not an invoice. Local electricity and
+hardware cost are unmeasured, not zero. Shared-runtime latency is not an isolated
+hardware benchmark. The completed human pilot is diagnostic; no correctness-matched
+productivity or ROI claim is supported.

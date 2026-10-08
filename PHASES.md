@@ -1,4 +1,4 @@
-# Phase Plan — build first, integrate in a reserved runtime session
+# Phase Plan â€” build first, integrate in a reserved runtime session
 
 2026-10-08. This plan replaces the earlier execution order. Feature requirements in
 the topic documents remain applicable; phase references in the frozen comparison
@@ -6,7 +6,7 @@ contract describe its original schedule, not a requirement to run Docker now.
 
 ## Execution rules
 
-- Phase 1–4: implement and test without Docker, live SaaS/model calls, .env access,
+- Phase 1â€“4: implement and test without Docker, live SaaS/model calls, .env access,
   or interference with other projects. Use deterministic fixtures and bounded tests.
 - One commit per phase. Phase 1 is the initial snapshot, including pre-existing
   runtime setup/evidence; it does not claim these were recreated without Docker.
@@ -18,14 +18,14 @@ contract describe its original schedule, not a requirement to run Docker now.
 - Commit only passing work with learning notes. Never include secrets, installed
   dependencies, caches or local credentials. No cloud deployment before Phase 9.
 
-## Phase 0 — Scope and prerequisites (existing)
+## Phase 0 â€” Scope and prerequisites (existing)
 
 Inventory, source snapshot, contract v1 and 14 reference fixtures exist. Atlassian
 account, IT-1 and one prior diagnostic read exist. William owns business decisions, approvals and credentials. Local sandbox
 identities and action targets are configured; provider/model readiness is tracked in
 `docs/phase-0/setup-readiness.md`. Synthetic policy is not business authorization.
 
-## Phase 1 — Backend foundation, no Docker
+## Phase 1 â€” Backend foundation, no Docker
 
 - [x] Typed identity/ticket contracts and GET-only Jira reader.
 - [x] Pure approval, verification, retry and reopen predicates.
@@ -37,7 +37,7 @@ identities and action targets are configured; provider/model readiness is tracke
 Gate: foundation is reproducible with stdlib tests; no listener or real credentials
 required. This is not a production identity system or durable storage.
 
-## Phase 2 — Deterministic business journey
+## Phase 2 â€” Deterministic business journey
 
 - [x] Tenant-scoped policy/context, triage and clarification/escalation.
 - [x] Propose, supervisor approval, bound versions/expiry and dispatch.
@@ -50,7 +50,7 @@ required. This is not a production identity system or durable storage.
 
 Gate: the bounded three-journey simulator obeys controls. No external mutations.
 
-## Phase 3 — Adapters and persistence preparation
+## Phase 3 â€” Adapters and persistence preparation
 
 - [x] Parameterized PostgreSQL repositories, migrations and tenant constraints.
 - [x] Versioned business-state persistence contract, optimistic concurrency and
@@ -62,7 +62,7 @@ Gate: the bounded three-journey simulator obeys controls. No external mutations.
 Gate: code and offline contracts pass. PostgreSQL semantics, migrations on a real
 server, durability and Jira write permissions remain Phase 5 requirements.
 
-## Phase 4 — Client, MCP and AI preparation
+## Phase 4 â€” Client, MCP and AI preparation
 
 - [x] TypeScript reference client and actual MCP stdio protocol server/client tests.
 - [x] Read/prepare/approved-execute/verify/reopen tools use the same Python controls.
@@ -77,7 +77,7 @@ server, durability and Jira write permissions remain Phase 5 requirements.
 Gate: client/protocol and skill contracts pass offline. Real credentials, hosted
 canaries, model artifacts/licenses and local inference remain unvalidated.
 
-## Phase 5 — Local integration and architecture decision
+## Phase 5 â€” Local integration and architecture decision
 
 Status: **complete for local V1 integration** on 2026-10-08. The intermediate
 checkpoint `66693e6` was committed at William's request; this completion is recorded
@@ -114,16 +114,28 @@ load/soak, host restart, network-partition fencing and release hardening are
 Phase 7. Jira source checks are preflight checks, not cross-system transactions.
 Billing/refund baseline jobs have not been cut over and are not deleted.
 
-## Phase 6 — Quality and business evaluation
+## Phase 6 â€” Quality and business evaluation
 
-Freeze development/regression and independent held-out sets, rubric/denominators,
-quality targets and versions. Run real-provider canaries and local inference with
-approved synthetic data; record actual usage and unknown costs honestly. Compare
-manual versus assisted tasks with equal correctness; distinguish active work,
-waiting, corrections and elapsed time. Recheck critical controls with real models.
-Gate: reproducible quality evidence and scoped limitations, no invented ROI.
+Status: **complete for the accepted OpenAI advisory lab scope**, 2026-10-09.
+William accepted the flow, explicitly kept Ollama experimental after quality failures,
+and deferred Claude/Grok live validation. [Current results](docs/phase-6/CURRENT.md)
+and the [closure gate](docs/phase-6/phase6-gate.json) record the final boundaries.
 
-## Phase 7 — Reliability, security and performance
+- [x] Frozen OpenAI development/held-out evaluation: 4/4 and 16/16 all checks.
+- [x] Actual local inference, pinned model/hardware/configuration and honest failure
+  evidence; experimental status and further improvement accepted explicitly.
+- [x] Eight-task human diagnostic pilot, preserved observations, no invented ROI.
+- [x] Equal quote-selection UX and AI next-step recommendation with a reason.
+- [x] Real-output domain replay: 38 valid outputs, eight checks each, zero target calls.
+- [x] 172 Python tests, 8 MCP tests and 14 focused JavaScript assertions pass.
+- [x] Reproducible closure gate and learning notes for one Phase 6 completion commit.
+
+Gate scope: OpenAI advisory lab quality and diagnostic business evaluation.
+The AI path does not replace domain approval/verification. Local quality, a fresh
+ROI study and other-provider live readiness are not claimed. Source-grounded quotes
+do not prove semantic correctness. Runtime hardening remains Phase 7.
+
+## Phase 7 â€” Reliability, security and performance
 
 Permission bypass/injection/leakage, duplicate triggers, expired approval, timeout
 after effect, concurrency, interrupted worker, delayed callback, database recovery,
@@ -133,14 +145,14 @@ After quality gates pass, rehearse cutover and remove only proven obsolete code;
 retain required baseline jobs until replacement passes. Rerun affected tests.
 Gate: verified local release candidate, not a production/cloud claim.
 
-## Phase 8 — Handover
+## Phase 8 â€” Handover
 
 Sanitized workflow exports, clean setup, daily use, approval/failure handling,
 backup/upgrade/support guide, demo, evidence manifest, version locks and operational
 owner. Prepare Azure IaC/cost/security/teardown plan without provisioning.
 Gate: reproducible local delivery and documented remaining prerequisites.
 
-## Phase 9 — Azure deployment last
+## Phase 9 â€” Azure deployment last
 
 Deploy only the selected tested architecture. Apply identity/secrets/network policy,
 repeat connected acceptance, recovery/load/monitoring in cloud and validate rollback.

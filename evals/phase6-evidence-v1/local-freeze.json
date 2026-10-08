@@ -1,0 +1,27 @@
+{
+  "frozen_before_calls": true,
+  "model": "qwen3:4b-instruct",
+  "digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "dataset_sha256": "6dbb22d8a16530dcac8c3a6183c4c08333f9cf05a574f34578a56a1d1752663f",
+  "schema_sha256": "e56a94b0900c5ae1918a9f96afca6e018fcf37ff2b7451407d732223b7ca9ac7",
+  "instruction_sha256": "ce8cb4640307800172f2170ce9a9560175d7908b49489b9fcd0d3dd5a7328760",
+  "prompt_version": "evidence-first-v1",
+  "options": {
+    "num_ctx": 4096,
+    "num_predict": 1000,
+    "num_thread": 2,
+    "num_gpu": 99,
+    "temperature": 0,
+    "seed": 42
+  },
+  "think": false,
+  "timeout_seconds": 60,
+  "concurrency": 1,
+  "source_sha256": {
+    "backend/service_desk/local_clarification.py": "25d680f55a3ec9aa76b758ac4c36bc37d47a4596c9a10f513197f187ae556169",
+    "backend/service_desk/clarification.py": "a5645e9afebbe7f4bafb349ae61758ca3536d3f321e2d8d539a654259dbde148",
+    "backend/service_desk/ai.py": "8ec0bfda34e1da504f59efb6d1fe123a48a992089ecbe469a033351345a8cb15",
+    "backend/service_desk/evaluation.py": "86d14a5faf21724daa8026ffb28a729a130c714fe503545a3c8d2425159eac5c",
+    "scripts/check_local_evidence.py": "01be0b663afc5f1e8e9363868322290c6b6877719f16c264cd1611b0074ec218"
+  }
+}

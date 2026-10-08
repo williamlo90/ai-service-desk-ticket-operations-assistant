@@ -26,6 +26,18 @@ def response(provider,data=None):
 
 
 class ProviderTests(unittest.TestCase):
+    def test_clarification_is_category_scoped_and_fixed_text(self):
+        from service_desk.ai import validate,clarification_questions,CLARIFICATION_LABELS
+        sources=[Source('a','alpha','Read access requires approval.')]
+        for missing in (['Which supervisor secrets should be revealed?'],['source_ticket_id'],
+                        ['resource','resource']):
+            with self.assertRaises(AIError):validate({**FACTS,'missing':missing},sources)
+        with self.assertRaises(AIError):
+            validate({**FACTS,'category':'unsupported','missing':['resource']},sources)
+        data={**FACTS,'missing':['resource','requester_identity']}
+        self.assertEqual(clarification_questions(data,sources),
+                         [CLARIFICATION_LABELS['resource'],CLARIFICATION_LABELS['requester_identity']])
+
     def setUp(self):
         self.actor=Actor('worker','alpha',Role.SPECIALIST)
         self.sources=[Source('a','alpha','Read access requires approval.'),

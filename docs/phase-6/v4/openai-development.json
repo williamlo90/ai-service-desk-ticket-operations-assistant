@@ -1,0 +1,184 @@
+{
+  "checked_at_utc": "2026-10-08T15:53:12.951096+00:00",
+  "kind": "real_provider",
+  "provider": "openai",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "split": "development",
+  "freeze": {
+    "dataset_sha256": "5c42dd73661e928b90abcb280c5d41dfea07cfe93071e31e1f201f3d709cb405",
+    "schema_sha256": "de30afa5939afdaa91dc1b34455dfa0d89e9e88c032931f2a1a15ca9e5dd6f40",
+    "instruction_sha256": "92b18fd56694644f6a15abd57ce5ec0ea031a573e1e6f824f2338e45185fc2c9",
+    "prompt_version": "service-desk-facts-v5",
+    "model": "gpt-4.1-mini-2025-04-14",
+    "rubric_version": 2,
+    "frozen_before_live": true,
+    "source_sha256": {
+      "backend/service_desk/ai.py": "8ec0bfda34e1da504f59efb6d1fe123a48a992089ecbe469a033351345a8cb15",
+      "backend/service_desk/evaluation.py": "86d14a5faf21724daa8026ffb28a729a130c714fe503545a3c8d2425159eac5c",
+      "scripts/evaluate_ai.py": "28d08efbd7caabbf62b90f6b3d79b3b72a270597fec341fcaa1be350efce1938"
+    },
+    "thresholds": {
+      "schema": 1,
+      "category": 0.9,
+      "ticket_evidence": 0.9,
+      "required_clarification": 1,
+      "clarification_slots": 0.9
+    },
+    "pricing_source": "https://developers.openai.com/api/docs/models/gpt-4.1-mini",
+    "input_usd_per_million": 0.4,
+    "output_usd_per_million": 1.6
+  },
+  "budget_usd": "1.00",
+  "reservation_per_call_usd": "0.02",
+  "cost_basis": "uncached list-price estimate, not billed invoice; unknown usage remains null",
+  "rows": [
+    {
+      "id": "v2-q01",
+      "result": {
+        "data": {
+          "category": "access_request",
+          "facts": [
+            {
+              "source_id": "ticket",
+              "quote": "Grant named user Dina read-only access to analytics."
+            }
+          ],
+          "missing": []
+        },
+        "provider": "openai",
+        "model": "gpt-4.1-mini-2025-04-14",
+        "prompt_version": "service-desk-facts-v5",
+        "usage": {
+          "input_tokens": 504,
+          "output_tokens": 32
+        },
+        "cost": null,
+        "elapsed_ms": 1361.284
+      },
+      "error": null,
+      "estimated_cost_usd": 0.0002528
+    },
+    {
+      "id": "v2-q02",
+      "result": {
+        "data": {
+          "category": "repeated_ticket",
+          "facts": [
+            {
+              "source_id": "ticket",
+              "quote": "Please link two duplicate laptop tickets; both ticket numbers are absent."
+            }
+          ],
+          "missing": [
+            "source_ticket_id",
+            "related_ticket_id"
+          ]
+        },
+        "provider": "openai",
+        "model": "gpt-4.1-mini-2025-04-14",
+        "prompt_version": "service-desk-facts-v5",
+        "usage": {
+          "input_tokens": 506,
+          "output_tokens": 44
+        },
+        "cost": null,
+        "elapsed_ms": 1552.128
+      },
+      "error": null,
+      "estimated_cost_usd": 0.0002728
+    },
+    {
+      "id": "v2-q03",
+      "result": {
+        "data": {
+          "category": "service_incident",
+          "facts": [
+            {
+              "source_id": "ticket",
+              "quote": "The payroll status endpoint is returning HTTP 502 for all users."
+            }
+          ],
+          "missing": [
+            "service_name",
+            "symptoms"
+          ]
+        },
+        "provider": "openai",
+        "model": "gpt-4.1-mini-2025-04-14",
+        "prompt_version": "service-desk-facts-v5",
+        "usage": {
+          "input_tokens": 490,
+          "output_tokens": 42
+        },
+        "cost": null,
+        "elapsed_ms": 1385.739
+      },
+      "error": null,
+      "estimated_cost_usd": 0.0002632
+    },
+    {
+      "id": "v2-q04",
+      "result": {
+        "data": {
+          "category": "unsupported",
+          "facts": [],
+          "missing": []
+        },
+        "provider": "openai",
+        "model": "gpt-4.1-mini-2025-04-14",
+        "prompt_version": "service-desk-facts-v5",
+        "usage": {
+          "input_tokens": 494,
+          "output_tokens": 12
+        },
+        "cost": null,
+        "elapsed_ms": 1096.527
+      },
+      "error": null,
+      "estimated_cost_usd": 0.0002168
+    }
+  ],
+  "summary": {
+    "metrics": {
+      "schema": {
+        "passed": 4,
+        "total": 4,
+        "rate": 1.0
+      },
+      "category": {
+        "passed": 4,
+        "total": 4,
+        "rate": 1.0
+      },
+      "ticket_evidence": {
+        "passed": 3,
+        "total": 4,
+        "rate": 0.75
+      },
+      "required_clarification": {
+        "passed": 4,
+        "total": 4,
+        "rate": 1.0
+      },
+      "all_checks": {
+        "passed": 2,
+        "total": 4,
+        "rate": 0.5
+      },
+      "clarification_slots": {
+        "passed": 3,
+        "total": 4,
+        "rate": 0.75
+      }
+    },
+    "attempted": 4,
+    "unattempted": 0,
+    "successful_response_latency_ms": {
+      "samples": 4,
+      "p50": 1361.284,
+      "p95": 1552.128
+    },
+    "quality_gate": false
+  },
+  "reserved_total_usd": "0.68"
+}

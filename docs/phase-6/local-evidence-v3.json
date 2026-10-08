@@ -1,0 +1,285 @@
+{
+  "checked_at_utc": "2026-10-08T16:56:30.856755+00:00",
+  "provider": "ollama",
+  "freeze": {
+    "frozen_before_calls": true,
+    "model": "qwen3:4b-instruct",
+    "digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "dataset_sha256": "2fea64b2f1b28e2f9e00a63ff5dccb1a12b54c44b4254c44803e02b9efc303c4",
+    "schema_sha256": "7b5cd7c00837a40520a0676bdf839fbd826721f1030d58aa81954ab2878fd2e0",
+    "instruction_sha256": "5761a3e779af9a049b8a7c0e71dd9eb59297425a9450f71328ef821e88b342e4",
+    "prompt_version": "evidence-first-local-v3",
+    "options": {
+      "num_ctx": 4096,
+      "num_predict": 1000,
+      "num_thread": 2,
+      "num_gpu": 99,
+      "temperature": 0,
+      "seed": 42
+    },
+    "think": false,
+    "timeout_seconds": 60,
+    "concurrency": 1,
+    "source_sha256": {
+      "backend/service_desk/local_clarification_v2.py": "372befe99866599aa89a331f5308e1eed499a6a057e6723a5ff19af7707e28de",
+      "backend/service_desk/local_clarification_v3.py": "1132b4ffb01261c87b8f79c0975ba8922aa064b88ed09fac0bb29b2964bfc744",
+      "backend/service_desk/local_clarification.py": "25d680f55a3ec9aa76b758ac4c36bc37d47a4596c9a10f513197f187ae556169",
+      "backend/service_desk/clarification.py": "a5645e9afebbe7f4bafb349ae61758ca3536d3f321e2d8d539a654259dbde148",
+      "backend/service_desk/ai.py": "8ec0bfda34e1da504f59efb6d1fe123a48a992089ecbe469a033351345a8cb15",
+      "backend/service_desk/evaluation.py": "86d14a5faf21724daa8026ffb28a729a130c714fe503545a3c8d2425159eac5c",
+      "scripts/check_local_evidence_v3.py": "7975e2a3a4bd4daaeb121b9738555f29235db7234874fa730964c04ac41b80fe"
+    }
+  },
+  "runtime": {
+    "version": "0.40.1"
+  },
+  "model_bytes": 2497293803,
+  "details": {
+    "parent_model": "",
+    "format": "gguf",
+    "family": "qwen3",
+    "families": [
+      "qwen3"
+    ],
+    "parameter_size": "4.0B",
+    "quantization_level": "Q4_K_M"
+  },
+  "license": "Apache-2.0",
+  "license_sha256": "d18a5cc71b84bc4af394a31116bd3932b42241de70c77d2b76d69a314ec8aa12",
+  "cost_usd": null,
+  "cost_note": "Hardware/electricity not measured; no hosted requests.",
+  "status": "failed",
+  "rows": [
+    {
+      "id": "l2-q01",
+      "result": {
+        "data": {
+          "category": "access_request",
+          "facts": [
+            {
+              "quote": "Viewer permission to the shipment register is needed",
+              "source_id": "ticket"
+            },
+            {
+              "quote": "the employee name is unknown",
+              "source_id": "ticket"
+            }
+          ],
+          "missing": [
+            "requester_identity"
+          ]
+        },
+        "field_evidence": [
+          {
+            "field": "resource",
+            "quote": "shipment register",
+            "source_id": "ticket"
+          },
+          {
+            "field": "entitlement",
+            "quote": "Viewer permission",
+            "source_id": "ticket"
+          }
+        ],
+        "discarded_field_evidence": [],
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct",
+        "prompt_version": "evidence-first-local-v3",
+        "usage": {
+          "input_tokens": 739,
+          "output_tokens": 71
+        },
+        "cost": null,
+        "elapsed_ms": 10074.513
+      },
+      "error": null
+    },
+    {
+      "id": "l2-q02",
+      "result": null,
+      "error": "unsupported_fact"
+    },
+    {
+      "id": "l2-q03",
+      "result": {
+        "data": {
+          "category": "repeated_ticket",
+          "facts": [
+            {
+              "quote": "Hubungkan tiket sumber IT-431 dengan duplikatnya",
+              "source_id": "ticket"
+            },
+            {
+              "quote": "nomor tiket terkait belum disebutkan",
+              "source_id": "ticket"
+            }
+          ],
+          "missing": [
+            "related_ticket_id"
+          ]
+        },
+        "field_evidence": [
+          {
+            "field": "source_ticket_id",
+            "quote": "IT-431",
+            "source_id": "ticket"
+          }
+        ],
+        "discarded_field_evidence": [
+          {
+            "evidence": {
+              "field": "related_ticket_id",
+              "quote": "belum disebutkan",
+              "source_id": "ticket"
+            },
+            "reason": "explicit_absence"
+          }
+        ],
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct",
+        "prompt_version": "evidence-first-local-v3",
+        "usage": {
+          "input_tokens": 769,
+          "output_tokens": 97
+        },
+        "cost": null,
+        "elapsed_ms": 16371.219
+      },
+      "error": null
+    },
+    {
+      "id": "l2-q04",
+      "result": {
+        "data": {
+          "category": "unsupported",
+          "facts": [
+            {
+              "quote": "Create a poem about mountains.",
+              "source_id": "ticket"
+            }
+          ],
+          "missing": []
+        },
+        "field_evidence": [],
+        "discarded_field_evidence": [],
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct",
+        "prompt_version": "evidence-first-local-v3",
+        "usage": {
+          "input_tokens": 739,
+          "output_tokens": 31
+        },
+        "cost": null,
+        "elapsed_ms": 6075.114
+      },
+      "error": null
+    }
+  ],
+  "warmup": {
+    "data": {
+      "category": "access_request",
+      "facts": [
+        {
+          "quote": "Viewer permission to the shipment register is needed",
+          "source_id": "ticket"
+        },
+        {
+          "quote": "the employee name is unknown",
+          "source_id": "ticket"
+        }
+      ],
+      "missing": [
+        "requester_identity"
+      ]
+    },
+    "field_evidence": [
+      {
+        "field": "resource",
+        "quote": "shipment register",
+        "source_id": "ticket"
+      },
+      {
+        "field": "entitlement",
+        "quote": "Viewer permission",
+        "source_id": "ticket"
+      }
+    ],
+    "discarded_field_evidence": [],
+    "provider": "ollama",
+    "model": "qwen3:4b-instruct",
+    "prompt_version": "evidence-first-local-v3",
+    "usage": {
+      "input_tokens": 739,
+      "output_tokens": 71
+    },
+    "cost": null,
+    "elapsed_ms": 33728.227
+  },
+  "loaded_model": {
+    "name": "qwen3:4b-instruct",
+    "model": "qwen3:4b-instruct",
+    "size": 3184001022,
+    "digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "qwen3",
+      "families": [
+        "qwen3"
+      ],
+      "parameter_size": "4.0B",
+      "quantization_level": "Q4_K_M"
+    },
+    "expires_at": "2026-10-08T23:59:04.6252626+07:00",
+    "size_vram": 0,
+    "context_length": 4096,
+    "runner": "llamacpp"
+  },
+  "gpu_offload_observed": false,
+  "summaries": {
+    "development": {
+      "metrics": {
+        "schema": {
+          "passed": 3,
+          "total": 4,
+          "rate": 0.75
+        },
+        "category": {
+          "passed": 3,
+          "total": 4,
+          "rate": 0.75
+        },
+        "ticket_evidence": {
+          "passed": 3,
+          "total": 4,
+          "rate": 0.75
+        },
+        "required_clarification": {
+          "passed": 3,
+          "total": 4,
+          "rate": 0.75
+        },
+        "all_checks": {
+          "passed": 3,
+          "total": 4,
+          "rate": 0.75
+        },
+        "clarification_slots": {
+          "passed": 3,
+          "total": 4,
+          "rate": 0.75
+        }
+      },
+      "attempted": 4,
+      "unattempted": 0,
+      "successful_response_latency_ms": {
+        "samples": 3,
+        "p50": 10074.513,
+        "p95": 16371.219
+      },
+      "quality_gate": false
+    }
+  },
+  "error": "check_quality_or_runtime_evidence",
+  "final_unloaded": true
+}

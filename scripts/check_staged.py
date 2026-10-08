@@ -14,13 +14,13 @@ for path in filter(None, paths):
     if path.endswith('.png'):
         continue
     text = subprocess.check_output(['git','show',':'+path]).decode('utf-8', errors='replace')
-    if re.search(r'ATATT3[A-Za-z0-9_=-]{30,}|-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----', text):
+    if re.search(r'ATATT3[A-Za-z0-9_=-]{30,}|sk-(?:proj-|ant-)?[A-Za-z0-9_-]{30,}|-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----', text):
         bad.append(path)
     if leaf == '.env.example':
         for line in text.splitlines():
             if '=' in line and not line.lstrip().startswith('#'):
                 key,value=line.split('=',1)
-                if any(x in key.upper() for x in ('TOKEN','PASSWORD','SECRET')) and value.strip():
+                if any(x in key.upper() for x in ('TOKEN','PASSWORD','SECRET','API_KEY')) and value.strip():
                     bad.append(path)
 print('Staged path/known-secret checks:', 'FAILED' if bad else 'passed')
 # Report filenames only; never secret values. This is not a comprehensive secret scanner.

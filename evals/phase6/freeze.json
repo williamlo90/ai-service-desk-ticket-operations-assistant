@@ -1,0 +1,18 @@
+{
+  "dataset_sha256": "636f9ef3bf9dc341a5c62e17158dc3d4291afb417b0a23d1e136c8d2fa5a124c",
+  "schema_sha256": "70631f8bc86dbbe565518da2b4757d0cc49bdef9857689e5c803c6147a679029",
+  "instruction_sha256": "eeff2e0d054b827166d91483d502b07a044d832694b640fc2697bd9bc26c0f3b",
+  "prompt_version": "service-desk-facts-v2",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "rubric_version": 1,
+  "frozen_before_live": true,
+  "pricing_source": "https://developers.openai.com/api/docs/models/gpt-4.1-mini",
+  "pricing_checked": "2026-10-08",
+  "input_usd_per_million": 0.4,
+  "output_usd_per_million": 1.6,
+  "source_sha256": {
+    "backend/service_desk/ai.py": "00a04108517a2f51c1b5a49a7699d1ef4b7db158d50311a8b0d6da373f61f61f",
+    "backend/service_desk/evaluation.py": "249316d32b263df648159dd9e0139f2f9fcc03b7a30ecaa1624785a592b6975f",
+    "scripts/evaluate_ai.py": "f72eae6634e09cfc7688466629adab4bb2028df56b2a47c8e71b579bfecb0dfd"
+  }
+}

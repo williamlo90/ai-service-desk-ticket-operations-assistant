@@ -1,0 +1,24 @@
+{
+  "checked_at_utc": "2026-10-08T16:28:46.039250+00:00",
+  "phase6_complete": false,
+  "scope": "evidence-first OpenAI synthetic evaluation and quote-selection UX",
+  "quality_gate": "passed",
+  "development_cases": 4,
+  "heldout_cases": 16,
+  "heldout_all_checks_passed": 16,
+  "python_tests": 156,
+  "focused_javascript_assertions": 14,
+  "domain_replay_outputs": 20,
+  "estimated_cumulative_usd": "0.0164488",
+  "settled_calls": 70,
+  "practice_url": "http://127.0.0.1:5682/practice",
+  "pilot_observations_unchanged": true,
+  "ui_source_sha256": {
+    "scripts/business_pilot.py": "fa02de0cc1117913df435b73ab85b679e802b3c5e45893c768cb7b27bf93290f",
+    "evals/phase6-v2/quote-tools.js": "86596f76373404794be3bfb3de8d6f70beef398a4d92988737fda1b9428845fe",
+    "evals/phase6-v2/pilot.html": "fde233ca3e343ba5b2ba8b4dbb7076468eadc47d5fba1fd4bb4d6dbf8a3c99d7",
+    "evals/phase6-v2/practice.html": "065e0ebc08446418f8b8f23db7ca4dc73ad283b648c2b7482305f5979f08bea8"
+  },
+  "next_step_recommendation_ui": "title and reason; no automatic selection or execution",
+  "record_type": "Historical OpenAI/UX checkpoint; current closure status is ../phase6-gate.json"
+}

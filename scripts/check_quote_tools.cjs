@@ -1,0 +1,18 @@
+const assert = require('node:assert/strict');
+const {exactQuote, suggestedStep, recommendation} = require('../evals/phase6-v2/quote-tools.js');
+const source = 'A service returns connection refused; its name is unknown.';
+assert.equal(exactQuote(source, 'connection refused'), 'connection refused');
+assert.equal(exactQuote(source, 'A paraphrased connection error'), null);
+assert.equal(exactQuote(source, 'short'), null);
+assert.equal(exactQuote(source, source), source);
+assert.equal(suggestedStep('service_incident', ['service_name']), 'clarify');
+assert.equal(suggestedStep('repeated_ticket', ['related_ticket_id']), 'clarify');
+assert.equal(suggestedStep('access_request', []), 'prepare_for_approval');
+assert.equal(suggestedStep('unsupported', []), 'route_out_of_scope');
+assert.equal(recommendation('repeated_ticket',['related_ticket_id']).step,'clarify');
+assert.match(recommendation('repeated_ticket',['related_ticket_id']).reason,/nomor tiket terkait/);
+assert.match(recommendation('access_request',[]).reason,/approval manusia/);
+assert.equal(recommendation('unsupported',[]).step,'route_out_of_scope');
+assert.equal(recommendation('unknown',[]).step,'');
+assert.equal(recommendation('access_request',['password']).step,'');
+console.log('14 quote/next-step assertions passed.');

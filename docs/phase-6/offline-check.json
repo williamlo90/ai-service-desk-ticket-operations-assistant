@@ -1,0 +1,14 @@
+{
+  "checked_at_utc": "2026-10-08T15:41:56.296893+00:00",
+  "status": "offline_preparation_passed",
+  "python_tests": 138,
+  "model_calls": 0,
+  "credentials_read_by_offline_validation": false,
+  "phase6_complete": false,
+  "remaining": [
+    "OpenAI key configuration and live evaluation",
+    "human semantic/control review",
+    "local inference and other-provider readiness",
+    "manual-versus-assisted human pilot"
+  ]
+}

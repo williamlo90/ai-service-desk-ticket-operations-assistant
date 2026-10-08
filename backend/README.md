@@ -1,5 +1,8 @@
 # Backend core and container-free API
 
+Current AI evaluation and lab scope: [Phase 6](../docs/phase-6/CURRENT.md).
+Earlier test counts below refer to their implementation checkpoints.
+
 Python 3.12 or 3.13, standard library only. No installation, credentials, Docker,
 database, model call or persistent server is needed for unit verification.
 

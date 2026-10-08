@@ -1,0 +1,138 @@
+{
+  "checked_at_utc": "2026-10-08T15:51:39.235219+00:00",
+  "kind": "real_provider",
+  "provider": "openai",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "split": "canary",
+  "freeze": {
+    "dataset_sha256": "5c42dd73661e928b90abcb280c5d41dfea07cfe93071e31e1f201f3d709cb405",
+    "schema_sha256": "de30afa5939afdaa91dc1b34455dfa0d89e9e88c032931f2a1a15ca9e5dd6f40",
+    "instruction_sha256": "d5c6f972e5220b81c1f62a80f63bef52c5ba136e6b2249b12dcc1b8dc9379a0a",
+    "prompt_version": "service-desk-facts-v3",
+    "model": "gpt-4.1-mini-2025-04-14",
+    "rubric_version": 2,
+    "frozen_before_live": true,
+    "source_sha256": {
+      "backend/service_desk/ai.py": "c7d56bd9aef3b38c045e84b28565188370bd264ec30be1976ad88b69b627aa2b",
+      "backend/service_desk/evaluation.py": "86d14a5faf21724daa8026ffb28a729a130c714fe503545a3c8d2425159eac5c",
+      "scripts/evaluate_ai.py": "293ef8feda8aeec446f773826591e31a645334d3d22f88a9c45448dcf8474e20"
+    },
+    "thresholds": {
+      "schema": 1,
+      "category": 0.9,
+      "ticket_evidence": 0.9,
+      "required_clarification": 1,
+      "clarification_slots": 0.9
+    },
+    "pricing_source": "https://developers.openai.com/api/docs/models/gpt-4.1-mini",
+    "input_usd_per_million": 0.4,
+    "output_usd_per_million": 1.6
+  },
+  "budget_usd": "1.00",
+  "reservation_per_call_usd": "0.02",
+  "cost_basis": "uncached list-price estimate, not billed invoice; unknown usage remains null",
+  "rows": [
+    {
+      "id": "v2-q01",
+      "result": {
+        "data": {
+          "category": "access_request",
+          "facts": [
+            {
+              "source_id": "ticket",
+              "quote": "Grant named user Dina read-only access to analytics."
+            }
+          ],
+          "missing": [
+            "requester_identity",
+            "resource",
+            "entitlement"
+          ]
+        },
+        "provider": "openai",
+        "model": "gpt-4.1-mini-2025-04-14",
+        "prompt_version": "service-desk-facts-v3",
+        "usage": {
+          "input_tokens": 386,
+          "output_tokens": 41
+        },
+        "cost": null,
+        "elapsed_ms": 1653.058
+      },
+      "error": null,
+      "estimated_cost_usd": 0.00022
+    },
+    {
+      "id": "v2-q02",
+      "result": {
+        "data": {
+          "category": "repeated_ticket",
+          "facts": [
+            {
+              "source_id": "ticket",
+              "quote": "Please link two duplicate laptop tickets; both ticket numbers are absent."
+            }
+          ],
+          "missing": [
+            "source_ticket_id",
+            "related_ticket_id"
+          ]
+        },
+        "provider": "openai",
+        "model": "gpt-4.1-mini-2025-04-14",
+        "prompt_version": "service-desk-facts-v3",
+        "usage": {
+          "input_tokens": 388,
+          "output_tokens": 44
+        },
+        "cost": null,
+        "elapsed_ms": 1605.257
+      },
+      "error": null,
+      "estimated_cost_usd": 0.0002256
+    }
+  ],
+  "summary": {
+    "metrics": {
+      "schema": {
+        "passed": 2,
+        "total": 2,
+        "rate": 1.0
+      },
+      "category": {
+        "passed": 2,
+        "total": 2,
+        "rate": 1.0
+      },
+      "ticket_evidence": {
+        "passed": 2,
+        "total": 2,
+        "rate": 1.0
+      },
+      "required_clarification": {
+        "passed": 2,
+        "total": 2,
+        "rate": 1.0
+      },
+      "all_checks": {
+        "passed": 1,
+        "total": 2,
+        "rate": 0.5
+      },
+      "clarification_slots": {
+        "passed": 1,
+        "total": 2,
+        "rate": 0.5
+      }
+    },
+    "attempted": 2,
+    "unattempted": 0,
+    "successful_response_latency_ms": {
+      "samples": 2,
+      "p50": 1605.257,
+      "p95": 1653.058
+    },
+    "quality_gate": false
+  },
+  "reserved_total_usd": "0.56"
+}

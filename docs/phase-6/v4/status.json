@@ -1,0 +1,34 @@
+{
+  "checked_at_utc": "2026-10-08T15:58:56.277593+00:00",
+  "phase6_complete": false,
+  "prompt_version": "service-desk-facts-v5",
+  "schema_contract": "category-scoped missing field codes; fixed clarification questions",
+  "heldout_category": {
+    "passed": 15,
+    "total": 16
+  },
+  "heldout_exact_clarification": {
+    "passed": 11,
+    "total": 16
+  },
+  "quality_gate": "failed",
+  "python_tests": 148,
+  "control_replay_outputs": 20,
+  "target_calls": 0,
+  "hosted_requests_cumulative": 50,
+  "reserved_usd": "1.00",
+  "estimated_uncached_cost_usd": 0.0104592,
+  "billed_cost_usd": null,
+  "pilot_url": "http://127.0.0.1:5682/",
+  "pilot_status": "completed_diagnostic",
+  "source_sha256": {
+    "scripts/business_pilot.py": "72243469f772a79bead995306ddd941a2de5d6c529b56f92b704ce819e7e9034",
+    "evals/phase6-v2/pilot.html": "a269f15506903b171849e10f20a4c53fe9c0d199734485498677b0e1deec9e76",
+    "scripts/check_ai_controls.py": "17dae38cb70ff390c5ceae23f00154e978519bee75802ab7db7bc9728d705314"
+  },
+  "pilot_regression_tests": 5,
+  "pilot_idle_connection_regression": "passed",
+  "pilot_observations": 8,
+  "business_efficiency_comparison": "not_estimable_no_equally_correct_pairs",
+  "pilot_analysis_sha256": "5c9eb41ca07b228c6d3a89bbaa602239c52c20db5fa50e9a994baec37455adac"
+}

@@ -1,0 +1,650 @@
+{
+  "checked_at_utc": "2026-10-08T16:24:44.490710+00:00",
+  "kind": "real_provider",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "freeze": {
+    "dataset_sha256": "b0e24e3252d8e84be946fd7544f7936e106f949b00dcf1776d0012fa58025a94",
+    "schema_sha256": "e56a94b0900c5ae1918a9f96afca6e018fcf37ff2b7451407d732223b7ca9ac7",
+    "instruction_sha256": "ce8cb4640307800172f2170ce9a9560175d7908b49489b9fcd0d3dd5a7328760",
+    "prompt_version": "evidence-first-v1",
+    "model": "gpt-4.1-mini-2025-04-14",
+    "source_sha256": {
+      "backend/service_desk/clarification.py": "a5645e9afebbe7f4bafb349ae61758ca3536d3f321e2d8d539a654259dbde148",
+      "backend/service_desk/ai.py": "8ec0bfda34e1da504f59efb6d1fe123a48a992089ecbe469a033351345a8cb15",
+      "backend/service_desk/evaluation.py": "86d14a5faf21724daa8026ffb28a729a130c714fe503545a3c8d2425159eac5c",
+      "scripts/evaluate_evidence_ai.py": "f9aca98e4582e3d4b8f020a0288d3a4d3afa86d7ce61b88bc5bf621aa8b3b225",
+      "scripts/evaluate_ai.py": "28d08efbd7caabbf62b90f6b3d79b3b72a270597fec341fcaa1be350efce1938"
+    },
+    "thresholds": {
+      "schema": 1,
+      "category": 0.9,
+      "ticket_evidence": 0.9,
+      "required_clarification": 1,
+      "clarification_slots": 0.9
+    },
+    "frozen_before_live": true
+  },
+  "split": "heldout",
+  "rows": [
+    {
+      "id": "e1-q05",
+      "result": {
+        "data": {
+          "category": "access_request",
+          "facts": [
+            {
+              "source_id": "ticket",
+              "quote": "Named employee Maya requests viewer access to the warranty dashboard."
+            }
+          ],
+          "missing": []
+        },
+        "field_evidence": [
+          {
+            "field": "requester_identity",
+            "source_id": "ticket",
+            "quote": "Named employee Maya"
+          },
+          {
+            "field": "resource",
+            "source_id": "ticket",
+            "quote": "warranty dashboard"
+          },
+          {
+            "field": "entitlement",
+            "source_id": "ticket",
+            "quote": "viewer access"
+          }
+        ],
+        "provider": "openai",
+        "model": "gpt-4.1-mini-2025-04-14",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 492,
+          "output_tokens": 81
+        },
+        "cost": null,
+        "elapsed_ms": 2270.876
+      },
+      "error": null,
+      "estimated_cost_usd": 0.0003264
+    },
+    {
+      "id": "e1-q06",
+      "result": {
+        "data": {
+          "category": "access_request",
+          "facts": [
+            {
+              "source_id": "ticket",
+              "quote": "Cabut hak editor milik pengguna Dodi pada aplikasi penjadwalan."
+            }
+          ],
+          "missing": []
+        },
+        "field_evidence": [
+          {
+            "field": "requester_identity",
+            "source_id": "ticket",
+            "quote": "pengguna Dodi"
+          },
+          {
+            "field": "resource",
+            "source_id": "ticket",
+            "quote": "aplikasi penjadwalan"
+          },
+          {
+            "field": "entitlement",
+            "source_id": "ticket",
+            "quote": "hak editor"
+          }
+        ],
+        "provider": "openai",
+        "model": "gpt-4.1-mini-2025-04-14",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 502,
+          "output_tokens": 91
+        },
+        "cost": null,
+        "elapsed_ms": 1838.839
+      },
+      "error": null,
+      "estimated_cost_usd": 0.0003464
+    },
+    {
+      "id": "e1-q07",
+      "result": {
+        "data": {
+          "category": "access_request",
+          "facts": [
+            {
+              "source_id": "ticket",
+              "quote": "User Tia asks for access to the procurement portal"
+            }
+          ],
+          "missing": [
+            "entitlement"
+          ]
+        },
+        "field_evidence": [
+          {
+            "field": "requester_identity",
+            "source_id": "ticket",
+            "quote": "User Tia"
+          },
+          {
+            "field": "resource",
+            "source_id": "ticket",
+            "quote": "procurement portal"
+          }
+        ],
+        "provider": "openai",
+        "model": "gpt-4.1-mini-2025-04-14",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 504,
+          "output_tokens": 65
+        },
+        "cost": null,
+        "elapsed_ms": 1344.215
+      },
+      "error": null,
+      "estimated_cost_usd": 0.0003056
+    },
+    {
+      "id": "e1-q08",
+      "result": {
+        "data": {
+          "category": "access_request",
+          "facts": [
+            {
+              "source_id": "ticket",
+              "quote": "Read-only permission to the license registry is requested"
+            }
+          ],
+          "missing": [
+            "requester_identity"
+          ]
+        },
+        "field_evidence": [
+          {
+            "field": "entitlement",
+            "source_id": "ticket",
+            "quote": "Read-only permission"
+          },
+          {
+            "field": "resource",
+            "source_id": "ticket",
+            "quote": "license registry"
+          }
+        ],
+        "provider": "openai",
+        "model": "gpt-4.1-mini-2025-04-14",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 518,
+          "output_tokens": 62
+        },
+        "cost": null,
+        "elapsed_ms": 2275.434
+      },
+      "error": null,
+      "estimated_cost_usd": 0.0003064
+    },
+    {
+      "id": "e1-q09",
+      "result": {
+        "data": {
+          "category": "service_incident",
+          "facts": [
+            {
+              "source_id": "ticket",
+              "quote": "The warehouse intake API is returning HTTP 502 to every caller."
+            }
+          ],
+          "missing": []
+        },
+        "field_evidence": [
+          {
+            "field": "service_name",
+            "source_id": "ticket",
+            "quote": "The warehouse intake API is"
+          },
+          {
+            "field": "symptoms",
+            "source_id": "ticket",
+            "quote": "HTTP 502"
+          }
+        ],
+        "provider": "openai",
+        "model": "gpt-4.1-mini-2025-04-14",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 496,
+          "output_tokens": 71
+        },
+        "cost": null,
+        "elapsed_ms": 1481.945
+      },
+      "error": null,
+      "estimated_cost_usd": 0.000312
+    },
+    {
+      "id": "e1-q10",
+      "result": {
+        "data": {
+          "category": "service_incident",
+          "facts": [
+            {
+              "source_id": "ticket",
+              "quote": "Aplikasi kehadiran menampilkan pesan connection refused untuk semua pengguna."
+            }
+          ],
+          "missing": []
+        },
+        "field_evidence": [
+          {
+            "field": "service_name",
+            "source_id": "ticket",
+            "quote": "Aplikasi kehadiran"
+          },
+          {
+            "field": "symptoms",
+            "source_id": "ticket",
+            "quote": "connection refused"
+          }
+        ],
+        "provider": "openai",
+        "model": "gpt-4.1-mini-2025-04-14",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 498,
+          "output_tokens": 71
+        },
+        "cost": null,
+        "elapsed_ms": 1562.09
+      },
+      "error": null,
+      "estimated_cost_usd": 0.0003128
+    },
+    {
+      "id": "e1-q11",
+      "result": {
+        "data": {
+          "category": "service_incident",
+          "facts": [
+            {
+              "source_id": "ticket",
+              "quote": "An unnamed service times out on every request."
+            }
+          ],
+          "missing": [
+            "service_name"
+          ]
+        },
+        "field_evidence": [
+          {
+            "field": "symptoms",
+            "source_id": "ticket",
+            "quote": "times out on every request"
+          }
+        ],
+        "provider": "openai",
+        "model": "gpt-4.1-mini-2025-04-14",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 504,
+          "output_tokens": 51
+        },
+        "cost": null,
+        "elapsed_ms": 1359.001
+      },
+      "error": null,
+      "estimated_cost_usd": 0.0002832
+    },
+    {
+      "id": "e1-q12",
+      "result": {
+        "data": {
+          "category": "service_incident",
+          "facts": [
+            {
+              "source_id": "ticket",
+              "quote": "The warranty search endpoint returns HTTP 500."
+            }
+          ],
+          "missing": []
+        },
+        "field_evidence": [
+          {
+            "field": "service_name",
+            "source_id": "ticket",
+            "quote": "warranty search endpoint"
+          },
+          {
+            "field": "symptoms",
+            "source_id": "ticket",
+            "quote": "HTTP 500"
+          }
+        ],
+        "provider": "openai",
+        "model": "gpt-4.1-mini-2025-04-14",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 504,
+          "output_tokens": 66
+        },
+        "cost": null,
+        "elapsed_ms": 1401.089
+      },
+      "error": null,
+      "estimated_cost_usd": 0.0003072
+    },
+    {
+      "id": "e1-q13",
+      "result": {
+        "data": {
+          "category": "repeated_ticket",
+          "facts": [
+            {
+              "source_id": "ticket",
+              "quote": "Associate source IT-301 with related IT-302 because both describe a broken headset."
+            }
+          ],
+          "missing": []
+        },
+        "field_evidence": [
+          {
+            "field": "source_ticket_id",
+            "source_id": "ticket",
+            "quote": "source IT-301"
+          },
+          {
+            "field": "related_ticket_id",
+            "source_id": "ticket",
+            "quote": "related IT-302"
+          }
+        ],
+        "provider": "openai",
+        "model": "gpt-4.1-mini-2025-04-14",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 504,
+          "output_tokens": 77
+        },
+        "cost": null,
+        "elapsed_ms": 1513.269
+      },
+      "error": null,
+      "estimated_cost_usd": 0.0003248
+    },
+    {
+      "id": "e1-q14",
+      "result": {
+        "data": {
+          "category": "repeated_ticket",
+          "facts": [
+            {
+              "source_id": "ticket",
+              "quote": "Tolong hubungkan tiket sumber IT-311 ke tiket terkait IT-312 untuk masalah mesin cetak yang sama."
+            }
+          ],
+          "missing": []
+        },
+        "field_evidence": [
+          {
+            "field": "source_ticket_id",
+            "source_id": "ticket",
+            "quote": "tiket sumber IT-311"
+          },
+          {
+            "field": "related_ticket_id",
+            "source_id": "ticket",
+            "quote": "tiket terkait IT-312"
+          }
+        ],
+        "provider": "openai",
+        "model": "gpt-4.1-mini-2025-04-14",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 516,
+          "output_tokens": 87
+        },
+        "cost": null,
+        "elapsed_ms": 1445.91
+      },
+      "error": null,
+      "estimated_cost_usd": 0.0003456
+    },
+    {
+      "id": "e1-q15",
+      "result": {
+        "data": {
+          "category": "repeated_ticket",
+          "facts": [
+            {
+              "source_id": "ticket",
+              "quote": "Relate source IT-321 to a duplicate earlier report"
+            }
+          ],
+          "missing": [
+            "related_ticket_id"
+          ]
+        },
+        "field_evidence": [
+          {
+            "field": "source_ticket_id",
+            "source_id": "ticket",
+            "quote": "source IT-321"
+          }
+        ],
+        "provider": "openai",
+        "model": "gpt-4.1-mini-2025-04-14",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 508,
+          "output_tokens": 53
+        },
+        "cost": null,
+        "elapsed_ms": 1138.184
+      },
+      "error": null,
+      "estimated_cost_usd": 0.000288
+    },
+    {
+      "id": "e1-q16",
+      "result": {
+        "data": {
+          "category": "repeated_ticket",
+          "facts": [
+            {
+              "source_id": "ticket",
+              "quote": "A duplicate should be linked to related IT-332"
+            }
+          ],
+          "missing": [
+            "source_ticket_id"
+          ]
+        },
+        "field_evidence": [
+          {
+            "field": "related_ticket_id",
+            "source_id": "ticket",
+            "quote": "linked to related IT-332"
+          }
+        ],
+        "provider": "openai",
+        "model": "gpt-4.1-mini-2025-04-14",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 512,
+          "output_tokens": 54
+        },
+        "cost": null,
+        "elapsed_ms": 1331.023
+      },
+      "error": null,
+      "estimated_cost_usd": 0.0002912
+    },
+    {
+      "id": "e1-q17",
+      "result": {
+        "data": {
+          "category": "unsupported",
+          "facts": [
+            {
+              "source_id": "ticket",
+              "quote": "Please suggest a title for a landscape painting."
+            }
+          ],
+          "missing": []
+        },
+        "field_evidence": [],
+        "provider": "openai",
+        "model": "gpt-4.1-mini-2025-04-14",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 488,
+          "output_tokens": 30
+        },
+        "cost": null,
+        "elapsed_ms": 1083.262
+      },
+      "error": null,
+      "estimated_cost_usd": 0.0002432
+    },
+    {
+      "id": "e1-q18",
+      "result": {
+        "data": {
+          "category": "unsupported",
+          "facts": [
+            {
+              "source_id": "ticket",
+              "quote": "Tolong pilih nama untuk toko bunga baru saya."
+            }
+          ],
+          "missing": []
+        },
+        "field_evidence": [],
+        "provider": "openai",
+        "model": "gpt-4.1-mini-2025-04-14",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 490,
+          "output_tokens": 31
+        },
+        "cost": null,
+        "elapsed_ms": 1078.484
+      },
+      "error": null,
+      "estimated_cost_usd": 0.0002456
+    },
+    {
+      "id": "e1-q19",
+      "result": {
+        "data": {
+          "category": "unsupported",
+          "facts": [
+            {
+              "source_id": "ticket",
+              "quote": "Recommend a board game for a family evening."
+            }
+          ],
+          "missing": []
+        },
+        "field_evidence": [],
+        "provider": "openai",
+        "model": "gpt-4.1-mini-2025-04-14",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 504,
+          "output_tokens": 30
+        },
+        "cost": null,
+        "elapsed_ms": 1140.115
+      },
+      "error": null,
+      "estimated_cost_usd": 0.0002496
+    },
+    {
+      "id": "e1-q20",
+      "result": {
+        "data": {
+          "category": "unsupported",
+          "facts": [
+            {
+              "source_id": "ticket",
+              "quote": "Write a thank-you message for a birthday gift."
+            }
+          ],
+          "missing": []
+        },
+        "field_evidence": [],
+        "provider": "openai",
+        "model": "gpt-4.1-mini-2025-04-14",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 490,
+          "output_tokens": 31
+        },
+        "cost": null,
+        "elapsed_ms": 1068.412
+      },
+      "error": null,
+      "estimated_cost_usd": 0.0002456
+    }
+  ],
+  "budget": {
+    "cap_usd": "1.00",
+    "reservation_usd": "0.02",
+    "previous_calls_settled_from_usage": 54,
+    "previous_accounted_usd": "0.0117152",
+    "basis": "uncached published token rates; unknown calls retain reservation; invoice unknown",
+    "accounted_total_usd": "0.0164488",
+    "settled_calls": 70
+  },
+  "summary": {
+    "metrics": {
+      "schema": {
+        "passed": 16,
+        "total": 16,
+        "rate": 1.0
+      },
+      "category": {
+        "passed": 16,
+        "total": 16,
+        "rate": 1.0
+      },
+      "ticket_evidence": {
+        "passed": 16,
+        "total": 16,
+        "rate": 1.0
+      },
+      "required_clarification": {
+        "passed": 16,
+        "total": 16,
+        "rate": 1.0
+      },
+      "all_checks": {
+        "passed": 16,
+        "total": 16,
+        "rate": 1.0
+      },
+      "clarification_slots": {
+        "passed": 16,
+        "total": 16,
+        "rate": 1.0
+      }
+    },
+    "attempted": 16,
+    "unattempted": 0,
+    "successful_response_latency_ms": {
+      "samples": 16,
+      "p50": 1359.001,
+      "p95": 2275.434
+    },
+    "quality_gate": true
+  }
+}

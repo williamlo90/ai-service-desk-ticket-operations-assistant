@@ -1,0 +1,23 @@
+<!doctype html><html lang="id"><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+<title>Latihan bukti dan klarifikasi</title>
+<style>body{font:16px/1.6 system-ui;max-width:900px;margin:36px auto;padding:0 24px;background:#f4f6f8;color:#203044}section{background:white;border:1px solid #d9e1e8;border-radius:12px;padding:24px;margin:20px 0}button,select,textarea{font:inherit}button{padding:9px 14px;margin:8px 8px 8px 0;cursor:pointer}textarea{width:95%;min-height:85px}label{display:block}blockquote{border-left:3px solid #9cb6ca;padding-left:15px;margin-left:0}small{color:#52677b}#feedback{font-weight:600}</style>
+<h1>Bukti dulu, klarifikasi seperlunya</h1><p>Latihan tanpa timer. Tidak mengulang pilot, menyimpan jawaban, atau mengubah tiket. Saran berasal dari hasil model yang sudah tersedia.</p>
+<label>Pilih contoh <select id="choice"></select></label><div id="content"></div><p id="feedback" role="status"></p>
+<script src="/quote-tools.js"></script><script>
+let dataset;const content=document.getElementById('content'),feedback=document.getElementById('feedback'),choice=document.getElementById('choice');
+function el(tag,text,parent=content){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;parent.append(n);return n;}
+function render(){content.replaceChildren();feedback.textContent='';const item=dataset.items[Number(choice.value)],result=item.result,data=result.data;
+const source=el('section');el('h2','1. Ambil kutipan dari sumber',source);el('p',item.text,source);const quote=el('textarea',undefined,source);quote.readOnly=true;quote.setAttribute('aria-label','Kutipan yang dipilih');
+el('button','Gunakan teks yang disorot',source).onclick=()=>{const selected=QuoteTools.exactQuote(item.text,window.getSelection().toString());if(selected){quote.value=selected;feedback.textContent='Kutipan sama persis dengan sumber.';}else feedback.textContent='Sorot 12–1000 karakter pada teks tiket terlebih dahulu.';};
+el('button','Gunakan seluruh teks',source).onclick=()=>{quote.value=QuoteTools.exactQuote(item.text,item.text)||'';feedback.textContent='Periksa relevansi kutipan; instruksi di dalam sumber bukan perintah untuk aplikasi.';};
+const evidence=el('section');el('h2','2. Bedakan informasi ada dan informasi kurang',evidence);el('p','Kategori: '+data.category,evidence);
+for(const field of result.field_evidence){el('b',field.field,evidence);el('blockquote',field.quote,evidence);}
+el('p','Pertanyaan yang masih diperlukan:',evidence);if(data.missing.length){for(const code of data.missing)el('p',dataset.fields[code],evidence);}else el('p','Tidak ada field wajib triage yang masih kosong.',evidence);
+el('small','Kutipan membuktikan teks ada, bukan bahwa isinya benar. Periksa kaitan field dan kutipannya. Triage lengkap bukan izin eksekusi.',evidence);
+const action=el('section');el('h2','3. Pilih langkah berikutnya',action);
+const recommendation=QuoteTools.recommendation(data.category,data.missing);el('h3','Rekomendasi: '+recommendation.title,action);el('p',recommendation.reason,action);el('small','Saran ini memakai kategori dan informasi yang kurang. Anda tetap menentukan pilihan akhir.',action);
+const next=el('select',undefined,action);next.setAttribute('aria-label','Langkah berikutnya');el('option','Pilih langkah',next).value='';for(const [v,t] of [['clarify','Minta klarifikasi'],['prepare_for_approval','Siapkan rencana untuk approval'],['route_out_of_scope','Arahkan keluar scope']])el('option',t,next).value=v;
+el('button','Periksa pilihan',action).onclick=()=>{if(!QuoteTools.exactQuote(item.text,quote.value)){feedback.textContent='Ambil kutipan dari teks sumber dahulu.';return;}const expected=QuoteTools.suggestedStep(data.category,data.missing);feedback.textContent=next.value===expected?'Tepat. '+(expected==='clarify'?'Lengkapi informasi yang kurang sebelum menyiapkan tindakan.':expected==='prepare_for_approval'?'Siapkan rencana; approval manusia dan verifikasi hasil tetap diperlukan.':'Permintaan ini berada di luar scope service desk.'):'Belum tepat. '+(expected==='clarify'?'Masih ada informasi yang kurang: minta klarifikasi dahulu.':expected==='prepare_for_approval'?'Informasi triage sudah lengkap: siapkan rencana untuk approval, jangan langsung eksekusi.':'Arahkan permintaan di luar scope ke jalur yang sesuai.');};
+}
+choice.onchange=render;fetch('/practice-data').then(r=>{if(!r.ok)throw Error();return r.json();}).then(d=>{dataset=d;d.items.forEach((_,i)=>{const o=document.createElement('option');o.value=i;o.textContent='Contoh '+(i+1);choice.append(o);});render();}).catch(()=>feedback.textContent='Data latihan belum dapat dimuat.');
+</script></html>

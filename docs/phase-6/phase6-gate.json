@@ -1,0 +1,33 @@
+{
+  "checked_at_utc": "2026-10-08T17:06:31.009386+00:00",
+  "status": "passed",
+  "scope": "Accepted OpenAI advisory lab evaluation; Ollama experimental by explicit user decision; Claude/Grok deferred; not production or ROI",
+  "passed": [
+    "openai_dataset_pin",
+    "openai_development",
+    "openai_heldout",
+    "experimental_local_evidence_and_cleanup",
+    "frozen_sources",
+    "explicit_scope_acceptance",
+    "business_pilot_no_invented_roi",
+    "real_output_domain_controls",
+    "python_tests",
+    "mcp_tests",
+    "quote_ui_tests"
+  ],
+  "remaining": [],
+  "tests": {
+    "python": {
+      "passed": true,
+      "output": "............................................................................................................................................................................\n----------------------------------------------------------------------\nRan 172 tests in 1.123s\n\nOK\n"
+    },
+    "mcp": {
+      "passed": true,
+      "output": "TAP version 13\n# Subtest: HTTP adapter refuses non-loopback destinations, credentials in URL and unknown commands\nok 1 - HTTP adapter refuses non-loopback destinations, credentials in URL and unknown commands\n  ---\n  duration_ms: 1.8537\n  type: 'test'\n  ...\n# Subtest: HTTP adapter rejects redirects and limits upstream output\nok 2 - HTTP adapter rejects redirects and limits upstream output\n  ---\n  duration_ms: 40.6074\n  type: 'test'\n  ...\n# Subtest: MCP initialization, strict schemas, discovery and scoped reads\nok 3 - MCP initialization, strict schemas, discovery and scoped reads\n  ---\n  duration_ms: 385.8515\n  type: 'test'\n  ...\n# Subtest: preapproved synthetic action, trusted verification, closure and replay\nok 4 - preapproved synthetic action, trusted verification, closure and replay\n  ---\n  duration_ms: 390.6116\n  type: 'test'\n  ...\n# Subtest: tool input cannot authorize its own proposal; pagination is stable\nok 5 - tool input cannot authorize its own proposal; pagination is stable\n  ---\n  duration_ms: 405.9715\n  type: 'test'\n  ...\n# Subtest: auditor cannot write; second tenant sees only its own fixture\nok 6 - auditor cannot write; second tenant sees only its own fixture\n  ---\n  duration_ms: 368.2562\n  type: 'test'\n  ...\n# Subtest: reference client runs with explicit ephemeral identity and empty memory\nok 7 - reference client runs with explicit ephemeral identity and empty memory\n  ---\n  duration_ms: 612.894\n  type: 'test'\n  ...\n# Subtest: backend cancellation before dispatch and in flight is explicit\nok 8 - backend cancellation before dispatch and in flight is explicit\n  ---\n  duration_ms: 10.0789\n  type: 'test'\n  ...\n1..8\n# tests 8\n# suites 0\n# pass 8\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 2531.1862\n"
+    },
+    "quote_ui": {
+      "passed": true,
+      "output": "14 quote/next-step assertions passed.\n"
+    }
+  }
+}

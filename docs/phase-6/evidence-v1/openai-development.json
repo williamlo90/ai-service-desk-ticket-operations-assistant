@@ -1,0 +1,235 @@
+{
+  "checked_at_utc": "2026-10-08T16:24:31.010298+00:00",
+  "kind": "real_provider",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "freeze": {
+    "dataset_sha256": "b0e24e3252d8e84be946fd7544f7936e106f949b00dcf1776d0012fa58025a94",
+    "schema_sha256": "e56a94b0900c5ae1918a9f96afca6e018fcf37ff2b7451407d732223b7ca9ac7",
+    "instruction_sha256": "ce8cb4640307800172f2170ce9a9560175d7908b49489b9fcd0d3dd5a7328760",
+    "prompt_version": "evidence-first-v1",
+    "model": "gpt-4.1-mini-2025-04-14",
+    "source_sha256": {
+      "backend/service_desk/clarification.py": "a5645e9afebbe7f4bafb349ae61758ca3536d3f321e2d8d539a654259dbde148",
+      "backend/service_desk/ai.py": "8ec0bfda34e1da504f59efb6d1fe123a48a992089ecbe469a033351345a8cb15",
+      "backend/service_desk/evaluation.py": "86d14a5faf21724daa8026ffb28a729a130c714fe503545a3c8d2425159eac5c",
+      "scripts/evaluate_evidence_ai.py": "f9aca98e4582e3d4b8f020a0288d3a4d3afa86d7ce61b88bc5bf621aa8b3b225",
+      "scripts/evaluate_ai.py": "28d08efbd7caabbf62b90f6b3d79b3b72a270597fec341fcaa1be350efce1938"
+    },
+    "thresholds": {
+      "schema": 1,
+      "category": 0.9,
+      "ticket_evidence": 0.9,
+      "required_clarification": 1,
+      "clarification_slots": 0.9
+    },
+    "frozen_before_live": true
+  },
+  "split": "development",
+  "rows": [
+    {
+      "id": "e1-q01",
+      "result": {
+        "data": {
+          "category": "service_incident",
+          "facts": [
+            {
+              "source_id": "ticket",
+              "quote": "The finance export API returns HTTP 503 for every request."
+            }
+          ],
+          "missing": []
+        },
+        "field_evidence": [
+          {
+            "field": "service_name",
+            "source_id": "ticket",
+            "quote": "finance export API"
+          },
+          {
+            "field": "symptoms",
+            "source_id": "ticket",
+            "quote": "HTTP 503"
+          }
+        ],
+        "provider": "openai",
+        "model": "gpt-4.1-mini-2025-04-14",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 494,
+          "output_tokens": 68
+        },
+        "cost": null,
+        "elapsed_ms": 2327.878
+      },
+      "error": null,
+      "estimated_cost_usd": 0.0003064
+    },
+    {
+      "id": "e1-q02",
+      "result": {
+        "data": {
+          "category": "service_incident",
+          "facts": [
+            {
+              "source_id": "ticket",
+              "quote": "A service shows connection refused; the affected service name is not given."
+            }
+          ],
+          "missing": [
+            "service_name"
+          ]
+        },
+        "field_evidence": [
+          {
+            "field": "symptoms",
+            "source_id": "ticket",
+            "quote": "connection refused"
+          }
+        ],
+        "provider": "openai",
+        "model": "gpt-4.1-mini-2025-04-14",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 498,
+          "output_tokens": 53
+        },
+        "cost": null,
+        "elapsed_ms": 2038.227
+      },
+      "error": null,
+      "estimated_cost_usd": 0.000284
+    },
+    {
+      "id": "e1-q03",
+      "result": {
+        "data": {
+          "category": "repeated_ticket",
+          "facts": [
+            {
+              "source_id": "ticket",
+              "quote": "Please link source IT-201 with related IT-202; they describe a duplicate laptop fault."
+            }
+          ],
+          "missing": []
+        },
+        "field_evidence": [
+          {
+            "field": "source_ticket_id",
+            "source_id": "ticket",
+            "quote": "source IT-201"
+          },
+          {
+            "field": "related_ticket_id",
+            "source_id": "ticket",
+            "quote": "related IT-202"
+          }
+        ],
+        "provider": "openai",
+        "model": "gpt-4.1-mini-2025-04-14",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 508,
+          "output_tokens": 79
+        },
+        "cost": null,
+        "elapsed_ms": 1892.476
+      },
+      "error": null,
+      "estimated_cost_usd": 0.0003296
+    },
+    {
+      "id": "e1-q04",
+      "result": {
+        "data": {
+          "category": "access_request",
+          "facts": [
+            {
+              "source_id": "ticket",
+              "quote": "Grant user Rani read-only access to the asset portal."
+            }
+          ],
+          "missing": []
+        },
+        "field_evidence": [
+          {
+            "field": "requester_identity",
+            "source_id": "ticket",
+            "quote": "user Rani"
+          },
+          {
+            "field": "resource",
+            "source_id": "ticket",
+            "quote": "the asset portal"
+          },
+          {
+            "field": "entitlement",
+            "source_id": "ticket",
+            "quote": "read-only access"
+          }
+        ],
+        "provider": "openai",
+        "model": "gpt-4.1-mini-2025-04-14",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 508,
+          "output_tokens": 83
+        },
+        "cost": null,
+        "elapsed_ms": 1852.67
+      },
+      "error": null,
+      "estimated_cost_usd": 0.000336
+    }
+  ],
+  "budget": {
+    "cap_usd": "1.00",
+    "reservation_usd": "0.02",
+    "previous_calls_settled_from_usage": 50,
+    "previous_accounted_usd": "0.0104592",
+    "basis": "uncached published token rates; unknown calls retain reservation; invoice unknown",
+    "accounted_total_usd": "0.0117152",
+    "settled_calls": 54
+  },
+  "summary": {
+    "metrics": {
+      "schema": {
+        "passed": 4,
+        "total": 4,
+        "rate": 1.0
+      },
+      "category": {
+        "passed": 4,
+        "total": 4,
+        "rate": 1.0
+      },
+      "ticket_evidence": {
+        "passed": 4,
+        "total": 4,
+        "rate": 1.0
+      },
+      "required_clarification": {
+        "passed": 4,
+        "total": 4,
+        "rate": 1.0
+      },
+      "all_checks": {
+        "passed": 4,
+        "total": 4,
+        "rate": 1.0
+      },
+      "clarification_slots": {
+        "passed": 4,
+        "total": 4,
+        "rate": 1.0
+      }
+    },
+    "attempted": 4,
+    "unattempted": 0,
+    "successful_response_latency_ms": {
+      "samples": 4,
+      "p50": 1892.476,
+      "p95": 2327.878
+    },
+    "quality_gate": true
+  }
+}

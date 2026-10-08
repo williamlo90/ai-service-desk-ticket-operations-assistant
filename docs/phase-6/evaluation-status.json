@@ -1,0 +1,19 @@
+{
+  "checked_at_utc": "2026-10-08T15:47:33.700590+00:00",
+  "phase6_complete": false,
+  "openai_automated_quality_gate": "passed",
+  "semantic_acceptance": "not_accepted_for_unreviewed_operator_guidance",
+  "hosted_calls": 26,
+  "unique_synthetic_tickets": 24,
+  "input_tokens": 6250,
+  "output_tokens": 1129,
+  "estimated_uncached_list_cost_usd": 0.0043064,
+  "billed_cost_usd": null,
+  "reserved_budget_usd": "0.52",
+  "budget_limit_usd": "1.00",
+  "human_business_study": "not_started",
+  "claude_canary": "credentials_not_available",
+  "grok_canary": "credentials_not_available",
+  "local_quality_gate": "failed",
+  "decision": "Keep model outputs advisory and human-reviewed; do not enable autonomous model routing or action generation."
+}

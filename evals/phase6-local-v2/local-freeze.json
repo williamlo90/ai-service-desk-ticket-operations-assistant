@@ -1,0 +1,28 @@
+{
+  "frozen_before_calls": true,
+  "model": "qwen3:4b-instruct",
+  "digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "dataset_sha256": "2fea64b2f1b28e2f9e00a63ff5dccb1a12b54c44b4254c44803e02b9efc303c4",
+  "schema_sha256": "e56a94b0900c5ae1918a9f96afca6e018fcf37ff2b7451407d732223b7ca9ac7",
+  "instruction_sha256": "f30a2553c10eebe605d687048824c754172773212c8ed423a6313b8dab30bafb",
+  "prompt_version": "evidence-first-local-v2",
+  "options": {
+    "num_ctx": 4096,
+    "num_predict": 1000,
+    "num_thread": 2,
+    "num_gpu": 99,
+    "temperature": 0,
+    "seed": 42
+  },
+  "think": false,
+  "timeout_seconds": 60,
+  "concurrency": 1,
+  "source_sha256": {
+    "backend/service_desk/local_clarification_v2.py": "372befe99866599aa89a331f5308e1eed499a6a057e6723a5ff19af7707e28de",
+    "backend/service_desk/local_clarification.py": "25d680f55a3ec9aa76b758ac4c36bc37d47a4596c9a10f513197f187ae556169",
+    "backend/service_desk/clarification.py": "a5645e9afebbe7f4bafb349ae61758ca3536d3f321e2d8d539a654259dbde148",
+    "backend/service_desk/ai.py": "8ec0bfda34e1da504f59efb6d1fe123a48a992089ecbe469a033351345a8cb15",
+    "backend/service_desk/evaluation.py": "86d14a5faf21724daa8026ffb28a729a130c714fe503545a3c8d2425159eac5c",
+    "scripts/check_local_evidence_v2.py": "61cfc9fb9aa628c05e42f90487b05611dcbd07535ff12aa6b478a9691325cca9"
+  }
+}

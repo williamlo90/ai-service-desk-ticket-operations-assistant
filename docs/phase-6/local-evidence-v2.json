@@ -1,0 +1,298 @@
+{
+  "checked_at_utc": "2026-10-08T16:53:48.265287+00:00",
+  "provider": "ollama",
+  "freeze": {
+    "frozen_before_calls": true,
+    "model": "qwen3:4b-instruct",
+    "digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "dataset_sha256": "2fea64b2f1b28e2f9e00a63ff5dccb1a12b54c44b4254c44803e02b9efc303c4",
+    "schema_sha256": "e56a94b0900c5ae1918a9f96afca6e018fcf37ff2b7451407d732223b7ca9ac7",
+    "instruction_sha256": "f30a2553c10eebe605d687048824c754172773212c8ed423a6313b8dab30bafb",
+    "prompt_version": "evidence-first-local-v2",
+    "options": {
+      "num_ctx": 4096,
+      "num_predict": 1000,
+      "num_thread": 2,
+      "num_gpu": 99,
+      "temperature": 0,
+      "seed": 42
+    },
+    "think": false,
+    "timeout_seconds": 60,
+    "concurrency": 1,
+    "source_sha256": {
+      "backend/service_desk/local_clarification_v2.py": "372befe99866599aa89a331f5308e1eed499a6a057e6723a5ff19af7707e28de",
+      "backend/service_desk/local_clarification.py": "25d680f55a3ec9aa76b758ac4c36bc37d47a4596c9a10f513197f187ae556169",
+      "backend/service_desk/clarification.py": "a5645e9afebbe7f4bafb349ae61758ca3536d3f321e2d8d539a654259dbde148",
+      "backend/service_desk/ai.py": "8ec0bfda34e1da504f59efb6d1fe123a48a992089ecbe469a033351345a8cb15",
+      "backend/service_desk/evaluation.py": "86d14a5faf21724daa8026ffb28a729a130c714fe503545a3c8d2425159eac5c",
+      "scripts/check_local_evidence_v2.py": "61cfc9fb9aa628c05e42f90487b05611dcbd07535ff12aa6b478a9691325cca9"
+    }
+  },
+  "runtime": {
+    "version": "0.40.1"
+  },
+  "model_bytes": 2497293803,
+  "details": {
+    "parent_model": "",
+    "format": "gguf",
+    "family": "qwen3",
+    "families": [
+      "qwen3"
+    ],
+    "parameter_size": "4.0B",
+    "quantization_level": "Q4_K_M"
+  },
+  "license": "Apache-2.0",
+  "license_sha256": "d18a5cc71b84bc4af394a31116bd3932b42241de70c77d2b76d69a314ec8aa12",
+  "cost_usd": null,
+  "cost_note": "Hardware/electricity not measured; no hosted requests.",
+  "status": "failed",
+  "rows": [
+    {
+      "id": "l2-q01",
+      "result": {
+        "data": {
+          "category": "access_request",
+          "facts": [
+            {
+              "quote": "Viewer permission to the shipment register",
+              "source_id": "ticket"
+            },
+            {
+              "quote": "shipment register",
+              "source_id": "ticket"
+            }
+          ],
+          "missing": [
+            "requester_identity"
+          ]
+        },
+        "field_evidence": [
+          {
+            "field": "resource",
+            "quote": "shipment register",
+            "source_id": "ticket"
+          },
+          {
+            "field": "entitlement",
+            "quote": "Viewer permission",
+            "source_id": "ticket"
+          }
+        ],
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct",
+        "prompt_version": "evidence-first-local-v2",
+        "usage": {
+          "input_tokens": 699,
+          "output_tokens": 66
+        },
+        "cost": null,
+        "elapsed_ms": 9453.374
+      },
+      "error": null
+    },
+    {
+      "id": "l2-q02",
+      "result": {
+        "data": {
+          "category": "service_incident",
+          "facts": [
+            {
+              "quote": "error E77",
+              "source_id": "ticket"
+            }
+          ],
+          "missing": [
+            "service_name"
+          ]
+        },
+        "field_evidence": [
+          {
+            "field": "symptoms",
+            "quote": "error E77",
+            "source_id": "ticket"
+          }
+        ],
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct",
+        "prompt_version": "evidence-first-local-v2",
+        "usage": {
+          "input_tokens": 685,
+          "output_tokens": 57
+        },
+        "cost": null,
+        "elapsed_ms": 9852.17
+      },
+      "error": null
+    },
+    {
+      "id": "l2-q03",
+      "result": {
+        "data": {
+          "category": "repeated_ticket",
+          "facts": [
+            {
+              "quote": "IT-431",
+              "source_id": "ticket"
+            },
+            {
+              "quote": "nomor tiket terkait belum disebutkan",
+              "source_id": "ticket"
+            }
+          ],
+          "missing": []
+        },
+        "field_evidence": [
+          {
+            "field": "source_ticket_id",
+            "quote": "IT-431",
+            "source_id": "ticket"
+          },
+          {
+            "field": "related_ticket_id",
+            "quote": "nomor tiket terkait belum disebutkan",
+            "source_id": "ticket"
+          }
+        ],
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct",
+        "prompt_version": "evidence-first-local-v2",
+        "usage": {
+          "input_tokens": 729,
+          "output_tokens": 92
+        },
+        "cost": null,
+        "elapsed_ms": 15668.368
+      },
+      "error": null
+    },
+    {
+      "id": "l2-q04",
+      "result": {
+        "data": {
+          "category": "unsupported",
+          "facts": [],
+          "missing": []
+        },
+        "field_evidence": [],
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct",
+        "prompt_version": "evidence-first-local-v2",
+        "usage": {
+          "input_tokens": 699,
+          "output_tokens": 17
+        },
+        "cost": null,
+        "elapsed_ms": 4098.129
+      },
+      "error": null
+    }
+  ],
+  "warmup": {
+    "data": {
+      "category": "access_request",
+      "facts": [
+        {
+          "quote": "Viewer permission to the shipment register",
+          "source_id": "ticket"
+        },
+        {
+          "quote": "shipment register",
+          "source_id": "ticket"
+        }
+      ],
+      "missing": [
+        "requester_identity"
+      ]
+    },
+    "field_evidence": [
+      {
+        "field": "resource",
+        "quote": "shipment register",
+        "source_id": "ticket"
+      },
+      {
+        "field": "entitlement",
+        "quote": "Viewer permission",
+        "source_id": "ticket"
+      }
+    ],
+    "provider": "ollama",
+    "model": "qwen3:4b-instruct",
+    "prompt_version": "evidence-first-local-v2",
+    "usage": {
+      "input_tokens": 699,
+      "output_tokens": 66
+    },
+    "cost": null,
+    "elapsed_ms": 30119.779
+  },
+  "loaded_model": {
+    "name": "qwen3:4b-instruct",
+    "model": "qwen3:4b-instruct",
+    "size": 3184001022,
+    "digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "qwen3",
+      "families": [
+        "qwen3"
+      ],
+      "parameter_size": "4.0B",
+      "quantization_level": "Q4_K_M"
+    },
+    "expires_at": "2026-10-08T23:56:18.4210695+07:00",
+    "size_vram": 0,
+    "context_length": 4096,
+    "runner": "llamacpp"
+  },
+  "gpu_offload_observed": false,
+  "summaries": {
+    "development": {
+      "metrics": {
+        "schema": {
+          "passed": 4,
+          "total": 4,
+          "rate": 1.0
+        },
+        "category": {
+          "passed": 4,
+          "total": 4,
+          "rate": 1.0
+        },
+        "ticket_evidence": {
+          "passed": 2,
+          "total": 4,
+          "rate": 0.5
+        },
+        "required_clarification": {
+          "passed": 3,
+          "total": 4,
+          "rate": 0.75
+        },
+        "all_checks": {
+          "passed": 1,
+          "total": 4,
+          "rate": 0.25
+        },
+        "clarification_slots": {
+          "passed": 3,
+          "total": 4,
+          "rate": 0.75
+        }
+      },
+      "attempted": 4,
+      "unattempted": 0,
+      "successful_response_latency_ms": {
+        "samples": 4,
+        "p50": 9453.374,
+        "p95": 15668.368
+      },
+      "quality_gate": false
+    }
+  },
+  "error": "check_quality_or_runtime_evidence",
+  "final_unloaded": true
+}

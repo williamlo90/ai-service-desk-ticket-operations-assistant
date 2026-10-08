@@ -3,9 +3,11 @@
 Service desk assistant untuk mengubah tiket Jira menjadi tindakan yang disetujui
 manusia, hasil yang diverifikasi di sistem tujuan, dan audit yang tersimpan.
 
-**Status: Phase 5 selesai untuk integrasi V1 lokal.**
-[Gate penutupan](docs/phase-5/phase5-gate.json) lulus. Tahap berikutnya adalah
-Phase 6: evaluasi kualitas model dan manfaat bisnis.
+**Status: Phase 6 selesai untuk scope lab OpenAI yang disepakati.**
+[Gate penutupan](docs/phase-6/phase6-gate.json) lulus. AI memberikan rekomendasi
+langkah berikutnya beserta alasan; keputusan tetap pada operator.
+[Hasil evaluasi](docs/phase-6/CURRENT.md): OpenAI lulus 16/16 held-out sintetis.
+Ollama tetap eksperimental; validasi live Claude/Grok ditunda.
 
 ## Arsitektur yang dipilih
 
@@ -26,7 +28,7 @@ API berjalan di loopback; supervisor memulihkan child process, bukan host reboot
 
 ## Bukti yang sudah tersedia
 
-- **130 tes Python + 8 tes Node lulus.**
+- **172 tes Python, 8 tes MCP dan 14 pemeriksaan JavaScript lulus** pada penutupan Phase 6.
 - Perbandingan dua engine: masing-masing 14 kasus dasar dan 17 kasus policy v2;
   pack recovery, transport dan native wait/restart tercatat terpisah.
 - PostgreSQL nyata: migration replay, RLS, CAS, audit atomicity dan pemulihan proses.
@@ -45,14 +47,15 @@ API berjalan di loopback; supervisor memulihkan child process, bukan host reboot
   [job cutover](docs/phase-5/job-cutover-check.json) terisolasi lulus, dengan satu
   efek target pada perpindahan dan rollback job sintetis.
 
-Hasil tersebut merupakan validasi integrasi lab. Belum ada klaim kualitas AI,
-ROI, performa produksi atau deployment cloud. Approval fixture diberi label dan
+Hasil tersebut merupakan validasi lab. Alur OpenAI diterima William; evaluasi memakai
+data sintetis dan pilot manusia bersifat diagnostik. Tidak ada klaim ROI, performa produksi
+atau deployment cloud. Approval fixture diberi label dan
 tidak disamakan dengan approval manusia. Baseline billing/refund dipertahankan;
 47 tes regresinya telah dijalankan terpisah, tanpa klaim bahwa job itu sudah dipindah.
 
 ## Mulai dan pelajari
 
-1. Baca [rencana fase](PHASES.md), [gate saat ini](docs/phase-5/CURRENT-GATES.md)
+1. Baca [rencana fase](PHASES.md), [hasil fase terkini](docs/phase-6/CURRENT.md)
    dan [panduan operator](docs/phase-5/OPERATOR-LAB.md).
 2. Tes Python: dari `backend`, jalankan
    `../.venv/Scripts/python.exe -B -m unittest discover -s tests`.
@@ -70,7 +73,7 @@ yang sedang aktif; gunakan fixture terpisah.
 
 ## Tahap selanjutnya
 
-Phase 6 mengukur kualitas model dan manfaat bisnis. Phase 7 menguji hardening,
+Phase 6 selesai dalam scope yang disepakati. Berikutnya, Phase 7 menguji hardening,
 beban, host recovery dan release candidate. Phase 8 adalah handover; Azure tetap
 Phase 9. Lihat dokumen topik untuk kebutuhan AI, reusable skills, MCP, security
 dan delivery, dengan ADR terbaru sebagai acuan ownership runtime.

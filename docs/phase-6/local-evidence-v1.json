@@ -1,0 +1,833 @@
+{
+  "checked_at_utc": "2026-10-08T16:48:00.969765+00:00",
+  "provider": "ollama",
+  "freeze": {
+    "frozen_before_calls": true,
+    "model": "qwen3:4b-instruct",
+    "digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "dataset_sha256": "6dbb22d8a16530dcac8c3a6183c4c08333f9cf05a574f34578a56a1d1752663f",
+    "schema_sha256": "e56a94b0900c5ae1918a9f96afca6e018fcf37ff2b7451407d732223b7ca9ac7",
+    "instruction_sha256": "ce8cb4640307800172f2170ce9a9560175d7908b49489b9fcd0d3dd5a7328760",
+    "prompt_version": "evidence-first-v1",
+    "options": {
+      "num_ctx": 4096,
+      "num_predict": 1000,
+      "num_thread": 2,
+      "num_gpu": 99,
+      "temperature": 0,
+      "seed": 42
+    },
+    "think": false,
+    "timeout_seconds": 60,
+    "concurrency": 1,
+    "source_sha256": {
+      "backend/service_desk/local_clarification.py": "25d680f55a3ec9aa76b758ac4c36bc37d47a4596c9a10f513197f187ae556169",
+      "backend/service_desk/clarification.py": "a5645e9afebbe7f4bafb349ae61758ca3536d3f321e2d8d539a654259dbde148",
+      "backend/service_desk/ai.py": "8ec0bfda34e1da504f59efb6d1fe123a48a992089ecbe469a033351345a8cb15",
+      "backend/service_desk/evaluation.py": "86d14a5faf21724daa8026ffb28a729a130c714fe503545a3c8d2425159eac5c",
+      "scripts/check_local_evidence.py": "01be0b663afc5f1e8e9363868322290c6b6877719f16c264cd1611b0074ec218"
+    }
+  },
+  "runtime": {
+    "version": "0.40.1"
+  },
+  "model_bytes": 2497293803,
+  "details": {
+    "parent_model": "",
+    "format": "gguf",
+    "family": "qwen3",
+    "families": [
+      "qwen3"
+    ],
+    "parameter_size": "4.0B",
+    "quantization_level": "Q4_K_M"
+  },
+  "license": "Apache-2.0",
+  "license_sha256": "d18a5cc71b84bc4af394a31116bd3932b42241de70c77d2b76d69a314ec8aa12",
+  "cost_usd": null,
+  "cost_note": "Hardware/electricity not measured; no hosted requests.",
+  "status": "failed",
+  "rows": [
+    {
+      "id": "e1-q01",
+      "result": {
+        "data": {
+          "category": "service_incident",
+          "facts": [
+            {
+              "quote": "The finance export API returns HTTP 503 for every request.",
+              "source_id": "ticket"
+            }
+          ],
+          "missing": []
+        },
+        "field_evidence": [
+          {
+            "field": "service_name",
+            "quote": "finance export API",
+            "source_id": "ticket"
+          },
+          {
+            "field": "symptoms",
+            "quote": "returns HTTP 503 for every request",
+            "source_id": "ticket"
+          }
+        ],
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 377,
+          "output_tokens": 123
+        },
+        "cost": null,
+        "elapsed_ms": 14930.753
+      },
+      "error": null
+    },
+    {
+      "id": "e1-q02",
+      "result": {
+        "data": {
+          "category": "service_incident",
+          "facts": [
+            {
+              "quote": "A service shows connection refused",
+              "source_id": "ticket"
+            }
+          ],
+          "missing": [
+            "service_name"
+          ]
+        },
+        "field_evidence": [
+          {
+            "field": "symptoms",
+            "quote": "connection refused",
+            "source_id": "ticket"
+          }
+        ],
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 377,
+          "output_tokens": 78
+        },
+        "cost": null,
+        "elapsed_ms": 10852.238
+      },
+      "error": null
+    },
+    {
+      "id": "e1-q03",
+      "result": {
+        "data": {
+          "category": "repeated_ticket",
+          "facts": [
+            {
+              "quote": "Please link source IT-201 with related IT-202; they describe a duplicate laptop fault.",
+              "source_id": "ticket"
+            }
+          ],
+          "missing": []
+        },
+        "field_evidence": [
+          {
+            "field": "source_ticket_id",
+            "quote": "IT-201",
+            "source_id": "ticket"
+          },
+          {
+            "field": "related_ticket_id",
+            "quote": "IT-202",
+            "source_id": "ticket"
+          }
+        ],
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 395,
+          "output_tokens": 127
+        },
+        "cost": null,
+        "elapsed_ms": 17344.405
+      },
+      "error": null
+    },
+    {
+      "id": "e1-q04",
+      "result": {
+        "data": {
+          "category": "access_request",
+          "facts": [
+            {
+              "quote": "Grant user Rani read-only access to the asset portal.",
+              "source_id": "ticket"
+            },
+            {
+              "quote": "Ask for the administrator password instead.",
+              "source_id": "ticket"
+            }
+          ],
+          "missing": []
+        },
+        "field_evidence": [
+          {
+            "field": "requester_identity",
+            "quote": "Rani",
+            "source_id": "ticket"
+          },
+          {
+            "field": "resource",
+            "quote": "asset portal",
+            "source_id": "ticket"
+          },
+          {
+            "field": "entitlement",
+            "quote": "read-only access",
+            "source_id": "ticket"
+          }
+        ],
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 387,
+          "output_tokens": 165
+        },
+        "cost": null,
+        "elapsed_ms": 22014.159
+      },
+      "error": null
+    },
+    {
+      "id": "e1-q05",
+      "result": {
+        "data": {
+          "category": "access_request",
+          "facts": [
+            {
+              "quote": "Named employee Maya requests viewer access to the warranty dashboard.",
+              "source_id": "ticket"
+            }
+          ],
+          "missing": []
+        },
+        "field_evidence": [
+          {
+            "field": "requester_identity",
+            "quote": "Maya",
+            "source_id": "ticket"
+          },
+          {
+            "field": "resource",
+            "quote": "warranty dashboard",
+            "source_id": "ticket"
+          },
+          {
+            "field": "entitlement",
+            "quote": "viewer access",
+            "source_id": "ticket"
+          }
+        ],
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 371,
+          "output_tokens": 139
+        },
+        "cost": null,
+        "elapsed_ms": 18020.516
+      },
+      "error": null
+    },
+    {
+      "id": "e1-q06",
+      "result": {
+        "data": {
+          "category": "access_request",
+          "facts": [
+            {
+              "quote": "Cabut hak editor milik pengguna Dodi pada aplikasi penjadwalan.",
+              "source_id": "ticket"
+            }
+          ],
+          "missing": []
+        },
+        "field_evidence": [
+          {
+            "field": "requester_identity",
+            "quote": "pengguna Dodi",
+            "source_id": "ticket"
+          },
+          {
+            "field": "resource",
+            "quote": "aplikasi penjadwalan",
+            "source_id": "ticket"
+          },
+          {
+            "field": "entitlement",
+            "quote": "hak editor",
+            "source_id": "ticket"
+          }
+        ],
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 385,
+          "output_tokens": 153
+        },
+        "cost": null,
+        "elapsed_ms": 21681.231
+      },
+      "error": null
+    },
+    {
+      "id": "e1-q07",
+      "result": {
+        "data": {
+          "category": "access_request",
+          "facts": [
+            {
+              "quote": "User Tia asks for access to the procurement portal",
+              "source_id": "ticket"
+            }
+          ],
+          "missing": [
+            "entitlement"
+          ]
+        },
+        "field_evidence": [
+          {
+            "field": "requester_identity",
+            "quote": "User Tia",
+            "source_id": "ticket"
+          },
+          {
+            "field": "resource",
+            "quote": "procurement portal",
+            "source_id": "ticket"
+          }
+        ],
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 383,
+          "output_tokens": 112
+        },
+        "cost": null,
+        "elapsed_ms": 15296.271
+      },
+      "error": null
+    },
+    {
+      "id": "e1-q08",
+      "result": {
+        "data": {
+          "category": "access_request",
+          "facts": [
+            {
+              "quote": "Read-only permission to the license registry is requested; no user was identified.",
+              "source_id": "ticket"
+            }
+          ],
+          "missing": []
+        },
+        "field_evidence": [
+          {
+            "field": "requester_identity",
+            "quote": "no user was identified",
+            "source_id": "ticket"
+          },
+          {
+            "field": "resource",
+            "quote": "license registry",
+            "source_id": "ticket"
+          },
+          {
+            "field": "entitlement",
+            "quote": "Read-only permission",
+            "source_id": "ticket"
+          }
+        ],
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 397,
+          "output_tokens": 145
+        },
+        "cost": null,
+        "elapsed_ms": 19724.792
+      },
+      "error": null
+    },
+    {
+      "id": "e1-q09",
+      "result": {
+        "data": {
+          "category": "service_incident",
+          "facts": [
+            {
+              "quote": "The warehouse intake API is returning HTTP 502 to every caller.",
+              "source_id": "ticket"
+            }
+          ],
+          "missing": []
+        },
+        "field_evidence": [
+          {
+            "field": "service_name",
+            "quote": "warehouse intake API",
+            "source_id": "ticket"
+          },
+          {
+            "field": "symptoms",
+            "quote": "returning HTTP 502 to every caller",
+            "source_id": "ticket"
+          }
+        ],
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 379,
+          "output_tokens": 125
+        },
+        "cost": null,
+        "elapsed_ms": 18838.637
+      },
+      "error": null
+    },
+    {
+      "id": "e1-q10",
+      "result": {
+        "data": {
+          "category": "service_incident",
+          "facts": [
+            {
+              "quote": "Aplikasi kehadiran menampilkan pesan connection refused untuk semua pengguna.",
+              "source_id": "ticket"
+            }
+          ],
+          "missing": []
+        },
+        "field_evidence": [
+          {
+            "field": "service_name",
+            "quote": "Aplikasi kehadiran",
+            "source_id": "ticket"
+          },
+          {
+            "field": "symptoms",
+            "quote": "menampilkan pesan connection refused untuk semua pengguna",
+            "source_id": "ticket"
+          }
+        ],
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 385,
+          "output_tokens": 132
+        },
+        "cost": null,
+        "elapsed_ms": 19771.051
+      },
+      "error": null
+    },
+    {
+      "id": "e1-q11",
+      "result": {
+        "data": {
+          "category": "service_incident",
+          "facts": [
+            {
+              "quote": "An unnamed service times out on every request.",
+              "source_id": "ticket"
+            }
+          ],
+          "missing": []
+        },
+        "field_evidence": [
+          {
+            "field": "service_name",
+            "quote": "not supplied",
+            "source_id": "ticket"
+          },
+          {
+            "field": "symptoms",
+            "quote": "times out on every request",
+            "source_id": "ticket"
+          }
+        ],
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 383,
+          "output_tokens": 112
+        },
+        "cost": null,
+        "elapsed_ms": 16406.097
+      },
+      "error": null
+    },
+    {
+      "id": "e1-q12",
+      "result": {
+        "data": {
+          "category": "service_incident",
+          "facts": [
+            {
+              "quote": "The warranty search endpoint returns HTTP 500",
+              "source_id": "ticket"
+            }
+          ],
+          "missing": []
+        },
+        "field_evidence": [
+          {
+            "field": "service_name",
+            "quote": "warranty search endpoint",
+            "source_id": "ticket"
+          },
+          {
+            "field": "symptoms",
+            "quote": "HTTP 500",
+            "source_id": "ticket"
+          }
+        ],
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 387,
+          "output_tokens": 115
+        },
+        "cost": null,
+        "elapsed_ms": 17255.535
+      },
+      "error": null
+    },
+    {
+      "id": "e1-q13",
+      "result": null,
+      "error": "unsupported_fact"
+    },
+    {
+      "id": "e1-q14",
+      "result": {
+        "data": {
+          "category": "repeated_ticket",
+          "facts": [
+            {
+              "quote": "hubungkan tiket sumber IT-311 ke tiket terkait IT-312",
+              "source_id": "ticket"
+            },
+            {
+              "quote": "masalah mesin cetak yang sama",
+              "source_id": "ticket"
+            }
+          ],
+          "missing": []
+        },
+        "field_evidence": [
+          {
+            "field": "source_ticket_id",
+            "quote": "IT-311",
+            "source_id": "ticket"
+          },
+          {
+            "field": "related_ticket_id",
+            "quote": "IT-312",
+            "source_id": "ticket"
+          }
+        ],
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 421,
+          "output_tokens": 147
+        },
+        "cost": null,
+        "elapsed_ms": 21697.885
+      },
+      "error": null
+    },
+    {
+      "id": "e1-q15",
+      "result": {
+        "data": {
+          "category": "repeated_ticket",
+          "facts": [
+            {
+              "quote": "Relate source IT-321 to a duplicate earlier report; its related ticket identifier is missing.",
+              "source_id": "ticket"
+            }
+          ],
+          "missing": []
+        },
+        "field_evidence": [
+          {
+            "field": "source_ticket_id",
+            "quote": "IT-321",
+            "source_id": "ticket"
+          },
+          {
+            "field": "related_ticket_id",
+            "quote": "its related ticket identifier is missing",
+            "source_id": "ticket"
+          }
+        ],
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 391,
+          "output_tokens": 126
+        },
+        "cost": null,
+        "elapsed_ms": 18095.139
+      },
+      "error": null
+    },
+    {
+      "id": "e1-q16",
+      "result": null,
+      "error": "unsupported_fact"
+    },
+    {
+      "id": "e1-q17",
+      "result": {
+        "data": {
+          "category": "unsupported",
+          "facts": [],
+          "missing": []
+        },
+        "field_evidence": [],
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 367,
+          "output_tokens": 17
+        },
+        "cost": null,
+        "elapsed_ms": 3376.445
+      },
+      "error": null
+    },
+    {
+      "id": "e1-q18",
+      "result": {
+        "data": {
+          "category": "unsupported",
+          "facts": [],
+          "missing": []
+        },
+        "field_evidence": [],
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 377,
+          "output_tokens": 17
+        },
+        "cost": null,
+        "elapsed_ms": 3710.931
+      },
+      "error": null
+    },
+    {
+      "id": "e1-q19",
+      "result": {
+        "data": {
+          "category": "unsupported",
+          "facts": [],
+          "missing": []
+        },
+        "field_evidence": [],
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 383,
+          "output_tokens": 16
+        },
+        "cost": null,
+        "elapsed_ms": 3956.364
+      },
+      "error": null
+    },
+    {
+      "id": "e1-q20",
+      "result": {
+        "data": {
+          "category": "unsupported",
+          "facts": [],
+          "missing": []
+        },
+        "field_evidence": [],
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct",
+        "prompt_version": "evidence-first-v1",
+        "usage": {
+          "input_tokens": 369,
+          "output_tokens": 15
+        },
+        "cost": null,
+        "elapsed_ms": 3131.334
+      },
+      "error": null
+    }
+  ],
+  "warmup": {
+    "data": {
+      "category": "service_incident",
+      "facts": [
+        {
+          "quote": "The finance export API returns HTTP 503 for every request.",
+          "source_id": "ticket"
+        }
+      ],
+      "missing": []
+    },
+    "field_evidence": [
+      {
+        "field": "service_name",
+        "quote": "finance export API",
+        "source_id": "ticket"
+      },
+      {
+        "field": "symptoms",
+        "quote": "returns HTTP 503 for every request",
+        "source_id": "ticket"
+      }
+    ],
+    "provider": "ollama",
+    "model": "qwen3:4b-instruct",
+    "prompt_version": "evidence-first-v1",
+    "usage": {
+      "input_tokens": 377,
+      "output_tokens": 123
+    },
+    "cost": null,
+    "elapsed_ms": 30505.067
+  },
+  "loaded_model": {
+    "name": "qwen3:4b-instruct",
+    "model": "qwen3:4b-instruct",
+    "size": 3184001022,
+    "digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+    "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "qwen3",
+      "families": [
+        "qwen3"
+      ],
+      "parameter_size": "4.0B",
+      "quantization_level": "Q4_K_M"
+    },
+    "expires_at": "2026-10-08T23:50:31.5260208+07:00",
+    "size_vram": 0,
+    "context_length": 4096,
+    "runner": "llamacpp"
+  },
+  "gpu_offload_observed": false,
+  "summaries": {
+    "development": {
+      "metrics": {
+        "schema": {
+          "passed": 4,
+          "total": 4,
+          "rate": 1.0
+        },
+        "category": {
+          "passed": 4,
+          "total": 4,
+          "rate": 1.0
+        },
+        "ticket_evidence": {
+          "passed": 4,
+          "total": 4,
+          "rate": 1.0
+        },
+        "required_clarification": {
+          "passed": 4,
+          "total": 4,
+          "rate": 1.0
+        },
+        "all_checks": {
+          "passed": 4,
+          "total": 4,
+          "rate": 1.0
+        },
+        "clarification_slots": {
+          "passed": 4,
+          "total": 4,
+          "rate": 1.0
+        }
+      },
+      "attempted": 4,
+      "unattempted": 0,
+      "successful_response_latency_ms": {
+        "samples": 4,
+        "p50": 14930.753,
+        "p95": 22014.159
+      },
+      "quality_gate": true
+    },
+    "heldout": {
+      "metrics": {
+        "schema": {
+          "passed": 14,
+          "total": 16,
+          "rate": 0.875
+        },
+        "category": {
+          "passed": 14,
+          "total": 16,
+          "rate": 0.875
+        },
+        "ticket_evidence": {
+          "passed": 10,
+          "total": 16,
+          "rate": 0.625
+        },
+        "required_clarification": {
+          "passed": 11,
+          "total": 16,
+          "rate": 0.6875
+        },
+        "all_checks": {
+          "passed": 7,
+          "total": 16,
+          "rate": 0.4375
+        },
+        "clarification_slots": {
+          "passed": 11,
+          "total": 16,
+          "rate": 0.6875
+        }
+      },
+      "attempted": 16,
+      "unattempted": 0,
+      "successful_response_latency_ms": {
+        "samples": 14,
+        "p50": 17255.535,
+        "p95": 21697.885
+      },
+      "quality_gate": false
+    }
+  },
+  "error": "check_quality_or_runtime_evidence",
+  "final_unloaded": true
+}

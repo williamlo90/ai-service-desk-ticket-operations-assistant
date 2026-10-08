@@ -1,0 +1,164 @@
+{
+  "checked_at_utc": "2026-10-08T16:14:01.917132+00:00",
+  "status": "pilot_completed",
+  "study": "diagnostic-cached-advice-v1",
+  "participant_count": 1,
+  "raw_observations_sha256": "a219528a5c39c0ac61e322cb46e9e7128938df369e0b86f421c2a40d20ae53fd",
+  "reference_sha256": "20491f870f48254cfbee78cbca0e0c570fd2c91910db8eeee63e49c29ca7c99e",
+  "analysis": {
+    "observations": 8,
+    "conditions": {
+      "manual": {
+        "tasks": 4,
+        "active_seconds_total": 220.053,
+        "descriptive_mean_active_seconds": 55.013,
+        "correct": 0,
+        "dimensions": {
+          "category": 4,
+          "missing_fields": 2,
+          "verbatim_evidence": 0,
+          "next_step": 3
+        }
+      },
+      "assisted": {
+        "tasks": 4,
+        "active_seconds_total": 151.245,
+        "descriptive_mean_active_seconds": 37.811,
+        "correct": 2,
+        "dimensions": {
+          "category": 4,
+          "missing_fields": 3,
+          "verbatim_evidence": 4,
+          "next_step": 2
+        }
+      }
+    },
+    "rows": [
+      {
+        "case_id": "manual-access",
+        "pair_id": "access",
+        "condition": "manual",
+        "active_seconds": 76.927,
+        "checks": {
+          "category": true,
+          "missing_fields": false,
+          "verbatim_evidence": false,
+          "next_step": true
+        },
+        "all_correct": false,
+        "changed_category_or_missing_fields": null
+      },
+      {
+        "case_id": "assisted-access",
+        "pair_id": "access",
+        "condition": "assisted",
+        "active_seconds": 43.976,
+        "checks": {
+          "category": true,
+          "missing_fields": true,
+          "verbatim_evidence": true,
+          "next_step": true
+        },
+        "all_correct": true,
+        "changed_category_or_missing_fields": 0
+      },
+      {
+        "case_id": "assisted-incident",
+        "pair_id": "incident",
+        "condition": "assisted",
+        "active_seconds": 53.686,
+        "checks": {
+          "category": true,
+          "missing_fields": false,
+          "verbatim_evidence": true,
+          "next_step": false
+        },
+        "all_correct": false,
+        "changed_category_or_missing_fields": 0
+      },
+      {
+        "case_id": "manual-incident",
+        "pair_id": "incident",
+        "condition": "manual",
+        "active_seconds": 67.306,
+        "checks": {
+          "category": true,
+          "missing_fields": false,
+          "verbatim_evidence": false,
+          "next_step": true
+        },
+        "all_correct": false,
+        "changed_category_or_missing_fields": null
+      },
+      {
+        "case_id": "manual-link",
+        "pair_id": "link",
+        "condition": "manual",
+        "active_seconds": 58.67,
+        "checks": {
+          "category": true,
+          "missing_fields": true,
+          "verbatim_evidence": false,
+          "next_step": false
+        },
+        "all_correct": false,
+        "changed_category_or_missing_fields": null
+      },
+      {
+        "case_id": "assisted-link",
+        "pair_id": "link",
+        "condition": "assisted",
+        "active_seconds": 41.985,
+        "checks": {
+          "category": true,
+          "missing_fields": true,
+          "verbatim_evidence": true,
+          "next_step": false
+        },
+        "all_correct": false,
+        "changed_category_or_missing_fields": 0
+      },
+      {
+        "case_id": "assisted-other",
+        "pair_id": "other",
+        "condition": "assisted",
+        "active_seconds": 11.598,
+        "checks": {
+          "category": true,
+          "missing_fields": true,
+          "verbatim_evidence": true,
+          "next_step": true
+        },
+        "all_correct": true,
+        "changed_category_or_missing_fields": 0
+      },
+      {
+        "case_id": "manual-other",
+        "pair_id": "other",
+        "condition": "manual",
+        "active_seconds": 17.15,
+        "checks": {
+          "category": true,
+          "missing_fields": true,
+          "verbatim_evidence": false,
+          "next_step": true
+        },
+        "all_correct": false,
+        "changed_category_or_missing_fields": null
+      }
+    ],
+    "eligible_correct_pairs": [],
+    "efficiency_comparison": "not_estimable",
+    "roi": null,
+    "recorded_active_seconds_total": 371.298,
+    "changed_category_or_missing_fields_total": 0
+  },
+  "limitations": [
+    "single participant",
+    "non-randomized matched pairs",
+    "cached advice; excludes generation wait",
+    "active time depends on participant pausing",
+    "semantic human review pending"
+  ],
+  "review_type": "mechanical rubric recomputation plus implementation-agent interpretation; not independent human sign-off"
+}

@@ -1,0 +1,22 @@
+{
+  "dataset_sha256": "b0e24e3252d8e84be946fd7544f7936e106f949b00dcf1776d0012fa58025a94",
+  "schema_sha256": "e56a94b0900c5ae1918a9f96afca6e018fcf37ff2b7451407d732223b7ca9ac7",
+  "instruction_sha256": "ce8cb4640307800172f2170ce9a9560175d7908b49489b9fcd0d3dd5a7328760",
+  "prompt_version": "evidence-first-v1",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "source_sha256": {
+    "backend/service_desk/clarification.py": "a5645e9afebbe7f4bafb349ae61758ca3536d3f321e2d8d539a654259dbde148",
+    "backend/service_desk/ai.py": "8ec0bfda34e1da504f59efb6d1fe123a48a992089ecbe469a033351345a8cb15",
+    "backend/service_desk/evaluation.py": "86d14a5faf21724daa8026ffb28a729a130c714fe503545a3c8d2425159eac5c",
+    "scripts/evaluate_evidence_ai.py": "f9aca98e4582e3d4b8f020a0288d3a4d3afa86d7ce61b88bc5bf621aa8b3b225",
+    "scripts/evaluate_ai.py": "28d08efbd7caabbf62b90f6b3d79b3b72a270597fec341fcaa1be350efce1938"
+  },
+  "thresholds": {
+    "schema": 1,
+    "category": 0.9,
+    "ticket_evidence": 0.9,
+    "required_clarification": 1,
+    "clarification_slots": 0.9
+  },
+  "frozen_before_live": true
+}

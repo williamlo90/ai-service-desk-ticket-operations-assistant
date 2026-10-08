@@ -1,0 +1,14 @@
+{
+  "checked_at_utc": "2026-10-08T16:39:54.0238312Z",
+  "cpu": {
+    "Name": "13th Gen Intel(R) Core(TM) i7-13620H",
+    "NumberOfCores": 10,
+    "NumberOfLogicalProcessors": 16
+  },
+  "memory_kib": {
+    "TotalVisibleMemorySize": 16473596,
+    "FreePhysicalMemory": 2001000
+  },
+  "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU, 6141 MiB, 5592 MiB",
+  "scope": "Shared Windows host pre-inference snapshot; not isolated load benchmark"
+}
