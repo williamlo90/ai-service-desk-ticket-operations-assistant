@@ -41,13 +41,15 @@ The original approval page showed a raw JSON block beneath a single narrow form;
 practice stacked all three tasks vertically. The revision makes the action readable
 as labeled fields and places the source beside evidence and the next decision.
 
-- Direction: calm, evidence-focused product workspace; variance 4, motion 2, density 5.
+- Direction: calm, evidence-focused product workspace; variance 5, motion 2, density 6.
 - Design system: official Primer buttons, forms, base styles and light palette,
   with green `#24584a` carried forward from the original approval page.
-- Typography: system sans, 34/28px page title, 16px section titles, 15px body;
-  12px supporting text. No font downloads or decorative imagery.
-- Spacing: 20/24px panels, 24px desktop gutter, a 300px connection column;
-  one column below 800px, compact field stacking below 480px.
+- Typography: system sans, 30/26px page title, 14px section titles, 14px body;
+  larger ticket excerpts and compact supporting text. No font downloads or decorative imagery.
+- Layout: 218px evergreen navigation sidebar, 22/24px panels, compact connection
+  column and labeled evidence rows. AI practice places source and evidence side by
+  side, followed by a full-width recommendation panel. Navigation becomes horizontal
+  below 800px; content stacks on mobile.
 - Accessibility: native controls, visible labels and focus, skip navigation,
   live feedback, semantic headings, no hover-only actions or motion.
 - Preserved: token then case field order, IDs, backend authorization, case URL
@@ -73,3 +75,12 @@ styles and the official light palette; runtime serves only explicit asset paths.
 
 Phase 5–8 reports remain evidence for their recorded revisions. This UI extension
 has its own validation above; it does not retroactively change those snapshots.
+
+## Visual refinement
+
+The post-publication revision strengthens the application shell with a dark evergreen
+sidebar, compact headings, separated evidence rows, and a pale-green decision panel.
+The recommendation and its controls now share one horizontal area on desktop, avoiding
+the previous empty space beneath the source. Token, approval, and practice behavior
+remain unchanged. Desktop (1440px) and mobile (390px) were checked again, and the
+public screenshots were refreshed from the actual application with synthetic data.
