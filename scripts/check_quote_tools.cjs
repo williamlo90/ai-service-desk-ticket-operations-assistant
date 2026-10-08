@@ -10,8 +10,8 @@ assert.equal(suggestedStep('repeated_ticket', ['related_ticket_id']), 'clarify')
 assert.equal(suggestedStep('access_request', []), 'prepare_for_approval');
 assert.equal(suggestedStep('unsupported', []), 'route_out_of_scope');
 assert.equal(recommendation('repeated_ticket',['related_ticket_id']).step,'clarify');
-assert.match(recommendation('repeated_ticket',['related_ticket_id']).reason,/nomor tiket terkait/);
-assert.match(recommendation('access_request',[]).reason,/approval manusia/);
+assert.match(recommendation('repeated_ticket',['related_ticket_id']).reason,/related ticket ID/);
+assert.match(recommendation('access_request',[]).reason,/human approval/);
 assert.equal(recommendation('unsupported',[]).step,'route_out_of_scope');
 assert.equal(recommendation('unknown',[]).step,'');
 assert.equal(recommendation('access_request',['password']).step,'');

@@ -35,31 +35,27 @@ questions, and an explicit recommendation with a reason. The operator still sele
 the next step. Practice performs no model calls, business actions, or answer writes.
 The completed human pilot and its original observations are unchanged.
 
-## Design audit and implementation
+## Design and implementation
 
-The original approval page showed a raw JSON block beneath a single narrow form;
-practice stacked all three tasks vertically. The revision makes the action readable
-as labeled fields and places the source beside evidence and the next decision.
+The workspace follows the review itself: request, evidence, decision. Thin top
+navigation replaces the sidebar. A warm paper surface, asymmetric reading columns,
+fine separators and an evergreen decision band establish hierarchy without a grid
+of dashboard cards. The case connection form is a compact strip above the proposal.
 
-- Direction: calm, evidence-focused product workspace; variance 5, motion 2, density 6.
-- Design system: official Primer buttons, forms, base styles and light palette,
-  with green `#24584a` carried forward from the original approval page.
-- Typography: system sans, 30/26px page title, 14px section titles, 14px body;
-  larger ticket excerpts and compact supporting text. No font downloads or decorative imagery.
-- Layout: 218px evergreen navigation sidebar, 22/24px panels, compact connection
-  column and labeled evidence rows. AI practice places source and evidence side by
-  side, followed by a full-width recommendation panel. Navigation becomes horizontal
-  below 800px; content stacks on mobile.
-- Accessibility: native controls, visible labels and focus, skip navigation,
-  live feedback, semantic headings, no hover-only actions or motion.
-- Preserved: token then case field order, IDs, backend authorization, case URL
-  query, exact-quote behavior, cached examples, and independent execution.
-- Marketing-page patterns, image generation, carousels and animation are not
-  applicable to this operator workspace. No Lighthouse score is claimed.
+- Direction: document-led operator workbench; variance 6, motion 1, density 5.
+- Foundation: official Primer CSS controls, native HTML/JavaScript, system typography.
+- Language: English interface, questions, recommendations and feedback. Source quotes
+  retain their original text so exact-evidence checks remain meaningful.
+- Responsive behavior: reading columns stack below 700px; top navigation remains
+  visible and the approval form stacks on narrow screens.
+- Accessibility: labeled native controls, visible focus, skip navigation, live feedback,
+  readable source excerpts and reduced-motion support.
+- Behavior: identity, payload-bound approval, independent execution, cached examples
+  and exact quotes are preserved. No new business or model calls are introduced.
 
-Rebuild the vendored, MIT-licensed CSS with `npm ci --prefix frontend` then
-`npm run build --prefix frontend`. `frontend/build.mjs` selects official component
-styles and the official light palette; runtime serves only explicit asset paths.
+Rebuild the MIT-licensed vendored CSS with `npm ci --prefix frontend` and
+`npm run build --prefix frontend`. Marketing imagery and animation are not needed
+for this workspace; no Lighthouse score is claimed.
 
 ## Validation, 2026-10-09
 
@@ -76,11 +72,9 @@ styles and the official light palette; runtime serves only explicit asset paths.
 Phase 5–8 reports remain evidence for their recorded revisions. This UI extension
 has its own validation above; it does not retroactively change those snapshots.
 
-## Visual refinement
+## Current visual check
 
-The post-publication revision strengthens the application shell with a dark evergreen
-sidebar, compact headings, separated evidence rows, and a pale-green decision panel.
-The recommendation and its controls now share one horizontal area on desktop, avoiding
-the previous empty space beneath the source. Token, approval, and practice behavior
-remain unchanged. Desktop (1440px) and mobile (390px) were checked again, and the
-public screenshots were refreshed from the actual application with synthetic data.
+The English workbench was checked in the browser at desktop and mobile widths.
+The selected source quote, missing-service question, clarification recommendation
+and decision feedback remain connected. Screenshots use synthetic cases from the
+actual application. The completed historical pilot observations were not changed.

@@ -11,22 +11,23 @@
     return missing.length ? 'clarify' : 'prepare_for_approval';
   }
   function recommendation(category, missing) {
-    const fields = {requester_identity:'identitas pengguna', resource:'aplikasi atau resource',
-      entitlement:'hak akses yang diminta', service_name:'nama layanan', symptoms:'gejala atau pesan error',
-      source_ticket_id:'nomor tiket sumber', related_ticket_id:'nomor tiket terkait'};
+    const fields = {requester_identity:'requester identity', resource:'application or resource',
+      entitlement:'requested access', service_name:'service name', symptoms:'symptoms or error message',
+      source_ticket_id:'source ticket ID', related_ticket_id:'related ticket ID'};
     if (!Array.isArray(missing) || missing.some(code => !Object.hasOwn(fields, code)) ||
         !['access_request','service_incident','repeated_ticket','unsupported'].includes(category)) {
-      return {step:'', title:'Tinjau tiket secara manual', reason:'Data triage belum valid untuk menentukan langkah berikutnya.'};
+      return {step:'', title:'Review the request manually', reason:'The triage data is not valid enough to recommend a next step.'};
     }
     const step = suggestedStep(category, missing);
-    if (step === 'clarify') return {step, title:'Minta klarifikasi',
-      reason:'Masih diperlukan: '+missing.map(code => fields[code]).join(', ')+'. Lengkapi informasi ini sebelum menyiapkan tindakan.'};
-    if (step === 'prepare_for_approval') return {step, title:'Siapkan rencana untuk approval',
-      reason:'Field triage yang diperlukan sudah lengkap menurut saran ini. Tinjau bukti dan siapkan rencana; pelaksanaan tetap memerlukan approval manusia.'};
-    return {step, title:'Arahkan keluar scope',
-      reason:'Menurut hasil triage, permintaan ini berada di luar layanan service desk. Periksa kategorinya, lalu arahkan ke tim atau layanan yang sesuai.'};
+    if (step === 'clarify') return {step, title:'Ask for clarification',
+      reason:'Still needed: '+missing.map(code => fields[code]).join(', ')+'. Gather this information before preparing an action.'};
+    if (step === 'prepare_for_approval') return {step, title:'Prepare for approval',
+      reason:'The required triage fields appear complete. Review the evidence and prepare a plan; execution still requires human approval.'};
+    return {step, title:'Route to another team',
+      reason:'This request appears to be outside the service desk scope. Check the category, then route it to the appropriate team.'};
   }
-  const api = {exactQuote, suggestedStep, recommendation};
+  const questions = Object.freeze({requester_identity:'Who needs access?', resource:'Which application or resource is involved?', entitlement:'What level of access is requested?', service_name:'Which service is affected?', symptoms:'What symptoms or error messages are present?', source_ticket_id:'What is the source ticket ID?', related_ticket_id:'Which ticket should be linked?'});
+  const api = {exactQuote, suggestedStep, recommendation, questions};
   globalThis.QuoteTools = api;
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
 })();
