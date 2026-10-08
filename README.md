@@ -1,82 +1,133 @@
 # AI Service Desk & Ticket Operations Assistant
 
-Service desk assistant untuk mengubah tiket Jira menjadi tindakan yang disetujui
-manusia, hasil yang diverifikasi di sistem tujuan, dan audit yang tersimpan.
+[![CI](https://github.com/williamlo90/ai-service-desk-ticket-operations-assistant/actions/workflows/ci.yml/badge.svg)](https://github.com/williamlo90/ai-service-desk-ticket-operations-assistant/actions/workflows/ci.yml)
 
-**Status: Phase 7 dan 8 selesai untuk rilis dan handover lab lokal.**
-[Gate handover](docs/phase-8/phase8-gate.json) lulus. Mulai dari
-[panduan operator](docs/phase-8/HANDOVER.md) atau jalankan demo tanpa kredensial:
-`python scripts/demo_handover.py`.
+AI-assisted ticket operations with an evidence-first browser workspace, a custom
+MCP server, human approval, tenant isolation, and verified action recovery.
 
-AI memberikan rekomendasi langkah berikutnya beserta alasan; keputusan tetap pada
-operator. OpenAI lulus 16/16 held-out sintetis. Ollama tetap eksperimental;
-Claude/Grok dan Azure ditunda.
+**From a Jira request to an approved action and a verified result.** AI helps the
+operator identify facts and the next step; deterministic services enforce who may
+act, what was approved, and when a case can close.
 
-## Arsitektur yang dipilih
+[UI tour](docs/WEB-UI.md) · [Case study](docs/CASE-STUDY.md) ·
+[Operator guide](docs/phase-8/HANDOVER.md) · [Documentation](docs/README.md)
 
-**Code-led:** Python domain service + PostgreSQL, TypeScript MCP, halaman approval
-browser, adapter Jira/Keycloak/service demo, serta supervisor proses lokal.
-[ADR 003](docs/architecture/ADR-003-selected-code-led.md) mencatat keputusan atas
-otoritas yang diberikan William, bukti pembanding, alasan dan tradeoff. n8n tetap
-tersedia sebagai integrasi pendukung; workflow existing tidak dihapus.
+![Service desk proposal review using synthetic demo data](docs/assets/case-review.jpg)
 
-PostgreSQL menyimpan proposal, approval yang terikat versi/payload, operation ID,
-retry state dan audit. Worker hanya memproses job yang memiliki approval tersimpan.
-Target read-back menentukan keberhasilan; respons accepted saja tidak menutup
-kasus. Source drift dan hasil yang tidak pasti masuk review.
+## Why this project
 
-Jira memakai polling HTTPS terautentikasi dengan scope key yang dibatasi dan
-pagination berbasis cursor. Runtime lokal tidak membuka receiver webhook publik.
-API berjalan di loopback; supervisor memulihkan child process, bukan host reboot.
+Service desk automation crosses a consequential boundary: understanding a ticket is
+not permission to change access or restart a service. A successful HTTP response
+also does not prove the requested outcome happened.
 
-## Bukti yang sudah tersedia
+This project separates those decisions. It supports three bounded journeys:
+**read-only access requests**, **service incident recovery**, and **related-ticket
+linking**. Missing information produces a clarification. Ambiguous execution stays
+open for reconciliation. Only verified outcomes permit local closure.
 
-- **182 tes Python, 8 tes MCP dan 14 pemeriksaan JavaScript lulus** dari instalasi sumber bersih Phase 8.
-- Perbandingan dua engine: masing-masing 14 kasus dasar dan 17 kasus policy v2;
-  pack recovery, transport dan native wait/restart tercatat terpisah.
-- PostgreSQL nyata: migration replay, RLS, CAS, audit atomicity dan pemulihan proses.
-- Dua tenant Keycloak/service demo: akses grup, restart service, tiga health check
-  berjarak waktu nyata, serta replay tanpa efek ganda.
-- [Approval William](docs/phase-5/human-approved-access.json): IT-1 diimpor,
-  disetujui di browser, akses Keycloak diberikan dan diverifikasi, kasus lokal ditutup.
-- [Ticket-link dan polling](docs/phase-5/jira-connected-check.json): IT-2 dibuat,
-  relasi dengan IT-1 diverifikasi, pencarian dua halaman serta sinkronisasi ulang
-  lulus. Poller aktif setiap 60 detik untuk kedua tiket lab tersebut.
-- [Metadata hasil Jira](docs/phase-5/jira-result-write.json) ditulis dan dibaca ulang;
-  replay tidak membuat PUT tambahan. Status workflow Jira tidak diubah.
-- [Supervisor](docs/phase-5/operator-supervisor-check.json) memulihkan API/worker
-  setelah crash dengan kasus dan entitlement tetap utuh.
-- [Migration/rollback](docs/phase-5/operator-migration-check.json) dan
-  [job cutover](docs/phase-5/job-cutover-check.json) terisolasi lulus, dengan satu
-  efek target pada perpindahan dan rollback job sintetis.
+## Validated results
 
-Hasil tersebut merupakan validasi lab. Alur OpenAI diterima William; evaluasi memakai
-data sintetis dan pilot manusia bersifat diagnostik. Tidak ada klaim ROI, performa produksi
-atau deployment cloud. Approval fixture diberi label dan
-tidak disamakan dengan approval manusia. Baseline billing/refund dipertahankan;
-47 tes regresinya telah dijalankan terpisah, tanpa klaim bahwa job itu sudah dipindah.
+| Area | Result | Evidence |
+| --- | --- | --- |
+| Current regression suite | 183 Python tests, 8 MCP tests, 14 guidance assertions, 7 approval UI tests | [UI validation](docs/WEB-UI.md#validation-2026-10-09), [CI](https://github.com/williamlo90/ai-service-desk-ticket-operations-assistant/actions) |
+| AI triage | OpenAI passed 16/16 held-out synthetic cases | [Evaluation](docs/phase-6/evidence-v1/openai-heldout.json) |
+| Bounded release exercise | 48 synthetic HTTP journeys plus fault/recovery fixtures | [Release report](docs/phase-7/release-lab.json) |
+| Human approval | Browser-approved Jira IT-1 access grant verified in Keycloak | [Connected evidence](docs/phase-5/human-approved-access.json) |
+| Jira integration | Related-ticket link, paginated reads and metadata write/read-back | [Jira check](docs/phase-5/jira-connected-check.json) |
+| Source delivery | Clean install, locked dependencies and offline recovery demo | [Phase 8 handover](docs/phase-8/README.md) |
 
-## Mulai dan pelajari
+These are local lab results. The held-out set is synthetic and internally designed;
+no production performance or business ROI is claimed. OpenAI is the accepted lab
+profile. Ollama remains experimental; additional providers and Azure are deferred.
 
-1. Baca [rencana fase](PHASES.md), [handover terkini](docs/phase-8/README.md)
-   dan [panduan operator](docs/phase-5/OPERATOR-LAB.md).
-2. Tes Python: dari `backend`, jalankan
-   `../.venv/Scripts/python.exe -B -m unittest discover -s tests`.
-3. Tes MCP: dari `mcp-server`, jalankan `npm test` setelah dependency terkunci terpasang.
-4. Jalankan `./scripts/operator-service.ps1 Start`, `Stop`, atau `Status` untuk
-   runtime proyek ini. Lihat [setup](deploy/README.md) untuk database dan target.
-5. Gunakan [catatan belajar](docs/learning/README.md) dan commit per fase untuk
-   mempelajari perubahan. Commit `66693e6` adalah checkpoint Phase 5 atas permintaan
-   William; commit penutupan Phase 5 mencatat gate yang sudah lulus.
+## From request to verified resolution
 
-Kredensial dimuat skrip secara internal dan tidak ditampilkan. Private runtime
-config berada di luar repository; `.env`, data runtime dan snapshot lokal tidak
-masuk Git. Jangan menjalankan tes pencabutan akses terhadap entitlement operator
-yang sedang aktif; gunakan fixture terpisah.
+1. **Read and clarify.** Ingest a bounded Jira request, extract source-backed facts,
+   and ask for missing information.
+2. **Prepare.** Apply deterministic policy and persist a versioned action proposal.
+3. **Approve.** A human supervisor reviews the exact payload. The model cannot
+   grant itself approval.
+4. **Execute and reconcile.** A durable operation identity prevents replay from
+   creating a second effect; uncertain outcomes require target read-back.
+5. **Verify and close.** Persist the verified result and audit. Write bounded Jira
+   result metadata; local closure does not change the Jira workflow status.
 
-## Tahap selanjutnya
+The [AI practice workspace](docs/WEB-UI.md#ai-practice) makes the next step explicit,
+with field-level quotes, clarification questions and a reason for the recommendation.
 
-Gunakan lab melalui panduan handover dan periksa `scripts/operator_health.py`
-sebelum sesi. Phase 7 menguji kegagalan kritis dan 48 alur HTTP sintetis; Phase 8
-memverifikasi instalasi sumber bersih dan demo. Hasil ini tidak menyatakan layanan
-siap produksi. Azure tetap Phase 9 dan belum dimulai.
+## Architecture
+
+```mermaid
+flowchart LR
+    Jira[Jira tickets] --> Poller[Scoped poller]
+    Poller --> Domain[Python domain service]
+    AI[AI suggestions] --> MCP[TypeScript MCP]
+    MCP --> Domain
+    UI[Human review UI] --> Approval[Version-bound approval]
+    Approval --> Domain
+    Domain <--> DB[(PostgreSQL state and audit)]
+    DB --> Worker[Approval-aware worker]
+    Worker --> Targets[Keycloak / Service demo / Jira links]
+    Targets --> Verify[Target read-back]
+    Verify --> Domain
+```
+
+| Layer | Responsibility |
+| --- | --- |
+| Browser workspace | Evidence, proposal review, approval and guided practice |
+| TypeScript MCP | Strict tool schemas, scoped calls and a reference client |
+| Python domain service | Policy, tenant boundaries, proposal versions and lifecycle |
+| PostgreSQL | Durable state, compare-and-swap, audit and job ownership |
+| Worker and adapters | Approved actions, idempotent recovery and target verification |
+| Local supervisor | Child-process recovery and bounded health diagnostics |
+
+**Stack:** Python 3.12–3.13, PostgreSQL, TypeScript/Node.js, MCP, native HTML/JavaScript,
+Primer CSS, Jira Service Management, Keycloak and a local service simulator.
+
+The selected runtime is **code-led**. [ADR 003](docs/architecture/ADR-003-selected-code-led.md)
+explains why transactional state and recovery ownership stay in Python/PostgreSQL;
+n8n comparison workflows remain available as supporting material.
+
+## Try it locally
+
+Python 3.12 or 3.13 is enough for the offline demo and UI preview. Neither requires
+Docker, a model API key, or a Jira account.
+
+```sh
+git clone https://github.com/williamlo90/ai-service-desk-ticket-operations-assistant.git
+cd ai-service-desk-ticket-operations-assistant
+python scripts/demo_handover.py
+python scripts/preview_workspace.py
+```
+
+Open the URL printed by the preview. Its public fixture token is `preview-only-`
+followed by 32 `x` characters. This disposable in-memory preview has no execution
+worker or external targets. See the [UI tour](docs/WEB-UI.md) for cached AI practice.
+
+Run the offline checks with Python and Node.js 22:
+
+```sh
+cd backend
+python -m unittest discover -s tests
+cd ..
+npm ci --prefix mcp-server
+npm test --prefix mcp-server
+node scripts/check_quote_tools.cjs
+node --test scripts/check_approval_ui.cjs
+```
+
+Connected setup requires PostgreSQL, sandbox targets and local credentials:
+follow [deployment setup](deploy/README.md) and the [operator handover](docs/phase-8/HANDOVER.md).
+
+## Engineering notes
+
+- [Case study: approval and uncertain outcomes](docs/CASE-STUDY.md)
+- [Security boundaries and disclosure](SECURITY.md)
+- [UI design, responsive checks and screenshots](docs/WEB-UI.md)
+- [Phase 7 release and recovery evidence](docs/phase-7/CURRENT.md)
+- [Phase-by-phase learning guide](docs/learning/README.md)
+- [Delivery scope and deferred Azure phase](PHASES.md)
+
+Historical phase gates describe their recorded source revisions. Current regression
+checks run in CI. Credentials and runtime state remain outside version control;
+CI scans Git history and enforces forbidden-path checks.
