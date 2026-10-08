@@ -1,0 +1,15 @@
+{
+  "tests_total": 62,
+  "adapter_tests": 9,
+  "status": "passed",
+  "postgres_connected": false,
+  "migrations_executed": false,
+  "jira_live_calls": 0,
+  "docker_used": false,
+  "limitations": [
+    "SQL assertions and DB-API spies are not PostgreSQL acceptance",
+    "Jira update transport injected; no live default",
+    "custom callback HMAC is not Jira webhook authentication",
+    "bulk Jira sync and pagination deferred until selected integration scope"
+  ]
+}

@@ -1,0 +1,3 @@
+# Runtime-only dependency; not installed or connected during offline development.
+psycopg==3.3.6
+psycopg-binary==3.3.6

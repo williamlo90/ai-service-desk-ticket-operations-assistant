@@ -1,4 +1,4 @@
-# Phase Plan â€” build first, integrate in a reserved runtime session
+# Phase Plan — build first, integrate in a reserved runtime session
 
 2026-10-08. This plan replaces the earlier execution order. Feature requirements in
 the topic documents remain applicable; phase references in the frozen comparison
@@ -6,7 +6,7 @@ contract describe its original schedule, not a requirement to run Docker now.
 
 ## Execution rules
 
-- Phase 1â€“4: implement and test without Docker, live SaaS/model calls, .env access,
+- Phase 1–4: implement and test without Docker, live SaaS/model calls, .env access,
   or interference with other projects. Use deterministic fixtures and bounded tests.
 - One commit per phase. Phase 1 is the initial snapshot, including pre-existing
   runtime setup/evidence; it does not claim these were recreated without Docker.
@@ -18,14 +18,14 @@ contract describe its original schedule, not a requirement to run Docker now.
 - Commit only passing work with learning notes. Never include secrets, installed
   dependencies, caches or local credentials. No cloud deployment before Phase 9.
 
-## Phase 0 â€” Scope and prerequisites (existing)
+## Phase 0 — Scope and prerequisites (existing)
 
 Inventory, source snapshot, contract v1 and 14 reference fixtures exist. Atlassian
 account, IT-1 and one prior diagnostic read exist. Business owner, integration
 identity, action-target sandbox and provider/model readiness remain open in
 `docs/phase-0/setup-readiness.md`. Synthetic policy is not business authorization.
 
-## Phase 1 â€” Backend foundation, no Docker
+## Phase 1 — Backend foundation, no Docker
 
 - [x] Typed identity/ticket contracts and GET-only Jira reader.
 - [x] Pure approval, verification, retry and reopen predicates.
@@ -37,7 +37,7 @@ identity, action-target sandbox and provider/model readiness remain open in
 Gate: foundation is reproducible with stdlib tests; no listener or real credentials
 required. This is not a production identity system or durable storage.
 
-## Phase 2 â€” Deterministic business journey
+## Phase 2 — Deterministic business journey
 
 - [x] Tenant-scoped policy/context, triage and clarification/escalation.
 - [x] Propose, supervisor approval, bound versions/expiry and dispatch.
@@ -50,19 +50,19 @@ required. This is not a production identity system or durable storage.
 
 Gate: the bounded three-journey simulator obeys controls. No external mutations.
 
-## Phase 3 â€” Adapters and persistence preparation
+## Phase 3 — Adapters and persistence preparation
 
-- [ ] Parameterized PostgreSQL repositories, migrations and tenant constraints.
-- [ ] Versioned business-state persistence contract, optimistic concurrency and
+- [x] Parameterized PostgreSQL repositories, migrations and tenant constraints.
+- [x] Versioned business-state persistence contract, optimistic concurrency and
   transactional idempotency/audit; migration runner with pinned dependency.
-- [ ] Jira mapping/read-sync and guarded update/read-back contracts, bounded errors,
+- [x] Jira mapping/read-sync and guarded update/read-back contracts, bounded errors,
   callback ordering, unknown-outcome recovery and fake transport tests.
-- [ ] Adapter contract tests and schema checks without launching PostgreSQL.
+- [x] Adapter contract tests and schema checks without launching PostgreSQL.
 
 Gate: code and offline contracts pass. PostgreSQL semantics, migrations on a real
 server, durability and Jira write permissions remain Phase 5 requirements.
 
-## Phase 4 â€” Client, MCP and AI preparation
+## Phase 4 — Client, MCP and AI preparation
 
 - [ ] TypeScript reference client and actual MCP stdio protocol server/client tests.
 - [ ] Read/prepare/approved-execute/verify/reopen tools use the same Python controls.
@@ -77,7 +77,7 @@ server, durability and Jira write permissions remain Phase 5 requirements.
 Gate: client/protocol and skill contracts pass offline. Real credentials, hosted
 canaries, model artifacts/licenses and local inference remain unvalidated.
 
-## Phase 5 â€” Reserved integration session and architecture decision
+## Phase 5 — Reserved integration session and architecture decision
 
 Only start after resource availability is confirmed and the user resumes runtime
 work. Use this project's bounded stack, one candidate at a time.
@@ -97,7 +97,7 @@ work. Use this project's bounded stack, one candidate at a time.
 Gate: real connected outcomes, not merely node success. Revisit ADR if connected
 results invalidate the synthetic comparison. No obsolete active code removed yet.
 
-## Phase 6 â€” Quality and business evaluation
+## Phase 6 — Quality and business evaluation
 
 Freeze development/regression and independent held-out sets, rubric/denominators,
 quality targets and versions. Run real-provider canaries and local inference with
@@ -106,7 +106,7 @@ manual versus assisted tasks with equal correctness; distinguish active work,
 waiting, corrections and elapsed time. Recheck critical controls with real models.
 Gate: reproducible quality evidence and scoped limitations, no invented ROI.
 
-## Phase 7 â€” Reliability, security and performance
+## Phase 7 — Reliability, security and performance
 
 Permission bypass/injection/leakage, duplicate triggers, expired approval, timeout
 after effect, concurrency, interrupted worker, delayed callback, database recovery,
@@ -116,14 +116,14 @@ After quality gates pass, rehearse cutover and remove only proven obsolete code;
 retain required baseline jobs until replacement passes. Rerun affected tests.
 Gate: verified local release candidate, not a production/cloud claim.
 
-## Phase 8 â€” Handover
+## Phase 8 — Handover
 
 Sanitized workflow exports, clean setup, daily use, approval/failure handling,
 backup/upgrade/support guide, demo, evidence manifest, version locks and operational
 owner. Prepare Azure IaC/cost/security/teardown plan without provisioning.
 Gate: reproducible local delivery and documented remaining prerequisites.
 
-## Phase 9 â€” Azure deployment last
+## Phase 9 — Azure deployment last
 
 Deploy only the selected tested architecture. Apply identity/secrets/network policy,
 repeat connected acceptance, recovery/load/monitoring in cloud and validate rollback.
