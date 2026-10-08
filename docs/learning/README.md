@@ -49,3 +49,6 @@ berikutnya, pilot manusia dan batas klaim. [Status terkini](../phase-6/CURRENT.m
 menjadi acuan hasil dan pekerjaan selanjutnya.
 
 [Catatan Phase 7](phase-7.md): pemulihan, pengukuran beban terbatas dan alert lokal.
+
+[Catatan Phase 8](phase-8.md): instalasi sumber bersih, demo, manifest dan handover.
+Phase 7 dan 8 memiliki commit penutupan terpisah; Azure ditunda.

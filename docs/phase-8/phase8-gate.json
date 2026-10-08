@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "checked_at_utc": "2026-10-08T17:23:11.734488+00:00",
+  "scope": "local lab handover; clean-source install tested on existing host; Azure deferred",
+  "remaining": [],
+  "clean_python_tests": 182,
+  "clean_mcp_tests": 8,
+  "javascript_assertions": 14,
+  "demo": "passed",
+  "owner": "William"
+}

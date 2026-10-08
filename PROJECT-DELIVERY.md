@@ -1,5 +1,16 @@
 # Project Delivery — Panduan untuk Manusia
 
+Current delivery: **Phase 8 local handover complete**. Use
+[the handover index](docs/phase-8/README.md), [English operator guide](docs/phase-8/HANDOVER.md),
+[acceptance map](docs/phase-8/ACCEPTANCE.md) and [release manifest](docs/phase-8/release-manifest.json).
+The scope is a same-host clean-source installation and connected lab evidence.
+Azure is deferred. ADR 003 supersedes mandatory n8n-export assumptions in the
+original planning checklist below; no active n8n workflow is needed by code-led V1.
+
+The original checklist is retained as planning context; current completion is
+established by `docs/phase-8/phase8-gate.json`, not unchecked historical bullets.
+
+
 Proyek 01: **AI Service Desk & Ticket Operations Assistant**
 
 Tanggal rencana: 2026-10-08. Status: **rencana implementasi; belum ada implementasi baru dalam folder ini**. Checklist hanya dicentang setelah artefak dan verifikasinya tersedia.

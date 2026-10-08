@@ -3,11 +3,14 @@
 Service desk assistant untuk mengubah tiket Jira menjadi tindakan yang disetujui
 manusia, hasil yang diverifikasi di sistem tujuan, dan audit yang tersimpan.
 
-**Status: Phase 7 selesai untuk rilis lab lokal yang dibatasi.**
-[Gate penutupan](docs/phase-7/phase7-gate.json) lulus. AI memberikan rekomendasi
-langkah berikutnya beserta alasan; keputusan tetap pada operator.
-[Hasil evaluasi](docs/phase-6/CURRENT.md): OpenAI lulus 16/16 held-out sintetis.
-Ollama tetap eksperimental; validasi live Claude/Grok ditunda.
+**Status: Phase 7 dan 8 selesai untuk rilis dan handover lab lokal.**
+[Gate handover](docs/phase-8/phase8-gate.json) lulus. Mulai dari
+[panduan operator](docs/phase-8/HANDOVER.md) atau jalankan demo tanpa kredensial:
+`python scripts/demo_handover.py`.
+
+AI memberikan rekomendasi langkah berikutnya beserta alasan; keputusan tetap pada
+operator. OpenAI lulus 16/16 held-out sintetis. Ollama tetap eksperimental;
+Claude/Grok dan Azure ditunda.
 
 ## Arsitektur yang dipilih
 
@@ -28,7 +31,7 @@ API berjalan di loopback; supervisor memulihkan child process, bukan host reboot
 
 ## Bukti yang sudah tersedia
 
-- **179 tes Python, 8 tes MCP dan 14 pemeriksaan JavaScript lulus** pada penutupan Phase 7.
+- **182 tes Python, 8 tes MCP dan 14 pemeriksaan JavaScript lulus** dari instalasi sumber bersih Phase 8.
 - Perbandingan dua engine: masing-masing 14 kasus dasar dan 17 kasus policy v2;
   pack recovery, transport dan native wait/restart tercatat terpisah.
 - PostgreSQL nyata: migration replay, RLS, CAS, audit atomicity dan pemulihan proses.
@@ -55,7 +58,7 @@ tidak disamakan dengan approval manusia. Baseline billing/refund dipertahankan;
 
 ## Mulai dan pelajari
 
-1. Baca [rencana fase](PHASES.md), [hasil fase terkini](docs/phase-6/CURRENT.md)
+1. Baca [rencana fase](PHASES.md), [handover terkini](docs/phase-8/README.md)
    dan [panduan operator](docs/phase-5/OPERATOR-LAB.md).
 2. Tes Python: dari `backend`, jalankan
    `../.venv/Scripts/python.exe -B -m unittest discover -s tests`.
@@ -73,7 +76,7 @@ yang sedang aktif; gunakan fixture terpisah.
 
 ## Tahap selanjutnya
 
-Phase 7 selesai untuk pemeriksaan kritis dan beban lab terbatas. Phase 8 menyiapkan
-handover; Azure ditunda dan tetap
-Phase 9. Lihat dokumen topik untuk kebutuhan AI, reusable skills, MCP, security
-dan delivery, dengan ADR terbaru sebagai acuan ownership runtime.
+Gunakan lab melalui panduan handover dan periksa `scripts/operator_health.py`
+sebelum sesi. Phase 7 menguji kegagalan kritis dan 48 alur HTTP sintetis; Phase 8
+memverifikasi instalasi sumber bersih dan demo. Hasil ini tidak menyatakan layanan
+siap produksi. Azure tetap Phase 9 dan belum dimulai.

@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "mode": "offline synthetic demo; fixture approval, not William",
+  "unapproved_action_blocked": true,
+  "lost_receipt_stays_open_until_verified": true,
+  "verified_reconciliation_closed": true,
+  "effects_after_replay": 1,
+  "missing_service_name_recommendation": "clarify",
+  "credential_reads": 0,
+  "external_calls": 0
+}

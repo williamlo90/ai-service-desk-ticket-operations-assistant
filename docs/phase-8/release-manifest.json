@@ -1,0 +1,50 @@
+{
+  "release": "local-lab-phase8",
+  "date_local": "2026-10-09",
+  "timezone": "Asia/Jakarta",
+  "owner": "William",
+  "approver": "William",
+  "credential_custodian": "William",
+  "support_owner": "William",
+  "phase7_commit": "666f7b1",
+  "tested_source_tree": "23a7c498324233ab4383897b55f9532b15579bae",
+  "final_commit": "Resolve git log for the Phase 8 completion commit; a commit cannot embed its own hash.",
+  "versions": {
+    "python": "3.13.6",
+    "psycopg": "3.3.6",
+    "node": "v22.19.0"
+  },
+  "dependency_lf_sha256": {
+    "backend/requirements-postgres.txt": "1af9de67219987e158240cba4bb1e29e7c2b793eb79a1e94309f896b760f223d",
+    "mcp-server/package-lock.json": "d08966a0c6a4e294de1c8f5775235fca976561e7d2d10723b68db64696ce28e2",
+    "deploy/compose.yaml": "eab833aeec7d4f39fccfb1f24887355e02838e9192c40f78b0b0a82dcc60ef91",
+    "deploy/targets.compose.yaml": "94e90cfc1521493f829deff79231c0bf25645999dc523b1d078fe090e467ec6f"
+  },
+  "evidence_lf_sha256": {
+    "docs/phase-5/phase5-gate.json": "5568c561c9169b3a542abaa8d6116172faa81bab4825643dad530aabb65126ed",
+    "docs/phase-6/phase6-gate.json": "cc2c0915c6b91aba517627db9e1a78c9dd1dadf14c169574b41f1ea77b3accb6",
+    "docs/phase-7/phase7-gate.json": "e001abc162ee4933d7d53fd42a61a56d1b6cff4f6ac98cd09cf9b9e7d2c4661a",
+    "docs/phase-8/clean-delivery.json": "776d8372bb909a1000e8ca16049069b9e6e44cd898ceb6b5c66fb7120845a195",
+    "docs/phase-8/demo.json": "aa65c87746d16e83576837a08b4d501d0d3eb04c831cef083c78429e84397540"
+  },
+  "accepted_model": "gpt-4.1-mini-2025-04-14 / evidence-first-v1",
+  "accepted_model_pin": "evals/phase6-evidence-v1/freeze.json",
+  "experimental_model": "qwen3:4b-instruct; local quality not accepted",
+  "deferred": [
+    "Claude/Grok live validation",
+    "Ollama improvement",
+    "Azure preparation and deployment"
+  ],
+  "orchestration": "code-led; optional n8n unchanged, no active workflow export required by selected architecture",
+  "startup": "manual Windows lab startup; loopback listeners",
+  "identity_lifetime_hours": 24,
+  "local_access_approval_minutes": 15,
+  "data": "synthetic/test lab; private runtime and credentials excluded from source archive",
+  "limitations": [
+    "physical host reboot",
+    "long-duration endurance",
+    "wire-level network partition fencing",
+    "live SaaS/model throughput",
+    "production or cloud readiness"
+  ]
+}

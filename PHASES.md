@@ -153,10 +153,23 @@ and operator review remain required. No shared containers or live targets change
 
 ## Phase 8 â€” Handover
 
-Sanitized workflow exports, clean setup, daily use, approval/failure handling,
-backup/upgrade/support guide, demo, evidence manifest, version locks and operational
-owner. Azure preparation and provisioning are deferred at William's request.
-Gate: reproducible local delivery and documented remaining prerequisites.
+Status: **complete for local lab handover**, 2026-10-09.
+[Handover](docs/phase-8/README.md), [operator guide](docs/phase-8/HANDOVER.md)
+and [gate](docs/phase-8/phase8-gate.json).
+
+- [x] Source-only package excludes credentials/runtime data/dependencies/models.
+- [x] Clean source export: new Python venv + locked npm install/build; 182 Python,
+  8 MCP tests and 14 JavaScript assertions pass; offline demo passes.
+- [x] English daily-use/setup/status/recovery/backup/upgrade/ownership guide.
+- [x] Bounded local identity renewal tool, scope-preserving tests and expiry guidance.
+- [x] Evidence/version manifest, acceptance map and synthetic failure/replay demo.
+- [x] William remains owner/approver/credential custodian/support owner.
+
+Code-led V1 requires no active n8n workflow export; existing optional workflows are
+preserved under ADR 003. Clean installation was tested on this host, not a second
+host or newly provisioned SaaS account. Physical reboot, full-volume disaster recovery
+and unattended production deployment remain separate qualifications.
+Azure preparation and provisioning are explicitly deferred at William's request.
 
 ## Phase 9 â€” Azure deployment last
 
