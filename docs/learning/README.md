@@ -47,3 +47,5 @@ tercantum di [CURRENT-GATES](../phase-5/CURRENT-GATES.md).
 [Catatan Phase 6](phase-6.md) menjelaskan evaluasi model, rekomendasi langkah
 berikutnya, pilot manusia dan batas klaim. [Status terkini](../phase-6/CURRENT.md)
 menjadi acuan hasil dan pekerjaan selanjutnya.
+
+[Catatan Phase 7](phase-7.md): pemulihan, pengukuran beban terbatas dan alert lokal.

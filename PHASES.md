@@ -137,19 +137,25 @@ do not prove semantic correctness. Runtime hardening remains Phase 7.
 
 ## Phase 7 â€” Reliability, security and performance
 
-Permission bypass/injection/leakage, duplicate triggers, expired approval, timeout
-after effect, concurrency, interrupted worker, delayed callback, database recovery,
-backup/restore, alerts and rollback. Bounded normal/peak/soak workload after sizing;
-report outcome correctness and end-to-end percentiles separately from acknowledgement.
-After quality gates pass, rehearse cutover and remove only proven obsolete code;
-retain required baseline jobs until replacement passes. Rerun affected tests.
-Gate: verified local release candidate, not a production/cloud claim.
+Status: **complete for the bounded local lab release**, 2026-10-09.
+[Results](docs/phase-7/CURRENT.md) and [gate](docs/phase-7/phase7-gate.json).
+
+- [x] Authorization/tenant/approval boundaries and current regression suite.
+- [x] Abrupt worker crash after effect, API cold start and durable replay.
+- [x] Concurrent dispatch, lost claim session and isolated database outage.
+- [x] 48 synthetic HTTP journeys: sequential, concurrency four and 61-second smoke soak.
+- [x] Fix active queue counting; add local health alerts; verify ready runtime.
+- [x] Reuse unchanged Phase 5 restore/cutover/rollback evidence; 179 Python + 8 MCP + 14 JS checks.
+
+Gate scope: bounded local lab. Physical host reboot, long endurance, wire-level
+partition fencing and production/cloud performance are not claimed. Manual startup
+and operator review remain required. No shared containers or live targets changed.
 
 ## Phase 8 â€” Handover
 
 Sanitized workflow exports, clean setup, daily use, approval/failure handling,
 backup/upgrade/support guide, demo, evidence manifest, version locks and operational
-owner. Prepare Azure IaC/cost/security/teardown plan without provisioning.
+owner. Azure preparation and provisioning are deferred at William's request.
 Gate: reproducible local delivery and documented remaining prerequisites.
 
 ## Phase 9 â€” Azure deployment last

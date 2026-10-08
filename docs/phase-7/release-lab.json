@@ -1,0 +1,61 @@
+{
+  "status": "passed",
+  "checked_at_utc": "2026-10-08T17:11:31.364420+00:00",
+  "scope": "isolated real PostgreSQL + HTTP API + durable synthetic target; not live target throughput",
+  "approval": "fixture supervisor, not a human approval",
+  "checks": [
+    "HTTP authorization, tenant, origin and argument injection denied with zero effects",
+    "expired approval blocked before dispatch",
+    "worker crash after effect + API cold start: same operation verified/closed, one effect",
+    "eight concurrent/replayed dispatch requests produce one operation/effect",
+    "database claim session terminated during paused dispatch: competing worker never resubmits",
+    "isolated database outage: readiness/write 503, sanitized error, restored connection",
+    "bounded normal/peak/60s smoke soak: all cases closed, exact effect count and atomic audit"
+  ],
+  "live_target_calls": 0,
+  "jira_calls": 0,
+  "host_reboot_tested": false,
+  "workload": {
+    "normal": {
+      "completed": 8,
+      "errors": 0,
+      "ack_ms": {
+        "p50": 135.658,
+        "p95": 230.79
+      },
+      "end_to_end_ms": {
+        "p50": 656.928,
+        "p95": 811.719
+      }
+    },
+    "peak_concurrency_4": {
+      "completed": 16,
+      "errors": 0,
+      "ack_ms": {
+        "p50": 378.749,
+        "p95": 538.976
+      },
+      "end_to_end_ms": {
+        "p50": 1564.317,
+        "p95": 1876.012
+      }
+    },
+    "soak": {
+      "completed": 24,
+      "errors": 0,
+      "ack_ms": {
+        "p50": 122.685,
+        "p95": 174.981
+      },
+      "end_to_end_ms": {
+        "p50": 543.085,
+        "p95": 658.09
+      }
+    },
+    "soak_wall_seconds": 61.08,
+    "hardware_context": "shared host, existing 512MiB/0.5CPU PostgreSQL container",
+    "interpretation": "closed-loop synthetic HTTP journeys, not Jira/Keycloak or AI latency; 60s is a smoke soak, not endurance qualification"
+  },
+  "synthetic_effects": 51,
+  "temporary_database_removed": true
+}

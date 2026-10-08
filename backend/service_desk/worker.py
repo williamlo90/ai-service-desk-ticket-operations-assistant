@@ -2,13 +2,13 @@
 from .recovery import RecoveryController
 
 def scan(service,actor,source_check=lambda state:True,limit=100):
-    states=service.store.list(actor.tenant_id)
+    states=[state for state in service.store.list(actor.tenant_id)
+            if state['status']!='closed' and not state.get('escalation')
+            and not state.get('recovery',{}).get('done')
+            and (state['approval'] or state['action'])]
     if len(states)>limit:raise ValueError('queue_scan_limit')
     results=[]
     for state in states:
-        if state['status']=='closed' or state.get('escalation') or state.get('recovery',{}).get('done'):
-            continue
-        if not state['approval'] and not state['action']:continue
         source_problem=None
         if state.get('source'):
             try:
