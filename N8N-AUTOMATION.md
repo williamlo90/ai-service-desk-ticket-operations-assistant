@@ -1,5 +1,9 @@
 # Automation Decision — 01 - AI Service Desk & Ticket Operations Assistant
 
+> Current architecture decision: code-led V1 with outbound Jira polling.
+> [ADR 003](docs/architecture/ADR-003-selected-code-led.md) supersedes earlier
+> mandatory n8n ownership assumptions below. Existing n8n workflows are retained.
+
 Status: **rencana; belum menjadi hasil benchmark atau implementasi baru**.
 
 **Keputusan:** Pakai n8n untuk integrasi workflow; evaluasi perluasan ownership lewat prototype.

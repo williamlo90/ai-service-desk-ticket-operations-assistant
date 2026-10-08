@@ -1,0 +1,7 @@
+{
+  "image": "quay.io/keycloak/keycloak:26.8.0",
+  "registry_manifest_digest": "sha256:d79bc4bf1c54e802735ef91926b5c003de1fbb50b1a93382611972277219c9ad",
+  "image_config_digest": "sha256:43ebe9d4e97c2e5483b7637edf474e6adc1bbf4832a7396686cf90259c396d42",
+  "layers_verified": 4,
+  "source": "Official public quay.io/keycloak/keycloak repository"
+}

@@ -3,7 +3,7 @@ from copy import deepcopy
 from datetime import datetime, timedelta, timezone
 from hashlib import sha256
 import json
-from uuid import uuid4
+from uuid import uuid4,uuid5,NAMESPACE_URL
 
 from .contracts import AccessDenied, Role, require_staff
 from .lifecycle import (Proposal, Approval, ActionState, VerifiedOutcome, approve,
@@ -41,18 +41,44 @@ class JourneyService:
         return deepcopy(state)
 
     def create(self,actor,text,requester='requester-a'):
+        state=self._new_state(actor,text,requester,str(uuid4()))
+        self.store.create(actor.tenant_id,state['id'],state)
+        return deepcopy(state)
+
+    def import_ticket(self,actor,ticket,cloud_id,requester):
+        """Trusted connector snapshot; deterministic identity prevents duplicate import.
+
+        No approval, target effect or Jira write. Changed snapshots require review.
+        """
+        from .store import Missing,Conflict
+        writer(actor,ticket.tenant_id)
+        source={'provider':'jira','cloud_id':cloud_id,'project':ticket.project_key,
+                'key':ticket.key,'summary':ticket.summary,'status':ticket.source_status}
+        key=str(uuid5(NAMESPACE_URL,canonical([ticket.tenant_id,cloud_id,ticket.project_key,ticket.key])))
+        def existing():
+            state=self.read(actor,key)
+            if state.get('source')!=source or state['requester']!=requester:
+                raise JourneyBlocked('source_changed_review_required')
+            return state
+        try:return existing()
+        except Missing:pass
+        state=self._new_state(actor,ticket.summary,requester,key)
+        state.update(source=source,source_observed_at=stamp(ticket.observed_at))
+        try:self.store.create(actor.tenant_id,key,state)
+        except Conflict:return existing()
+        return deepcopy(state)
+
+    def _new_state(self,actor,text,requester,key):
         writer(actor,actor.tenant_id)
         if not isinstance(requester,str) or not requester or len(requester)>128:
             raise JourneyBlocked('invalid_requester')
         classification=triage(text)
-        key=str(uuid4())
         state={'id':key,'tenant':actor.tenant_id,'revision':1,'version':1,
                'requester':requester,'text':text,'classification':classification,
                'status':'open','proposal':None,'approval':None,'action':None,
                'verified':None,'closed_at':None,'escalation':None,
                'audit':[{'sequence':1,'actor':actor.actor_id,'event':'received','at':stamp(self.clock())}]}
-        self.store.create(actor.tenant_id,key,state)
-        return deepcopy(state)
+        return state
 
     def get_context(self,actor,case_id):
         state=self.read(actor,case_id)

@@ -45,9 +45,11 @@ class RuntimeAuthenticator:
 
 
 class RuntimeAPI:
-    def __init__(self,auth,service,intake_repository,origin,ready=lambda:True):
+    def __init__(self,auth,service,intake_repository,origin,ready=lambda:True,mode='synthetic',requesters=None):
         self.auth,self.service,self.origin,self.ready=auth,service,origin,ready
-        self.bridge=Bridge(auth,service)
+        if mode not in ('synthetic','lab'):raise ValueError('Unsupported runtime mode')
+        self.mode=mode
+        self.bridge=Bridge(auth,service,requesters)
         self.intake=CaseAPI(auth,intake_repository)
 
     def __call__(self,env,start_response):
@@ -68,7 +70,7 @@ class RuntimeAPI:
                 return self.reply(start_response,200,content,correlation,
                                   'text/html; charset=utf-8' if path=='/' else 'text/javascript; charset=utf-8')
             if method=='GET' and path=='/healthz':
-                return self.reply(start_response,200,{'status':'ok','mode':'synthetic'},correlation)
+                return self.reply(start_response,200,{'status':'ok','mode':self.mode},correlation)
             if method=='GET' and path=='/readyz':
                 if not self.ready():raise RuntimeError()
                 return self.reply(start_response,200,{'status':'ready'},correlation)
@@ -131,7 +133,7 @@ def main():
         raw=sys.stdin.buffer.readline(65537)
         if len(raw)>65536:raise ValueError()
         config=json.loads(raw,object_pairs_hook=strict_object,parse_constant=reject_constant)
-        if config['mode']!='synthetic':raise ValueError()
+        if config['mode'] not in ('synthetic','lab'):raise ValueError()
         import psycopg
         from .postgres import PostgresStateStore,PostgresCaseRepository
         from .durable_target import DurableSyntheticTarget
@@ -139,7 +141,12 @@ def main():
         if db['host']!='127.0.0.1' or db['port']!=5433:raise ValueError()
         connect=lambda:psycopg.connect(**db)
         auth=RuntimeAuthenticator(config['bindings'])
-        target=DurableSyntheticTarget(config['target_path'])
+        requesters=None
+        if config['mode']=='lab':
+            from .lab_targets import LabTargets
+            target=LabTargets(config['target_path'],config['lab_tenants'])
+            requesters={t:c['requester'] for t,c in config['lab_tenants'].items()}
+        else:target=DurableSyntheticTarget(config['target_path'])
         service=JourneyService(PostgresStateStore(connect),target)
         def ready():
             with connect() as conn:conn.execute('SELECT 1 FROM sd_journey LIMIT 0')
@@ -147,7 +154,7 @@ def main():
         ready()
         server=make_server('127.0.0.1',config.get('port',5679),lambda *_:[],handler_class=QuietHandler)
         origin=f'http://127.0.0.1:{server.server_port}'
-        server.set_app(RuntimeAPI(auth,service,PostgresCaseRepository(connect),origin,ready))
+        server.set_app(RuntimeAPI(auth,service,PostgresCaseRepository(connect),origin,ready,config['mode'],requesters))
         print(json.dumps({'status':'ready','origin':origin}),flush=True)
         server.serve_forever()
     except KeyboardInterrupt:return 0

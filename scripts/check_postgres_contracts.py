@@ -166,6 +166,9 @@ except Exception:sys.exit(1)
         require(json.loads(child.stdout)=={'status':'closed','action_id':dispatched['action']['id']},'fresh_process_persistence')
         report['checks'].append('SQL-backed approve/dispatch/verify/close/replay and fresh-process persistence')
         report['connected_checks']=check_connected(runtime_config)
+        if '--lab-targets' in sys.argv:
+            from lab_connected_checks import check_lab_connected
+            report['lab_connected_checks']=check_lab_connected(runtime_config)
         report['status']='passed'
     except Exception as exc:
         report['status']='failed'
@@ -181,8 +184,8 @@ except Exception:sys.exit(1)
     report['limitations']=['No database/container restart or backup restore',
         'Abrupt worker recovery tested with durable synthetic target; independent frozen evaluator pending',
         'Tenant context comes from trusted service; runtime role is not safe for arbitrary user SQL',
-        'Connected tests use a separate SQLite synthetic target; no live entitlement/service action',
-        'n8n comparison, persistent operator deployment and live Jira/model integration remain pending']
+        'Default connected checks use synthetic targets; optional lab-target checks separately exercise local Keycloak and demo services',
+        'Architecture comparison is recorded separately; persistent operator deployment and live Jira/model integration remain pending']
     output=ROOT/'docs/phase-5/postgres-contract-check.json'
     output.write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
     print(json.dumps(report,indent=2))

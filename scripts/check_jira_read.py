@@ -16,6 +16,7 @@ from urllib.request import HTTPRedirectHandler, Request, build_opener
 ROOT = Path(__file__).resolve().parents[1]
 CLOUD_ID = "86f72776-2ba9-422b-aaad-184f0ed671be"
 ISSUE = "IT-1"
+SITE_URL = 'https://william-service-desk-lab.atlassian.net'
 
 
 class NoRedirect(HTTPRedirectHandler):
@@ -64,7 +65,7 @@ def check():
                 value = value.replace(secret, "[REDACTED]")
             return re.sub(r"[\x00-\x1f\x7f-\x9f]", " ", value)[:200]
 
-        url = (f"https://api.atlassian.com/ex/jira/{CLOUD_ID}/rest/api/3/issue/"
+        url = (SITE_URL + "/rest/api/3/issue/"
                f"{ISSUE}?fields=summary,status")
         request = Request(url, method="GET", headers={
             "Authorization": f"Basic {auth}", "Accept": "application/json"})

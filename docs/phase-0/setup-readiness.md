@@ -5,10 +5,10 @@ Status: Phase 0A pending. No accounts or services created by the planning work.
 | Item | Status | Responsible role | Evidence / next action | Affected phase |
 | --- | --- | --- | --- | --- |
 | Atlassian account | Created per user; authenticated Jira session observed | User | Login verified through Jira UI on 2026-10-08; email verification not separately inspected | 0A.1 |
-| Business owner and credential custodian | William confirmed as business owner; credential custodian and operational approver still pending | William | User confirmed owner during Phase 5; target live not ready | 0A / 5 |
+| Business owner and credential custodian | William confirmed as business owner, operational approver and credential custodian for the lab | William | User confirmed all three lab roles during Phase 5; Keycloak/demo sandbox ready | 0A / 5 |
 | Jira test environment | Site and project verified in browser; Free plan confirmed by user; integration identity pending | Future custodian | william-service-desk-lab.atlassian.net; IT Service Project, key IT; Free (not trial) confirmed by user on 2026-10-08; verify API identity/access next | 0A / 5 |
-| Jira credentials and scopes | Read authentication verified for IT-1; scope inventory and negative permission checks pending | User owns token; operational custodian pending | jira-read-check.json: GET returned HTTP 200 on 2026-10-08; personal-account token loaded locally without displaying credentials | 0A / 5 |
-| Access/service sandbox | Blocked: actual target not selected | Business owner | Select authoritative entitlement and health-check targets; synthetic contract available | 0A / 5 |
+| Jira credentials and scopes | Read authentication verified for IT-1; scope inventory and negative permission checks pending | William | jira-read-check.json: GET returned HTTP 200 on 2026-10-08; personal-account token loaded locally without displaying credentials | 0A / 5 |
+| Access/service sandbox | Ready: local Keycloak and demo targets for alpha/beta | Business owner | Actual membership and child restart/read-back checks pass; see phase-5 evidence | 0A / 5 |
 | Docker Linux runtime | Engine/Compose ready; startup blocked by current RAM headroom | Implementer | docker-readiness.json: Linux engine 29.8.0, Compose 5.5.1, 1.81 GiB host free at sample; local-runtime-plan.md defines initial resource budgets | 0A / 1 |
 | Exact new-project version lock | Pending setup compatibility check | Implementer | Pin n8n image digest and compatible PostgreSQL/dependencies before installation | 0A / 1 |
 | Model credentials | Unknown, not requested/read | Future custodian | Configure provider references when needed | 3 |
@@ -44,10 +44,21 @@ Ran scripts/check_jira_read.py with explicit user authorization to load .env int
 
 ## Phase 5 update — 2026-10-08
 
-William explicitly confirmed himself as business owner. The live action target is
-not ready, so current integration remains local/synthetic. This does not designate
-an operational supervisor or authorize real entitlement/service changes. Synthetic
+William explicitly confirmed himself as business owner and selected local
+Keycloak plus dedicated demo service targets. Setup now passes realm isolation
+and health checks; see ../phase-5/target-sandbox-setup.json. This does not designate
+production authority. William subsequently confirmed both operational approver and credential custodian roles for this lab. Synthetic
 supervisor identities in tests are fixtures, not a record of William approving a
 real action. Project PostgreSQL/n8n were observed healthy; updated connected check
 results are in ../phase-5/postgres-contract-check.json. Earlier runtime blockers
 above are historical snapshots, not the current container status.
+
+Local target credentials were generated privately without reading the project
+.env. The two realms and demo children are technical lab resources. Adapter checks
+exercise actual membership changes (restored afterward) and actual child restarts.
+Jira write acceptance and a named human approval session remain separate gates.
+
+William has now confirmed both operational roles. The persistent operator API
+and IT-1 read-only import are ready; see [operator guide](../phase-5/OPERATOR-LAB.md).
+The first proposal awaits an explicit human click, with no target action or Jira
+write performed by setup/import.

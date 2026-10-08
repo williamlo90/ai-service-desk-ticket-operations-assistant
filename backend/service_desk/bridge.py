@@ -17,11 +17,14 @@ from .skills import SkillRunner,SkillRejected
 def public_state(state):
     return {'case_id':state['id'],'tenant':state['tenant'],'version':state['version'],
             'status':state['status'],'category':state['classification']['category'],
-            'proposal':state['proposal'],'action':state['action'],'verified':state['verified']}
+            'proposal':state['proposal'],'action':state['action'],'verified':state['verified'],
+            'source':state.get('source')}
 
 
 class Bridge:
-    def __init__(self,auth,service):self.auth,self.service=auth,service
+    def __init__(self,auth,service,requesters=None):
+        self.auth,self.service=auth,service
+        self.requesters=dict(requesters or {})
 
     def call(self,token,command,args):
         actor=self.auth.authenticate('Bearer '+token)
@@ -45,7 +48,8 @@ class Bridge:
             end=args['offset']+args['limit']
             return {'items':[public_state(s) for s in rows[args['offset']:end]],
                     'next_offset':end if end<len(rows) else None}
-        if command=='create':return public_state(self.service.create(actor,args['text']))
+        if command=='create':return public_state(self.service.create(actor,args['text'],
+            requester=self.requesters.get(actor.tenant_id,'requester-a')))
         if command=='context':
             result=self.service.get_context(actor,args['case_id'])
             return {'case':public_state(result['case']),'context':result['context']}

@@ -1,5 +1,9 @@
 # Architecture Comparison — 01 - AI Service Desk & Ticket Operations Assistant
 
+> Current architecture decision: code-led V1 with outbound Jira polling.
+> [ADR 003](docs/architecture/ADR-003-selected-code-led.md) supersedes earlier
+> mandatory n8n ownership assumptions below. Existing n8n workflows are retained.
+
 Status: **hipotesis desain; belum ada benchmark pembanding**. User mengizinkan penggantian dan penghapusan kode jika solusi yang lebih baik membutuhkannya. Reuse adalah opsi, bukan kewajiban.
 
 **Hipotesis awal:** n8n memimpin alur integrasi/triage/handoff; Python tetap service untuk policy checks, authorization, action transaction, outcome checks dan case state yang sensitif terhadap concurrency. Kandidat boleh memindahkan lebih banyak orchestration ke n8n jika lolos.

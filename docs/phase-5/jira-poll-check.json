@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "checked_at": "2026-10-08T15:30:31.624416+00:00",
+  "keys": [
+    "IT-1",
+    "IT-2"
+  ],
+  "interval_seconds": 60,
+  "public_webhook_receiver": false,
+  "error_policy": "durable review latch; explicit manual resume",
+  "credentials_printed": false
+}

@@ -1,10 +1,12 @@
-"""Single-worker reconciliation budget persisted with the journey.
+"""Reconciliation budget persisted with the journey.
 
 Retries authoritative reads, never resubmits an uncertain target operation.
 An orchestrator owns timer scheduling; this controller owns the persisted budget.
-Distributed leases and transport retry are intentionally outside this prototype.
+PostgreSQL stores coordinate cooperative ticks with a transaction advisory lock;
+memory stores remain single-worker fixtures. This is not a network-partition lease.
 """
 from datetime import datetime,timedelta,timezone
+from contextlib import nullcontext
 from .journeys import JourneyBlocked,stamp
 from .lifecycle import LifecycleBlocked
 from .policy import writer
@@ -19,6 +21,15 @@ class RecoveryController:
 
     def tick(self,actor,case_id):
         writer(actor,actor.tenant_id)
+        claim=getattr(self.service.store,'claim',None)
+        with claim(actor.tenant_id,case_id) if claim else nullcontext(True) as acquired:
+            if not acquired:
+                state=self.service.read(actor,case_id)
+                return {'done':False,'retry_seconds':0.25,'attempts':state.get('recovery',{}).get('attempts',0),
+                        'reason':'worker_busy'}
+            return self._tick(actor,case_id)
+
+    def _tick(self,actor,case_id):
         s=self.service;state=s.read(actor,case_id);now=self.clock()
         recovery=state.get('recovery',{'attempts':0,'done':False,'next_at':None})
         if recovery['done']:return self.result(state)

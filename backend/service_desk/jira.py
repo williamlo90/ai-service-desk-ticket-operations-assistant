@@ -33,6 +33,12 @@ class JiraConnection:
     project_key: str
     email: str = field(repr=False)
     api_token: str = field(repr=False)
+    site_url: str | None = None
+
+    @property
+    def api_base(self):
+        return ((self.site_url if self.site_url else f'https://api.atlassian.com/ex/jira/{self.cloud_id}')
+                + '/rest/api/3/')
 
     def __repr__(self):
         return "JiraConnection(credentials=REDACTED)"
@@ -44,6 +50,8 @@ class JiraConnection:
                      and self.email and self.api_token
                      and ":" not in self.email
                      and not any(c.isspace() for c in self.email + self.api_token))
+            if self.site_url is not None:
+                valid=valid and bool(re.fullmatch(r'https://[a-z0-9][a-z0-9-]{0,62}\.atlassian\.net',self.site_url))
         except (ValueError, TypeError, AttributeError):
             valid = False
         if not valid:
@@ -83,7 +91,7 @@ class JiraReader:
             raise JiraReadError("issue_out_of_scope")
         encoded = base64.b64encode(
             f"{connection.email}:{connection.api_token}".encode()).decode("ascii")
-        url = (f"https://api.atlassian.com/ex/jira/{connection.cloud_id}/rest/api/3/issue/"
+        url = (connection.api_base + "issue/"
                f"{issue_key}?fields=summary,status,project")
         try:
             status, body = self._transport(url, f"Basic {encoded}")

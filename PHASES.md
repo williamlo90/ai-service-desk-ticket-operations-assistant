@@ -21,8 +21,8 @@ contract describe its original schedule, not a requirement to run Docker now.
 ## Phase 0 — Scope and prerequisites (existing)
 
 Inventory, source snapshot, contract v1 and 14 reference fixtures exist. Atlassian
-account, IT-1 and one prior diagnostic read exist. Business owner, integration
-identity, action-target sandbox and provider/model readiness remain open in
+account, IT-1 and one prior diagnostic read exist. William owns business decisions, approvals and credentials. Local sandbox
+identities and action targets are configured; provider/model readiness is tracked in
 `docs/phase-0/setup-readiness.md`. Synthetic policy is not business authorization.
 
 ## Phase 1 — Backend foundation, no Docker
@@ -77,43 +77,42 @@ server, durability and Jira write permissions remain Phase 5 requirements.
 Gate: client/protocol and skill contracts pass offline. Real credentials, hosted
 canaries, model artifacts/licenses and local inference remain unvalidated.
 
-## Phase 5 — Reserved integration session and architecture decision
+## Phase 5 — Local integration and architecture decision
 
-Commit status: William requested an intermediate commit of the validated local
-checkpoint. This supersedes waiting for the entire phase gate before committing;
-Phase 5 remains in progress.
+Status: **complete for local V1 integration** on 2026-10-08. The intermediate
+checkpoint `66693e6` was committed at William's request; this completion is recorded
+in the final Phase 5 commit after the evidence gate passed.
 
-Docker use authorized by William after the offline loop. Initial real PostgreSQL
-adapter checks passed (docs/phase-5/postgres-contract-check.json) in a disposable
-database on the existing project container. MCP/HTTP/PostgreSQL approval flow and
-abrupt-worker recovery against a durable synthetic target also pass. William is
-business owner; live target is not ready. Each reference engine passes 14 base and
-17 policy-v2 cases; ADR-001 retains shared controls without selecting an engine
-before broader scheduling/effort evidence. A separate native wait test passes
-approval/target wait recovery across two abrupt engine restarts per candidate,
-with one target effect each. Seven recovery cases per engine also pass with a
-persisted four-read budget, bounded backoff and review escalation. A separate
-70-second timer crash test passes both engines. Restored baseline unit regression
-passes 47 tests; shared-policy edit/rollback passes three boundaries per copy.
-Short-timer crash, transport retry, distributed leases, full baseline feature
-parity and operator maintenance effort remain open.
-Full Phase 5 gate remains open. Use
-this project's bounded stack, one candidate at a time.
+Architecture: **code-led**, selected under William's explicit delegation.
+[ADR 003](docs/architecture/ADR-003-selected-code-led.md) records the rationale,
+responsibility boundaries, comparison evidence and tradeoffs. n8n remains optional;
+existing workflows and baseline jobs are preserved. Jira uses outbound polling,
+so V1 does not deploy an inbound webhook receiver.
 
-1. Install from pinned dependencies; configure real local service identity; run
-   actual HTTP auth/readiness and PostgreSQL migrations/permissions/transactions.
-2. Run equivalent complete code-led/n8n-led vertical prototypes against the same
-   independent reference evaluator. Persisted restart/concurrency cases are mandatory.
-3. Compare controls, recovery and equivalent process-change effort; document an ADR.
-   Do not choose a winner from this project's memory simulator or trigger demo.
-4. Connect Jira, approved sandbox targets, UI/client/MCP and selected orchestration.
-   Test read/propose/approve/write/read-back, rate limits, callback/retry ordering,
-   dead-letter/review paths and a second tenant configuration.
-5. Rehearse schema/config/job migration and rollback without duplicate effects;
-   correct integration defects and rerun affected tests before leaving the phase.
+- [x] Real PostgreSQL migrations, RLS, CAS, audit atomicity and connected MCP/API.
+- [x] Both reference candidates: 14 base + 17 policy cases each; native wait,
+  recovery, transport and persisted timer evidence recorded separately.
+- [x] Keycloak/demo targets for alpha/beta, actual target read-back and replay.
+- [x] William's browser approval, actual access grant and verified local closure.
+- [x] Jira result property write/read-back and replay without another PUT.
+- [x] API/worker supervision and crash restart with unchanged approved entitlement.
+- [x] Logical restore, schema rollback, quiesced cross-database job cutover and
+  rollback with one synthetic target effect.
+- [x] Bounded Jira search/sync and approved-link adapters with negative tests.
+- [x] Live IT-1/IT-2 link creation/read-back, two-page sync and negative authentication.
+- [x] Enable and verify the authenticated periodic poller after live acceptance.
+- [x] Pass scripts/check_phase5_gate.py and record the final Phase 5 status.
 
-Gate: real connected outcomes, not merely node success. Revisit ADR if connected
-results invalidate the synthetic comparison. No obsolete active code removed yet.
+Final unit validation: **130 Python + 8 Node tests**.
+[phase5-gate.json](docs/phase-5/phase5-gate.json) passes with no remaining gates.
+The user-selected unscoped token uses the explicit Jira site origin. IT-2 was
+created, related to IT-1, verified and rechecked without another link write.
+The 60-second authenticated poller is active for these two keys only.
+
+Gate scope: integrated local V1. Real-provider quality evaluation is Phase 6;
+load/soak, host restart, network-partition fencing and release hardening are
+Phase 7. Jira source checks are preflight checks, not cross-system transactions.
+Billing/refund baseline jobs have not been cut over and are not deleted.
 
 ## Phase 6 — Quality and business evaluation
 

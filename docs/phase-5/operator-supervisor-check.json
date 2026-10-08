@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "checked_at": "2026-10-08T15:00:08.480987+00:00",
+  "checks": [
+    "api crash automatically restarted; persisted case unchanged",
+    "worker crash automatically restarted; persisted case unchanged"
+  ],
+  "case_status": "closed",
+  "same_operation_id": true,
+  "membership_preserved": true,
+  "other_project_processes_touched": false,
+  "credentials_printed": false,
+  "limitation": "Supervisor must be running; no OS reboot/autostart or host-failure recovery claim"
+}

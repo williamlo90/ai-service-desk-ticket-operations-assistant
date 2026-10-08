@@ -1,0 +1,46 @@
+name: service-desk-targets
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.8.0
+    pull_policy: never
+    entrypoint: [/bin/bash, /bootstrap/keycloak-start.sh]
+    restart: "no"
+    mem_limit: 1280m
+    memswap_limit: 1280m
+    cpus: 1
+    pids_limit: 160
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: service-desk-bootstrap
+      KC_HEALTH_ENABLED: "true"
+      KC_HOSTNAME: http://localhost:8085
+      KC_HTTP_ENABLED: "true"
+    ports: ["127.0.0.1:8085:8080"]
+    volumes:
+      - ./targets/keycloak-start.sh:/bootstrap/keycloak-start.sh:ro
+      - target_secrets:/run/secrets:ro
+      - keycloak_data:/opt/keycloak/data
+    networks: [targets]
+    logging:
+      options: {max-size: 5m, max-file: "2"}
+  demo:
+    build: ./targets
+    restart: "no"
+    mem_limit: 128m
+    memswap_limit: 128m
+    cpus: 0.5
+    pids_limit: 64
+    ports: ["127.0.0.1:8086:8080"]
+    volumes:
+      - target_secrets:/run/secrets:ro
+      - demo_data:/data
+    networks: [targets]
+    logging:
+      options: {max-size: 5m, max-file: "2"}
+volumes:
+  target_secrets:
+    external: true
+    name: service-desk-targets_secrets
+  keycloak_data:
+  demo_data:
+networks:
+  targets:

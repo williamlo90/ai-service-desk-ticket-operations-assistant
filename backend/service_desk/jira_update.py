@@ -74,7 +74,7 @@ class JiraSummaryAdapter:
                'audit':[{'sequence':1,'actor':actor.actor_id,'event':'reserved','at':self.clock().isoformat()}]}
         self.journal.create(plan.tenant,plan.operation_id,state)
         auth=base64.b64encode((self.connection.email+':'+self.connection.api_token).encode()).decode()
-        url=f'https://api.atlassian.com/ex/jira/{self.connection.cloud_id}/rest/api/3/issue/{plan.key}'
+        url=self.connection.api_base+f'issue/{plan.key}'
         try:
             status=self.transport(url,{'Authorization':'Basic '+auth,'Content-Type':'application/json'},
                                   json.dumps({'fields':{'summary':plan.after}}).encode())

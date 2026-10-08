@@ -36,6 +36,20 @@ class JiraReaderTests(unittest.TestCase):
             self.reader.read(Actor("a", "beta", Role.SPECIALIST), "IT-1")
         self.transport.assert_not_called()
 
+    def test_unscoped_token_uses_explicit_site_origin(self):
+        c=JiraConnection('alpha',self.connection.cloud_id,'IT','synthetic@example.invalid',
+                         'SENTINEL_TOKEN',site_url='https://william-service-desk-lab.atlassian.net')
+        JiraReader(c,self.transport).read(self.actor,'IT-1')
+        self.assertTrue(self.transport.call_args.args[0].startswith(c.site_url+'/rest/api/3/issue/IT-1?'))
+
+    def test_site_origin_rejects_paths_credentials_and_other_hosts(self):
+        for origin in ('http://lab.atlassian.net','https://lab.atlassian.net/evil',
+                       'https://lab.atlassian.net.evil.test','https://user@lab.atlassian.net',
+                       'https://lab.atlassian.net?next=evil'):
+            with self.subTest(origin=origin),self.assertRaises(JiraReadError):
+                JiraConnection('alpha',self.connection.cloud_id,'IT','synthetic@example.invalid',
+                               'SENTINEL_TOKEN',site_url=origin)
+
     def test_requester_cannot_use_staff_reader(self):
         with self.assertRaises(AccessDenied):
             self.reader.read(Actor("a", "alpha", Role.REQUESTER), "IT-1")

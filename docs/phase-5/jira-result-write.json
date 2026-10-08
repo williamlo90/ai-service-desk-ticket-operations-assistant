@@ -1,0 +1,28 @@
+{
+  "checked_at": "2026-10-08T14:43:08.360498+00:00",
+  "issue": "IT-1",
+  "status": "passed",
+  "credentials_printed": false,
+  "jira_credentials_loaded_internally": true,
+  "ticket_status_changed": false,
+  "comments_sent": 0,
+  "operation_id": "f98d23f4-2d55-4eb4-8139-5ae6cdfa1878",
+  "payload": {
+    "schema": 1,
+    "environment": "local-lab",
+    "tenant": "alpha",
+    "case_id": "7c72fff3-881e-571e-9be7-aed9870482bc",
+    "operation_id": "f98d23f4-2d55-4eb4-8139-5ae6cdfa1878",
+    "action": "grant_read_access",
+    "resource": "reports",
+    "result": "verified",
+    "local_case_status": "closed",
+    "closed_at": "2026-10-08T14:28:54.393107+00:00",
+    "jira_resolution_changed": false
+  },
+  "property_key": "service-desk.lab.result.f98d23f4-2d55-4eb4-8139-5ae6cdfa1878",
+  "verified": true,
+  "write_attempted": true,
+  "replay_without_write": true,
+  "limitation": "Operation property is not a Jira resolution transition or cross-system transaction"
+}

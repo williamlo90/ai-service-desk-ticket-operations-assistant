@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "checked_at": "2026-10-08T14:28:54.541269+00:00",
+  "case_id": "7c72fff3-881e-571e-9be7-aed9870482bc",
+  "jira_issue": "IT-1",
+  "source_rechecked_at": "2026-10-08T14:28:52.160959+00:00",
+  "source_snapshot_unchanged": true,
+  "approver": "William",
+  "approved_at": "2026-10-08T14:27:50.067974+00:00",
+  "approval_expires_at": "2026-10-08T14:42:50.067978+00:00",
+  "path": "Human browser approval -> MCP -> HTTP API -> PostgreSQL -> Keycloak read-back",
+  "tenant": "alpha",
+  "realm": "sd-lab-alpha",
+  "requester": "requester-a",
+  "group": "reports-reader",
+  "membership_before": false,
+  "membership_after": true,
+  "operation_id": "f98d23f4-2d55-4eb4-8139-5ae6cdfa1878",
+  "case_status": "closed",
+  "verified": true,
+  "dispatch_reservations": 1,
+  "human_token_used_by_script": false,
+  "jira_writes": 0,
+  "credentials_printed": false,
+  "jira_credentials_loaded_internally": true,
+  "limitations": [
+    "Jira summary/status snapshot checked before dispatch, not an atomic cross-system lock",
+    "Local case closed; Jira ticket status unchanged; Phase 5 gate remains open"
+  ]
+}

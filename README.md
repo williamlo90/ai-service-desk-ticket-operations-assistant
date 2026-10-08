@@ -1,101 +1,76 @@
 # AI Service Desk & Ticket Operations Assistant
 
-Proyek 01: **AI Service Desk & Ticket Operations Assistant**
+Service desk assistant untuk mengubah tiket Jira menjadi tindakan yang disetujui
+manusia, hasil yang diverifikasi di sistem tujuan, dan audit yang tersimpan.
 
-Tanggal rencana: 2026-10-08. Status: **Phase 1-4 pra-Docker selesai; Phase 5 berjalan: integrasi lokal MCP/API/PostgreSQL dan recovery sintetis lulus**. Checklist hanya dicentang setelah artefak dan verifikasinya tersedia.
+**Status: Phase 5 selesai untuk integrasi V1 lokal.**
+[Gate penutupan](docs/phase-5/phase5-gate.json) lulus. Tahap berikutnya adalah
+Phase 6: evaluasi kualitas model dan manfaat bisnis.
 
-**Pengguna:** Service desk lead dan support specialist.
+## Arsitektur yang dipilih
 
-**Hasil bisnis:** Mengubah tiket masuk menjadi pekerjaan yang jelas, tindakan yang disetujui, dan hasil penyelesaian yang terverifikasi.
+**Code-led:** Python domain service + PostgreSQL, TypeScript MCP, halaman approval
+browser, adapter Jira/Keycloak/service demo, serta supervisor proses lokal.
+[ADR 003](docs/architecture/ADR-003-selected-code-led.md) mencatat keputusan atas
+otoritas yang diberikan William, bukti pembanding, alasan dan tradeoff. n8n tetap
+tersedia sebagai integrasi pendukung; workflow existing tidak dihapus.
 
-**Alur:** Tiket Jira masuk → klasifikasi dan pengumpulan konteks → retrieval SOP → rencana tindakan → approval sesuai risiko → update/action → periksa hasil di sistem tujuan → tutup atau eskalasi → laporan.
+PostgreSQL menyimpan proposal, approval yang terikat versi/payload, operation ID,
+retry state dan audit. Worker hanya memproses job yang memiliki approval tersimpan.
+Target read-back menentukan keberhasilan; respons accepted saja tidak menutup
+kasus. Source drift dan hasil yang tidak pasti masuk review.
 
-**Implementasi saat ini:** Python domain service dan WSGI intake, TypeScript MCP
-server/reference client, adapter PostgreSQL/Jira, empat reusable skills, serta
-adapter OpenAI/Claude/Grok/Ollama. Validasi menggunakan target dan transport sintetis.
+Jira memakai polling HTTPS terautentikasi dengan scope key yang dibatasi dan
+pagination berbasis cursor. Runtime lokal tidak membuka receiver webhook publik.
+API berjalan di loopback; supervisor memulihkan child process, bukan host reboot.
 
-**Target integrasi:** FastAPI/React, PostgreSQL + pgvector, runtime Docker lokal,
-Jira dan model nyata. Ownership workflow code-led/n8n-led ditentukan lewat
-perbandingan Phase 5; LangGraph digunakan bila keputusan checkpoint memerlukannya.
-Lihat [rencana fase](PHASES.md) dan [handoff integrasi](docs/phase-5/HANDOFF.md).
+## Bukti yang sudah tersedia
 
-## Baseline dan reuse
+- **130 tes Python + 8 tes Node lulus.**
+- Perbandingan dua engine: masing-masing 14 kasus dasar dan 17 kasus policy v2;
+  pack recovery, transport dan native wait/restart tercatat terpisah.
+- PostgreSQL nyata: migration replay, RLS, CAS, audit atomicity dan pemulihan proses.
+- Dua tenant Keycloak/service demo: akses grup, restart service, tiga health check
+  berjarak waktu nyata, serta replay tanpa efek ganda.
+- [Approval William](docs/phase-5/human-approved-access.json): IT-1 diimpor,
+  disetujui di browser, akses Keycloak diberikan dan diverifikasi, kasus lokal ditutup.
+- [Ticket-link dan polling](docs/phase-5/jira-connected-check.json): IT-2 dibuat,
+  relasi dengan IT-1 diverifikasi, pencarian dua halaman serta sinkronisasi ulang
+  lulus. Poller aktif setiap 60 detik untuk kedua tiket lab tersebut.
+- [Metadata hasil Jira](docs/phase-5/jira-result-write.json) ditulis dan dibaca ulang;
+  replay tidak membuat PUT tambahan. Status workflow Jira tidak diubah.
+- [Supervisor](docs/phase-5/operator-supervisor-check.json) memulihkan API/worker
+  setelah crash dengan kasus dan entitlement tetap utuh.
+- [Migration/rollback](docs/phase-5/operator-migration-check.json) dan
+  [job cutover](docs/phase-5/job-cutover-check.json) terisolasi lulus, dengan satu
+  efek target pada perpindahan dan rollback job sintetis.
 
-Perluasan Case Resolution Copilot. Sumber: C:/Users/William/OneDrive/Dokumen/Agentic Project/case-resolution-copilot-rebuild. HEAD 1a88dbb; ada perubahan lokal production-validation yang belum di-commit pada pemeriksaan 8 Oktober. Approval snapshots, policy retrieval, audit, permissions, action gateway, idempotency, dan reconciliation sudah memiliki fondasi. Verifikasi ulang sebelum dipakai. Gap audit sebelumnya: intake masih menerima kategori dari pemanggil; receipt tindakan dan final outcome belum dibedakan cukup tegas; closure/reopen perlu diperkuat. Pertahankan domain sengketa tagihan/refund sebagai regression pack; tambahkan kasus service desk MSP yang spesifik. Jangan mengasumsikan perubahan lokal telah lulus hanya dari status Git.
+Hasil tersebut merupakan validasi integrasi lab. Belum ada klaim kualitas AI,
+ROI, performa produksi atau deployment cloud. Approval fixture diberi label dan
+tidak disamakan dengan approval manusia. Baseline billing/refund dipertahankan;
+47 tes regresinya telah dijalankan terpisah, tanpa klaim bahwa job itu sudah dipindah.
 
-## Dokumen kerja
+## Mulai dan pelajari
 
-- [PHASES.md](PHASES.md)
-- [AI-AGENTS.md](AI-AGENTS.md)
-- [REUSABLE-SKILLS.md](REUSABLE-SKILLS.md)
-- [MCP-INTEGRATIONS.md](MCP-INTEGRATIONS.md)
-- [BUSINESS-PLATFORM.md](BUSINESS-PLATFORM.md)
-- [LOCAL-AI-AND-PROVIDERS.md](LOCAL-AI-AND-PROVIDERS.md)
-- [SECURITY-TESTING-MONITORING.md](SECURITY-TESTING-MONITORING.md)
-- [PROJECT-DELIVERY.md](PROJECT-DELIVERY.md)
+1. Baca [rencana fase](PHASES.md), [gate saat ini](docs/phase-5/CURRENT-GATES.md)
+   dan [panduan operator](docs/phase-5/OPERATOR-LAB.md).
+2. Tes Python: dari `backend`, jalankan
+   `../.venv/Scripts/python.exe -B -m unittest discover -s tests`.
+3. Tes MCP: dari `mcp-server`, jalankan `npm test` setelah dependency terkunci terpasang.
+4. Jalankan `./scripts/operator-service.ps1 Start`, `Stop`, atau `Status` untuk
+   runtime proyek ini. Lihat [setup](deploy/README.md) untuk database dan target.
+5. Gunakan [catatan belajar](docs/learning/README.md) dan commit per fase untuk
+   mempelajari perubahan. Commit `66693e6` adalah checkpoint Phase 5 atas permintaan
+   William; commit penutupan Phase 5 mencatat gate yang sudah lulus.
 
-## Ukuran keberhasilan
+Kredensial dimuat skrip secara internal dan tidak ditampilkan. Private runtime
+config berada di luar repository; `.env`, data runtime dan snapshot lokal tidak
+masuk Git. Jangan menjalankan tes pencabutan akses terhadap entitlement operator
+yang sedang aktif; gunakan fixture terpisah.
 
-triage accuracy per kategori; policy-correct decision rate; verified resolution rate; false closure rate; auto-resolution coverage dari seluruh kasus; manual touches; reopen rate; p95 sampai hasil terverifikasi; biaya per kasus benar.
+## Tahap selanjutnya
 
-## Cara mulai
-
-1. Baca [catatan belajar per phase](docs/learning/README.md). Setiap phase punya
-   satu commit sehingga perubahan bisa dipelajari secara bertahap.
-2. Jalankan tes Python dari folder backend:
-   `python -B -m unittest discover -s tests -v`.
-3. Dari mcp-server, instal dependency terkunci dengan
-   `npm ci --ignore-scripts --no-audit --no-fund`, lalu `npm test`.
-4. Baca [handoff Phase 5](docs/phase-5/HANDOFF.md) sebelum integrasi runtime.
-
-Hasil terakhir: **74 tes Python + 6 tes MCP lulus**. Tes menggunakan proses lokal,
-identitas sintetis, memory store, DB-API spies dan fake transports; tidak memakai
-Docker, .env, database nyata atau panggilan provider/Jira live. Instalasi npm
-memerlukan registry. Tidak ada klaim benchmark AI, ROI atau connected acceptance.
-
-[Kontrak pembanding](docs/architecture/comparison-contract.md) dan 14 reference
-fixtures tetap menjadi gate integrasi tersendiri. [Setup readiness](docs/phase-0/setup-readiness.md)
-mencatat prasyarat owner/identity/sandbox yang masih terbuka. Bukti runtime lama
-tersedia sebagai snapshot historis; bukan validasi deployment saat ini.
-
-## Progress integrasi lokal
-
-Checkpoint Phase 5: **94 tes Python + 8 tes Node lulus**, ditambah 7 kelompok
-uji PostgreSQL nyata dan 5 kelompok uji HTTP/MCP/recovery. Endpoint approval
-supervisor terpisah dari MCP; state bertahan setelah restart proses, dan efek
-target sintetis tidak digandakan setelah crash. Lihat
-[status dan batas integrasi](docs/phase-5/HANDOFF.md).
-
-William adalah business owner. Target live belum siap; integrasi memakai SQLite
-sebagai target sintetis independen. Harness membersihkan database dan proses
-uji sesudah selesai. Deployment pengguna, keputusan akhir code-led/n8n-led, serta
-integrasi Jira/model live masih pending. Checkpoint Phase 5 disimpan dalam commit
-atas instruksi William; gate akhir fase tetap terbuka.
-
-Perbandingan reference worker sudah dijalankan: code-led dan n8n-led masing-masing
-lulus **14/14 skenario dasar + 17/17 skenario policy v2**. Total 62 eksekusi skenario;
-unit suite kini 94 Python tests. [ADR 001](docs/architecture/ADR-001-orchestration-checkpoint.md)
-mempertahankan shared domain controls dan menunda pilihan engine sampai cakupan
-scheduling serta effort pemeliharaan diuji setara. Ini belum menutup gate arsitektur.
-
-Uji [native wait/restart](docs/phase-5/native-wait-comparison.json) juga lulus:
-dua journey sintetis, masing-masing melewati dua restart engine saat menunggu
-approval dan hasil target, lalu menutup kasus dengan satu efek target.
-n8n melanjutkan execution ID yang sama.
-
-[Pack recovery](docs/phase-5/recovery-comparison.json) lulus **7/7 skenario per
-engine**: approval tidak valid, target lambat/gagal, response hilang, timeout
-pembacaan, dan batas retry. Retry hanya membaca ulang hasil; tindakan tidak
-dikirim ulang. Kasus yang perlu review tetap terbuka dengan escalation tersimpan.
-Uji [crash saat backoff 70 detik](docs/phase-5/timer-comparison.json) juga lulus
-untuk kedua engine. Sebanyak 47 tes regresi baseline lama lulus dari salinan
-backup, dan rehearsal perubahan policy cukup menyentuh satu entri bersama pada
-masing-masing kandidat. Crash timer pendek, transport retry, kesetaraan fitur
-billing/refund dan effort operator masih pending; belum ada engine yang dipilih.
-
-## Keputusan kode existing
-
-Kode lama boleh dipakai ulang, diganti atau dihapus berdasarkan hasil [ARCHITECTURE-COMPARISON.md](ARCHITECTURE-COMPARISON.md). Tidak ada kewajiban mempertahankan arsitektur hanya karena sudah dibangun. Implementasi baru dimulai dari core backend terisolasi; belum ada kode baseline yang dihapus.
-
-
-Akun Atlassian dan Jira IT-1 sudah tersedia; diagnostic read berhasil. Sisa setup identity/owner dan akses tercatat di [PHASES.md](PHASES.md). Runtime lokal terisolasi memiliki panduan di [deploy/README.md](deploy/README.md).
+Phase 6 mengukur kualitas model dan manfaat bisnis. Phase 7 menguji hardening,
+beban, host recovery dan release candidate. Phase 8 adalah handover; Azure tetap
+Phase 9. Lihat dokumen topik untuk kebutuhan AI, reusable skills, MCP, security
+dan delivery, dengan ADR terbaru sebagai acuan ownership runtime.

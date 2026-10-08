@@ -1,5 +1,9 @@
 # Business Platform & Workflow Integration
 
+> Current architecture decision: code-led V1 with outbound Jira polling.
+> [ADR 003](docs/architecture/ADR-003-selected-code-led.md) supersedes earlier
+> mandatory n8n ownership assumptions below. Existing n8n workflows are retained.
+
 Proyek 01: **AI Service Desk & Ticket Operations Assistant**
 
 Tanggal rencana: 2026-10-08. Status: **rencana implementasi; belum ada implementasi baru dalam folder ini**. Checklist hanya dicentang setelah artefak dan verifikasinya tersedia.

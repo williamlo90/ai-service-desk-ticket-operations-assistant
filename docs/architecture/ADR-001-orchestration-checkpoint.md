@@ -163,3 +163,18 @@ code worker reads due time from PostgreSQL when relaunched; the harness supplies
 the same job configuration. Host/service auto-start deployment, lost HTTP replies,
 database restart and distributed ownership remain outside this test. Keep the
 short-timer profile a bounded lab fixture rather than treating it as durable.
+
+## HTTP retries and concurrent recovery
+
+[Transport comparison](../phase-5/transport-comparison.json) passes seven cases
+per engine: 503 recovery, 429, lost reply after commit, retry exhaustion, 401,
+two workers and lock-owner crash. PostgreSQL transaction advisory locks coordinate
+recovery ticks while aggregate CAS protects persisted state. A killed lock holder
+releases ownership; this is not a fencing lease for network partitions.
+
+Code retries selected transient failures with bounded backoff and stops on 401.
+The tested n8n node retries 401 four times as well as transient errors, with fixed
+one-second waits. Both persist a review outcome on exhaustion. These behavioral
+differences remain relevant to selection; equal scenario pass counts do not imply
+identical retry policies. Human maintenance effort, short-timer crash behavior and
+baseline feature parity remain open. No final engine selection is made here.

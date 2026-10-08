@@ -11,7 +11,7 @@ from http.server import BaseHTTPRequestHandler,ThreadingHTTPServer
 import json
 import sys
 from threading import Barrier,local
-from time import monotonic
+from time import monotonic,sleep
 import psycopg
 from service_desk.contracts import Actor,Role,AccessDenied
 from service_desk.events import CallbackVerifier,CallbackHandler
@@ -26,7 +26,7 @@ from service_desk.recovery import RecoveryController
 
 class Harness:
     def __init__(self,config):
-        self.config=config;self.contexts={};self.observations={}
+        self.config=config;self.contexts={};self.observations={};self.http_faults={};self.http_calls={}
         self.connect=lambda:psycopg.connect(**config['database'])
         self.store=PostgresStateStore(self.connect)
         self.target=ReferenceTarget('/tmp/reference-target.sqlite')
@@ -47,21 +47,39 @@ class Harness:
             return {'registered':data['stage']}
         state=self.store.get(ctx['tenant'],ctx['id']);action=state['action']
         return {'state':state,'resume':ctx.get('resume',{}),
+            'http_calls':self.http_calls.get(data.get('fixture','native-wait'),0),
+            'busy_returns':ctx.get('busy_returns',0),
+            'worker_ids':sorted(ctx.get('worker_ids',set())),
             'submit_calls':self.target.submit_calls(ctx['tenant'],action['id']) if action else 0,
             'target':self.target.inspect(ctx['tenant'],action['id'],state['proposal']['payload']) if action else None,
             'effects':len([x for x in self.target.ledger() if action and x['operation_id']==action['id']])}
 
     def recovery(self,data):
         ctx=self.contexts[data['fixture']];target=self.target
+        if data.get('worker_id'):ctx.setdefault('worker_ids',set()).add(str(data['worker_id']))
         class FaultTarget:
-            def submit(inner,*args):return target.submit(*args)
+            def submit(inner,*args):
+                result=target.submit(*args)
+                if ctx.get('complete_on_submit'):target.complete(args[0],args[1],True)
+                return result
             def inspect(inner,*args):
+                if ctx.get('hold_read'):sleep(0.6)
                 if ctx.get('read_timeouts',0)>0:
                     ctx['read_timeouts']-=1
                     raise TimeoutError('Synthetic target read timeout')
                 return target.inspect(*args)
         service=JourneyService(self.store,FaultTarget(),lambda:ctx['clock'])
-        return RecoveryController(service,delay_scale=70 if self.config.get('profile')=='timer' else 1).tick(self.staff,ctx['id'])
+        result=RecoveryController(service,delay_scale=70 if self.config.get('profile')=='timer' else 1).tick(self.staff,ctx['id'])
+        if result.get('reason')=='worker_busy':ctx['busy_returns']=ctx.get('busy_returns',0)+1
+        return result
+
+    def faults(self,data):
+        key=data['fixture'];plan=data.get('plan',[])
+        if not isinstance(plan,list) or len(plan)>10 or any(x not in ('503','429','401','drop_after') for x in plan):raise ValueError()
+        self.http_faults[key]=list(plan)
+        self.contexts[key]['complete_on_submit']=bool(data.get('complete_on_submit',True))
+        self.contexts[key]['hold_read']=bool(data.get('hold_read',False))
+        return {'configured':True}
 
     def step(self,data):
         key,command=data['fixture'],data['command'];started=monotonic();error=None;results=None
@@ -149,7 +167,20 @@ def main():
                 length=int(self.headers.get('Content-Length','0'))
                 if not 0<length<=16384:raise ValueError()
                 data=json.loads(self.rfile.read(length))
-                result=harness.observations if self.path=='/observations' else harness.step(data) if self.path=='/step' else harness.native(data) if self.path=='/native' else harness.recovery(data) if self.path=='/recovery' else {'ready':True}
+                fault=None
+                if self.path=='/recovery':
+                    key=data['fixture'];harness.http_calls[key]=harness.http_calls.get(key,0)+1
+                    plan=harness.http_faults.get(key,[])
+                    fault=plan.pop(0) if plan else None
+                    if fault in ('503','429','401'):
+                        self.send_response(int(fault));self.send_header('Retry-After','1')
+                        self.send_header('Content-Length','0');self.end_headers();return
+                if self.path=='/faults':
+                    result=harness.faults(data)
+                else:
+                    result=harness.observations if self.path=='/observations' else harness.step(data) if self.path=='/step' else harness.native(data) if self.path=='/native' else harness.recovery(data) if self.path=='/recovery' else {'ready':True}
+                if fault=='drop_after':
+                    self.close_connection=True;self.connection.shutdown(2);self.connection.close();return
                 body=json.dumps(result).encode();self.send_response(200)
             except Exception:
                 body=b'{"error":"comparison_request_failed"}';self.send_response(500)

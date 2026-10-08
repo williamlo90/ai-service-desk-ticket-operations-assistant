@@ -5,6 +5,8 @@ const load = document.querySelector('#load');
 const message = document.querySelector('#message');
 const proposal = document.querySelector('#proposal');
 let snapshot = null;
+const linkedCase = new URLSearchParams(window.location.search).get('case');
+if (linkedCase && /^[a-f0-9-]{36}$/.test(linkedCase)) caseInput.value = linkedCase;
 function clearSnapshot() { snapshot = null; approve.disabled = true; }
 token.addEventListener('input', clearSnapshot);
 caseInput.addEventListener('input', clearSnapshot);
@@ -26,7 +28,7 @@ load.addEventListener('click', async () => {
     const c = result.case;
     if (!c.proposal || c.action || c.status !== 'open') throw new Error('No pending proposal available.');
     snapshot = { case_id: c.case_id, expected_version: c.version, payload_hash: c.proposal.payload_hash };
-    proposal.textContent = JSON.stringify({ tenant: c.tenant, version: c.version,
+    proposal.textContent = JSON.stringify({ source: c.source, tenant: c.tenant, version: c.version,
       policy: c.proposal.policy_version, requested_action: c.proposal.payload, sources: result.context.sources }, null, 2);
     approve.disabled = false; message.textContent = 'Review the action above.';
   } catch (error) { message.textContent = error.message; }

@@ -46,7 +46,7 @@ def workflow(steps,origin,capability):
             'nodes':nodes,'connections':connections,'settings':{'executionOrder':'v1'},'active':False}
 
 
-def run_candidate(name,inputs,run_dir,profile='v1',native=False,recovery=False,timer=False):
+def run_candidate(name,inputs,run_dir,profile='v1',native=False,recovery=False,timer=False,transport=False):
     import psycopg
     suffix=secrets.token_hex(5);db='sdcompare_'+suffix;owner=db+'_owner';runtime=db+'_app'
     owner_pw=secrets.token_hex(32);app_pw=secrets.token_hex(32);capability=secrets.token_hex(32)
@@ -80,13 +80,18 @@ def run_candidate(name,inputs,run_dir,profile='v1',native=False,recovery=False,t
         except Empty:raise ComparisonFailed('fixture_api_start_timeout') from None
         if ready.strip()!='comparison-ready':raise ComparisonFailed('fixture_api_not_ready')
         if name=='n8n':
-            command(['docker','run','-d','--name',engine,'--network','service-desk-lab_service_desk','--memory','768m','--cpus','1','--pids-limit','128',
+            command(['docker','run','-d','--name',engine,'--network','service-desk-lab_service_desk','--memory','1280m' if transport else '768m','--cpus','1','--pids-limit','192' if transport else '128',
                 '-e','N8N_DIAGNOSTICS_ENABLED=false','-e','N8N_VERSION_NOTIFICATIONS_ENABLED=false','-e','N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true',
                 '-e','NODE_OPTIONS=--max-old-space-size=512','-e','WEBHOOK_URL=http://'+engine+':5678/',
                 '-e','N8N_HOST='+engine,'--entrypoint','sleep',N8N,'infinity']);containers.append(engine)
         elif native or timer:
             command(['docker','run','-d','--name',engine,'--network','service-desk-lab_service_desk','--memory','128m','--cpus','0.5',
                      '--pids-limit','64','--entrypoint','sleep',IMAGE,'infinity']);containers.append(engine)
+        if transport:
+            from transport_checks import check_transport
+            report['transport']=check_transport(name,api,engine,capability,command,api_request,run_dir,config['database'])
+            report['status']='executed'
+            return report
         if timer:
             from timer_checks import check_timer
             report['timer']=check_timer(name,api,engine,capability,command,api_request,run_dir)

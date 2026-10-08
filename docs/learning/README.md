@@ -1,6 +1,6 @@
 # Learning checkpoints
 
-Phases 1–4 each have one commit. Phase 5 has a user-requested intermediate checkpoint; its final gate remains open. Use `git log --oneline` to locate the checkpoints and
+Phases 1–4 each have one commit. Phase 5 has a user-requested intermediate checkpoint; its final local V1 gate has now passed. Use `git log --oneline` to locate the checkpoints and
 `git show <commit> --stat` to see scope. Read each phase note before its tests.
 Inspect historical files with `git show <commit>:path`; avoid resetting your
 working tree while another phase is being implemented.
@@ -27,3 +27,20 @@ Phase 5 sedang dikerjakan: baca [perbandingan code-led/n8n-led](phase-5-comparis
 untuk eksperimen 14 skenario, perubahan policy lima menit, native wait/restart,
 dan tujuh skenario recovery per engine. Atas instruksi William, checkpoint
 Phase 5 disimpan sekarang; gate arsitektur dan integrasi live belum lengkap.
+
+Sandbox lanjutan: Keycloak memisahkan tenant dalam realm, sedangkan adapter
+membatasi user/grup yang boleh diubah. Service demo menjalankan child process
+nyata agar restart dapat dibuktikan lewat perubahan generation. Pelajari
+[setup sandbox](../../deploy/README.md#keycloak-and-demo-targets) dan
+[bukti connected](../phase-5/lab-connected-check.json). Approval fixture menguji
+mekanisme; penunjukan approver manusia tetap menjadi langkah terpisah.
+
+
+Keputusan akhir orchestration V1 kini **code-led**, melalui delegasi William.
+Baca [ADR 003](../architecture/ADR-003-selected-code-led.md): keputusan berangkat
+dari ownership state dan kompleksitas operasi, bukan klaim pemenang benchmark.
+Runtime memiliki worker approval-aware, supervisor child process, pencarian Jira
+berpaginasi dan adapter related-ticket. Gate live terakhir dan status commit
+tercantum di [CURRENT-GATES](../phase-5/CURRENT-GATES.md).
+
+[Catatan penutupan Phase 5](phase-5.md) merangkum implementasi dan bukti akhir.

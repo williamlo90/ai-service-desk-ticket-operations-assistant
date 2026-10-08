@@ -104,4 +104,47 @@ checks approval/closure/reopen through real HTTP, terminates/restarts the API an
 crashes workers before/after a durable synthetic target effect. Only those owned
 processes are terminated. It does not prove database restart/backup recovery, live
 target actions or the frozen architecture comparison. All temporary API processes,
-target files, SQL database and generated roles are cleaned up after the check.
+SQL database and generated roles are cleaned up after the check. Local target
+ledgers remain in ignored `local/` directories for diagnosis.
+
+## Keycloak and demo targets
+
+William selected this independent local sandbox. Keycloak listens on
+`http://localhost:8085`; the demo health endpoint is
+`http://localhost:8086/healthz`. Compose project `service-desk-targets` has its own
+network and volumes. It does not mount the Docker socket or change existing n8n
+workflows. Keycloak uses development mode and H2, for this lab only.
+
+```powershell
+python -B scripts/cache_keycloak_image.py
+python -B scripts/setup_target_sandbox.py
+& ./.venv/Scripts/python.exe -B scripts/check_demo_target.py
+& ./.venv/Scripts/python.exe -B scripts/check_lab_access.py
+& ./.venv/Scripts/python.exe -B scripts/check_postgres_contracts.py --lab-targets
+```
+
+The image cache script verifies official registry layer/config digests before
+loading the image. Setup checks the pinned image ID before starting Keycloak.
+Compose receives an explicit empty env file. The project `.env` is not read.
+Generated credentials are kept under the current user's
+`.codex/private/service-desk-targets/bootstrap.json`, with restricted Windows
+directory permissions, and consumed internally by scripts. Do not paste this
+file into chat, logs or Git. The technical bootstrap username is
+`service-desk-bootstrap`; it is not an operational role assignment.
+
+Each realm (`sd-lab-alpha`, `sd-lab-beta`) has a separate integration client,
+requester and `reports-reader` group. Clients are denied access to the other
+realm. Their own-realm `manage-users` permission is broader than group membership;
+the adapter additionally limits actions to the configured requester/group.
+Demo tokens are tenant-specific and control only a dedicated child process.
+Repeated operation IDs cannot trigger another restart.
+
+Connected acceptance uses temporary API/SQL resources and fixture supervisor
+identities. Access tests restore original membership. Service tests deliberately
+restart only the dedicated demo children. The sandbox containers and persistent
+volumes remain available afterward. William is the confirmed lab operational approver and credential custodian;
+these scripts do not represent human acceptance. See
+[operator lab](../docs/phase-5/OPERATOR-LAB.md) for the persistent API and IT-1 review.
+
+Reference: [official Keycloak Docker guide](https://www.keycloak.org/getting-started/getting-started-docker)
+and [Admin REST API](https://www.keycloak.org/docs-api/latest/rest-api/index.html).

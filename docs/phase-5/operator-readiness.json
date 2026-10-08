@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "case_id": "7c72fff3-881e-571e-9be7-aed9870482bc",
+  "ready": true,
+  "source": "Jira IT-1",
+  "cross_tenant_case_denied": true,
+  "integration_approval_denied": true,
+  "approval_absent_at_check": true,
+  "target_action_absent_at_check": true,
+  "mcp_imported_source_read_passed": true,
+  "human_token_used": false,
+  "project_dotenv_read": false
+}

@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "checked_at": "2026-10-08T15:30:18.037256+00:00",
+  "credentials_printed": false,
+  "comments_sent": 0,
+  "jira_status_transitions": 0,
+  "link_types_http": 200,
+  "link": {
+    "matches": true,
+    "link_id": "10000",
+    "write_attempted": false
+  },
+  "link_replay_without_write": true,
+  "link_approval": "technical fixture; not a William browser approval",
+  "prior_link_write_verified": true,
+  "created_issue": "IT-2",
+  "search_pages": 2,
+  "synchronized_keys": [
+    "IT-1",
+    "IT-2"
+  ],
+  "import_replay_same_cases": true,
+  "invalid_token_http": 404,
+  "stage": "complete",
+  "invalid_token_issue_data_returned": false,
+  "rate_limit_evidence": "controlled adapter tests only; no deliberate live SaaS throttling",
+  "polling_transport": "outbound authenticated HTTPS; no Jira webhook receiver deployed"
+}

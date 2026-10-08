@@ -6,9 +6,10 @@ import type { ServerRequest, ServerNotification } from '@modelcontextprotocol/sd
 import { Backend } from './backend.js';
 import { HttpBackend } from './http-backend.js';
 
-if (process.env.SERVICE_DESK_MODE !== 'synthetic' || !process.env.SERVICE_DESK_API_TOKEN ||
+if (!['synthetic','lab'].includes(process.env.SERVICE_DESK_MODE ?? '') ||
+    (process.env.SERVICE_DESK_MODE === 'lab' && !process.env.SERVICE_DESK_API_URL) || !process.env.SERVICE_DESK_API_TOKEN ||
     (!process.env.SERVICE_DESK_API_URL && !process.env.SERVICE_DESK_BINDINGS)) {
-  process.stderr.write('Explicit synthetic mode and identity configuration required.\n');
+  process.stderr.write('Explicit local mode and identity configuration required; lab mode needs an API.\n');
   process.exit(1);
 }
 let backend: Backend | HttpBackend;
@@ -33,7 +34,9 @@ const state = z.object({ case_id: id, tenant: z.string(), version: expected,
   status: z.enum(['open','closed','reopened']), category: z.enum(['access_request','service_incident','repeated_ticket','unsupported']),
   proposal: proposal.nullable(), action: z.object({ id, status: actionStatus, dispatched_at: z.string(),
     sequence: z.number().int().nonnegative(), healthy_checks: z.array(z.string()) }).strict().nullable(),
-  verified: evidence.nullable() }).strict();
+  verified: evidence.nullable(), source: z.object({ provider: z.literal('jira'),
+    cloud_id: id, project: z.string().max(20), key: z.string().max(40),
+    summary: z.string().max(1000), status: z.string().max(100) }).strict().nullable() }).strict();
 const outputs = {
   search: z.object({ items: z.array(state).max(20), next_offset: z.number().int().nonnegative().nullable() }).strict(),
   create: state,
@@ -46,7 +49,7 @@ const outputs = {
   execute: state, close: state, reopen: state,
 };
 const tools = [
-  ['ticket.search', 'search', 'Search authorized local synthetic cases; use next_offset for pagination.',
+  ['ticket.search', 'search', 'Search authorized local cases, including imported Jira snapshots; use next_offset for pagination.',
     z.object({ query: z.string().max(200), offset: z.number().int().nonnegative(), limit: z.number().int().min(1).max(20) }).strict(), true],
   ['ticket.create_synthetic', 'create', 'Create a synthetic case only; never creates a Jira ticket.',
     z.object({ text: z.string().min(1).max(4000) }).strict(), false],
@@ -55,7 +58,7 @@ const tools = [
     z.object({ case_id: id, expected_version: expected }).strict(), false],
   ['ticket.apply_approved_update', 'execute', 'Execute only a stored, current supervisor approval. Replays never resubmit.',
     z.object({ case_id: id, expected_version: expected }).strict(), false],
-  ['ticket.verify_outcome', 'verify', 'Read the authoritative synthetic target and record evidence; acknowledgement is not success.',
+  ['ticket.verify_outcome', 'verify', 'Read the configured lab target and record evidence; acknowledgement is not success.',
     z.object({ case_id: id }).strict(), false],
   ['ticket.close', 'close', 'Close only after a fresh verified outcome; linking tickets alone cannot resolve an incident.',
     z.object({ case_id: id }).strict(), false],

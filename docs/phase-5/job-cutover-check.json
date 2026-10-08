@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "checked_at": "2026-10-08T14:55:47.886376+00:00",
+  "cross_database_restore": true,
+  "cutover_closed": true,
+  "rollback_closed": true,
+  "target_effects": 1,
+  "same_operation_id": true,
+  "source_worker_quiesced": true,
+  "destination_worker_quiesced_before_rollback": true,
+  "original_operator_database_touched": false,
+  "live_target_calls": 0,
+  "approval": "technical fixture",
+  "limitation": "Quiesced synthetic job; not simultaneous writers or network-partition fencing",
+  "temporary_databases_removed": true
+}

@@ -4,6 +4,7 @@ Connection factory must return a fresh psycopg3 connection with autocommit=False
 default tuple rows and READ COMMITTED isolation. No connection opens on import.
 """
 from dataclasses import asdict
+from contextlib import contextmanager
 from datetime import datetime,timezone
 from uuid import uuid4
 import json
@@ -58,6 +59,16 @@ class PostgresCaseRepository:
 
 class PostgresStateStore:
     def __init__(self,connect):self.connect=connect
+
+    @contextmanager
+    def claim(self,tenant,key):
+        # Transaction-scoped coordination across API/worker processes. A lost
+        # session releases this lock; aggregate CAS still protects every write.
+        with self.connect() as conn:
+            identity=json.dumps(['service-desk-recovery',tenant,key],separators=(',',':'))
+            acquired=conn.execute('SELECT pg_try_advisory_xact_lock(hashtextextended(%s,0))',
+                                  (identity,)).fetchone()[0]
+            yield acquired
 
     @staticmethod
     def _audit(conn,tenant,key,event):

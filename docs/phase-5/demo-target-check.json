@@ -1,0 +1,23 @@
+{
+  "checked_at": "2026-10-08T14:02:23.958469+00:00",
+  "status": "passed",
+  "results": [
+    {
+      "tenant": "alpha",
+      "real_child_generation_changed": true,
+      "readback_matches": true,
+      "replay_did_not_restart_child": true,
+      "cross_tenant_read_and_write_denied": true
+    },
+    {
+      "tenant": "beta",
+      "real_child_generation_changed": true,
+      "readback_matches": true,
+      "replay_did_not_restart_child": true,
+      "cross_tenant_read_and_write_denied": true
+    }
+  ],
+  "project_dotenv_read": false,
+  "credentials_printed": false,
+  "scope": "Technical lab target checks; business approval and full ticket-to-target journey not exercised"
+}

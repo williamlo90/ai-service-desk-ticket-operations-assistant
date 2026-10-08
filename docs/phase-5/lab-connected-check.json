@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "checks": [
+    "two-tenant MCP -> HTTP -> PostgreSQL -> Keycloak membership -> verified closure with fixture supervisor approval",
+    "API restart and fresh MCP connections preserve operation IDs and closed cases",
+    "actual Keycloak membership revocation reopens each tenant case without granting access again",
+    "two-tenant demo child restarts via MCP/API/SQL; closure denied until three healthy observations separated by real ten-second intervals",
+    "API restart and incident replay preserve each actual service generation without a second restart"
+  ],
+  "original_membership_restored": true,
+  "approvals": "technical fixture identities, not William or a human acceptance session",
+  "project_dotenv_read": false,
+  "credentials_printed": false,
+  "jira_calls": 0,
+  "limitations": [
+    "Local access and service restart journeys only; Jira ticket-link full path pending",
+    "Temporary runtime and database; no persistent operator deployment or human approval acceptance"
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-10-08T12:46:15.906184+00:00",
+  "checked_at_utc": "2026-10-08T14:16:21.348122+00:00",
   "scope": "disposable PostgreSQL database; actual Python adapters",
   "checks": [
     "fresh migrations, replay and checksum rejection",
@@ -25,13 +25,32 @@
     "persisted adverse target evidence reopens through MCP without repeating effect",
     "abrupt worker exits after reservation and after committed target effect reconcile without duplicate effects"
   ],
+  "lab_connected_checks": {
+    "status": "passed",
+    "checks": [
+      "two-tenant MCP -> HTTP -> PostgreSQL -> Keycloak membership -> verified closure with fixture supervisor approval",
+      "API restart and fresh MCP connections preserve operation IDs and closed cases",
+      "actual Keycloak membership revocation reopens each tenant case without granting access again",
+      "two-tenant demo child restarts via MCP/API/SQL; closure denied until three healthy observations separated by real ten-second intervals",
+      "API restart and incident replay preserve each actual service generation without a second restart"
+    ],
+    "original_membership_restored": true,
+    "approvals": "technical fixture identities, not William or a human acceptance session",
+    "project_dotenv_read": false,
+    "credentials_printed": false,
+    "jira_calls": 0,
+    "limitations": [
+      "Local access and service restart journeys only; Jira ticket-link full path pending",
+      "Temporary runtime and database; no persistent operator deployment or human approval acceptance"
+    ]
+  },
   "status": "passed",
   "temporary_database_and_roles_removed": true,
   "limitations": [
     "No database/container restart or backup restore",
     "Abrupt worker recovery tested with durable synthetic target; independent frozen evaluator pending",
     "Tenant context comes from trusted service; runtime role is not safe for arbitrary user SQL",
-    "Connected tests use a separate SQLite synthetic target; no live entitlement/service action",
-    "n8n comparison, persistent operator deployment and live Jira/model integration remain pending"
+    "Default connected checks use synthetic targets; optional lab-target checks separately exercise local Keycloak and demo services",
+    "Architecture comparison is recorded separately; persistent operator deployment and live Jira/model integration remain pending"
   ]
 }

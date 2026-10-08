@@ -1,0 +1,37 @@
+{
+  "status": "passed",
+  "checked_at": "2026-10-08T14:34:44.376537+00:00",
+  "checks": [
+    "repeatable-read application snapshot for configured alpha/beta tenants",
+    "fresh schema, migration replay and disk snapshot restore match every application row",
+    "additive column forward/rollback keeps existing repository reads and persisted case intact",
+    "synthetic in-flight effect with lost receipt survives schema forward/rollback and reconciles once through new connections",
+    "failed DDL transaction rolls back its added column",
+    "restored completed-job receipt replay performs no target calls; reconnect to source preserves original state"
+  ],
+  "source_database_modified": false,
+  "live_target_calls": 0,
+  "secrets_printed": false,
+  "snapshot_sha256": "c478f6990f0630b05a84fff8b2c50ce69c3981243eea2d786d08cc8b790637ec",
+  "row_counts": {
+    "sd_case_intake": 0,
+    "sd_journey": 1,
+    "sd_audit": 8
+  },
+  "inflight_fixture": {
+    "tenant": "beta",
+    "approval": "fixture supervisor, not William",
+    "effects": 1,
+    "same_operation_id": true,
+    "closed_after_reconciliation": true
+  },
+  "operation_id": "f98d23f4-2d55-4eb4-8139-5ae6cdfa1878",
+  "scope": "configured two-tenant application tables; one completed access job",
+  "temporary_database_removed": true,
+  "limitations": [
+    "No live schema/config change or job cutover performed",
+    "In-flight case covers additive schema rollback only, not cross-database cutover or n8n state migration",
+    "No database-volume recovery or external-target rollback",
+    "Snapshot covers only the two configured tenants and three application tables"
+  ]
+}

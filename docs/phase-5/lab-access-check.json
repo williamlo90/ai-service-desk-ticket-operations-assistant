@@ -1,0 +1,43 @@
+{
+  "run_id": "20261008T140843Z",
+  "status": "passed",
+  "results": [
+    {
+      "tenant": "alpha",
+      "lost_reply_injected": false,
+      "membership_readback": true,
+      "put_calls": 1,
+      "replay_without_second_put": true,
+      "revocation_detected": true
+    },
+    {
+      "tenant": "alpha",
+      "lost_reply_injected": true,
+      "membership_readback": true,
+      "put_calls": 1,
+      "replay_without_second_put": true,
+      "revocation_detected": true
+    },
+    {
+      "tenant": "beta",
+      "lost_reply_injected": false,
+      "membership_readback": true,
+      "put_calls": 1,
+      "replay_without_second_put": true,
+      "revocation_detected": true
+    },
+    {
+      "tenant": "beta",
+      "lost_reply_injected": true,
+      "membership_readback": true,
+      "put_calls": 1,
+      "replay_without_second_put": true,
+      "revocation_detected": true
+    }
+  ],
+  "initial_membership_restored": true,
+  "project_dotenv_read": false,
+  "credentials_printed": false,
+  "source_sha256": "370cd37fc8d9217c1bef1fae22c648b59d3ca54560fa8f7be81bda64542f753e",
+  "scope": "Technical adapter test using isolated Keycloak users; not human-approved Jira-to-target acceptance"
+}

@@ -1,0 +1,191 @@
+{
+  "run_id": "20261008T135510Z-ce7d45",
+  "mode": "synthetic",
+  "project_dotenv_read": false,
+  "results": [
+    {
+      "candidate": "code",
+      "profile": "v1",
+      "status": "executed",
+      "transport": {
+        "status": "passed",
+        "cases": [
+          {
+            "case": "unavailable",
+            "passed": true,
+            "http_calls": 3,
+            "submit_calls": 1,
+            "effects": 1,
+            "busy_returns": 0,
+            "workers": 1,
+            "status": "closed"
+          },
+          {
+            "case": "rate_limit",
+            "passed": true,
+            "http_calls": 2,
+            "submit_calls": 1,
+            "effects": 1,
+            "busy_returns": 0,
+            "workers": 1,
+            "status": "closed"
+          },
+          {
+            "case": "lost_reply",
+            "passed": true,
+            "http_calls": 2,
+            "submit_calls": 1,
+            "effects": 1,
+            "busy_returns": 0,
+            "workers": 1,
+            "status": "closed"
+          },
+          {
+            "case": "exhausted",
+            "passed": true,
+            "http_calls": 4,
+            "submit_calls": 0,
+            "effects": 0,
+            "busy_returns": 0,
+            "workers": 0,
+            "status": "open"
+          },
+          {
+            "case": "unauthorized",
+            "passed": true,
+            "http_calls": 1,
+            "submit_calls": 0,
+            "effects": 0,
+            "busy_returns": 0,
+            "workers": 0,
+            "status": "open"
+          },
+          {
+            "case": "two_workers",
+            "passed": true,
+            "http_calls": 10,
+            "submit_calls": 1,
+            "effects": 1,
+            "busy_returns": 8,
+            "workers": 2,
+            "status": "closed"
+          },
+          {
+            "case": "lock_owner_crash",
+            "passed": true,
+            "http_calls": 4,
+            "submit_calls": 1,
+            "effects": 1,
+            "busy_returns": 3,
+            "workers": 1,
+            "status": "closed"
+          }
+        ],
+        "trace_sha256": "3aaad8263b31e9de2af26f31ca1c4706f07e3c41525636a16920f8016930041e"
+      },
+      "cleanup_passed": true
+    },
+    {
+      "candidate": "n8n",
+      "profile": "v1",
+      "status": "executed",
+      "transport": {
+        "status": "passed",
+        "cases": [
+          {
+            "case": "unavailable",
+            "passed": true,
+            "http_calls": 3,
+            "submit_calls": 1,
+            "effects": 1,
+            "busy_returns": 0,
+            "workers": 1,
+            "status": "closed"
+          },
+          {
+            "case": "rate_limit",
+            "passed": true,
+            "http_calls": 2,
+            "submit_calls": 1,
+            "effects": 1,
+            "busy_returns": 0,
+            "workers": 1,
+            "status": "closed"
+          },
+          {
+            "case": "lost_reply",
+            "passed": true,
+            "http_calls": 2,
+            "submit_calls": 1,
+            "effects": 1,
+            "busy_returns": 0,
+            "workers": 1,
+            "status": "closed"
+          },
+          {
+            "case": "exhausted",
+            "passed": true,
+            "http_calls": 4,
+            "submit_calls": 0,
+            "effects": 0,
+            "busy_returns": 0,
+            "workers": 0,
+            "status": "open"
+          },
+          {
+            "case": "unauthorized",
+            "passed": true,
+            "http_calls": 4,
+            "submit_calls": 0,
+            "effects": 0,
+            "busy_returns": 0,
+            "workers": 0,
+            "status": "open"
+          },
+          {
+            "case": "two_workers",
+            "passed": true,
+            "http_calls": 11,
+            "submit_calls": 1,
+            "effects": 1,
+            "busy_returns": 9,
+            "workers": 2,
+            "status": "closed"
+          },
+          {
+            "case": "lock_owner_crash",
+            "passed": true,
+            "http_calls": 3,
+            "submit_calls": 1,
+            "effects": 1,
+            "busy_returns": 2,
+            "workers": 1,
+            "status": "closed"
+          }
+        ],
+        "trace_sha256": "9088510e7ab785c873f776ff958ed81bace68500ca9db44aab6243f34ee74d5e"
+      },
+      "cleanup_passed": true
+    }
+  ],
+  "python_image": "sha256:2b43175899c6c5db69bd31bb87051d14c0faf021c39a4083bcacd8d347e0e2c0",
+  "n8n_image": "docker.n8n.io/n8nio/n8n@sha256:f6dc0d15bc9620baf5ba1df834ef81ae4e969f778c09300e567217be88f04a96",
+  "raw_trace_location": "local/transport/20261008T135510Z-ce7d45",
+  "source_sha256": {
+    "scripts/transport_checks.py": "f8e8a302efff994faf8bd27fa32a61b4ac216667d27b28b3a1c8ce7bef3df2c2",
+    "scripts/compare_orchestrators.py": "9d85722ca1ac2038e02a8f3189c626d83efb2d1be69e479bb21c8767ea32ace1",
+    "backend/service_desk/http_retry.py": "9df788726e579f209586f1ee96080744b38230e4c93a8d66d9c067356b20e025",
+    "backend/service_desk/recovery.py": "45db0189fc46bc1ea087e865c93b5581ea16609852c777e99e07e691a6f602ee",
+    "backend/service_desk/postgres.py": "15ad75464c0572801af8d7fc296e4010f5fdcc15e085ad6ce96afefcd90c069a",
+    "backend/comparison/server.py": "e275c6acc318df09b243e87b071e107800b57d3ee081554df53d65b2b0bcaee1",
+    "backend/comparison/recovery_worker.py": "57258fb4a4a0a95c51439c832371240b75bf69f2ad3dcef64663798c9ec2e4cd"
+  },
+  "limitations": [
+    "PostgreSQL transaction advisory lock coordinates cooperative recovery ticks; aggregate CAS remains required",
+    "Two worker processes share one fixture API; separate holder is killed to prove lock release",
+    "n8n built-in retry permits four attempts with fixed 1s delays and retries 401 too; code fails terminal HTTP immediately",
+    "429 test has Retry-After 1; arbitrary rate-limit delays not proven for n8n",
+    "Transport exhaustion recorded in worker SQLite/n8n error execution; central case review synchronization pending",
+    "No lease fencing across network partitions, no live targets and no final architecture winner"
+  ]
+}

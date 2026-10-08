@@ -1,0 +1,25 @@
+{
+  "checked_at": "2026-10-08T14:08:14.760216+00:00",
+  "status": "ready_for_acceptance",
+  "keycloak_url": "http://localhost:8085",
+  "demo_url": "http://localhost:8086",
+  "keycloak_image": "sha256:43ebe9d4e97c2e5483b7637edf474e6adc1bbf4832a7396686cf90259c396d42",
+  "realms": [
+    "sd-lab-alpha",
+    "sd-lab-beta"
+  ],
+  "scoped_identity_read_checks": 2,
+  "cross_realm_denials": 2,
+  "demo_health_checks": 2,
+  "project_dotenv_read": false,
+  "credentials_printed": false,
+  "private_credentials_location": "C:\\Users\\William\\.codex\\private\\service-desk-targets\\bootstrap.json",
+  "operational_approver": "pending_user_assignment",
+  "credential_custodian": "pending_user_assignment",
+  "membership_changes": 0,
+  "limitations": [
+    "Local development-mode Keycloak with persistent H2 volume, not production deployment",
+    "Integration identity can manage users in its own lab realm; adapter must enforce exact user/group allowlist",
+    "No live Jira write, business approval or end-to-end acceptance performed by setup"
+  ]
+}
