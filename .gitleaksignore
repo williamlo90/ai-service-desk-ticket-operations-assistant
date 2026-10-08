@@ -1,0 +1,26 @@
+# Exact historical findings: JSON source/evidence SHA-256 digests, not credentials.
+666f7b16fac78c9f5a6c842885389f28d8cd1a49:docs/phase-7/phase7-gate.json:generic-api-key:30
+666f7b16fac78c9f5a6c842885389f28d8cd1a49:docs/phase-7/phase7-gate.json:generic-api-key:31
+666f7b16fac78c9f5a6c842885389f28d8cd1a49:docs/phase-7/phase7-gate.json:generic-api-key:57
+666f7b16fac78c9f5a6c842885389f28d8cd1a49:docs/phase-7/phase7-gate.json:generic-api-key:64
+666f7b16fac78c9f5a6c842885389f28d8cd1a49:docs/phase-7/phase7-gate.json:generic-api-key:73
+666f7b16fac78c9f5a6c842885389f28d8cd1a49:docs/phase-7/phase7-gate.json:generic-api-key:104
+169622b6bcdfb64ad55eee4e9f1e831357561d5e:docs/phase-8/clean-delivery.json:generic-api-key:32
+169622b6bcdfb64ad55eee4e9f1e831357561d5e:docs/phase-8/clean-delivery.json:generic-api-key:33
+169622b6bcdfb64ad55eee4e9f1e831357561d5e:docs/phase-8/clean-delivery.json:generic-api-key:59
+169622b6bcdfb64ad55eee4e9f1e831357561d5e:docs/phase-8/clean-delivery.json:generic-api-key:67
+169622b6bcdfb64ad55eee4e9f1e831357561d5e:docs/phase-8/clean-delivery.json:generic-api-key:94
+169622b6bcdfb64ad55eee4e9f1e831357561d5e:docs/phase-8/clean-delivery.json:generic-api-key:105
+169622b6bcdfb64ad55eee4e9f1e831357561d5e:docs/phase-8/clean-delivery.json:generic-api-key:139
+4039e9fa893035da77f479509b762d6ac9151cc9:docs/phase-5/phase5-gate.json:generic-api-key:22
+4039e9fa893035da77f479509b762d6ac9151cc9:docs/phase-5/phase5-gate.json:generic-api-key:23
+4039e9fa893035da77f479509b762d6ac9151cc9:docs/phase-5/phase5-gate.json:generic-api-key:42
+4039e9fa893035da77f479509b762d6ac9151cc9:docs/phase-5/phase5-gate.json:generic-api-key:53
+4039e9fa893035da77f479509b762d6ac9151cc9:docs/phase-5/phase5-gate.json:generic-api-key:62
+4039e9fa893035da77f479509b762d6ac9151cc9:docs/phase-5/phase5-gate.json:generic-api-key:83
+66693e6f3b41bc955fc67316670ba1d78eef1462:docs/phase-5/orchestrator-comparison.json:generic-api-key:592
+66693e6f3b41bc955fc67316670ba1d78eef1462:docs/phase-5/orchestrator-comparison.json:generic-api-key:593
+66693e6f3b41bc955fc67316670ba1d78eef1462:docs/phase-5/orchestrator-comparison.json:generic-api-key:606
+7e9369123eb84eb397a5551430cec73bae4898ae:docs/phase-1/api-check.json:generic-api-key:13
+7e9369123eb84eb397a5551430cec73bae4898ae:docs/phase-1/api-check.json:generic-api-key:14
+7e9369123eb84eb397a5551430cec73bae4898ae:docs/phase-1/api-check.json:generic-api-key:16

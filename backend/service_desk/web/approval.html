@@ -1,14 +1,26 @@
 <!doctype html>
-<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Service desk · proposal review</title>
-<style>
-body{font:17px/1.6 system-ui,sans-serif;background:#f3f1eb;color:#202b29;margin:0}main{max-width:720px;margin:4rem auto;padding:0 24px}h1{font-size:2.2rem;line-height:1.2}label{display:block;margin-top:20px;font-weight:600}input{display:block;box-sizing:border-box;width:100%;padding:12px;border:1px solid #8a9690;border-radius:4px;font:inherit;background:white}button{margin:20px 8px 0 0;padding:12px 18px;border:0;border-radius:4px;font:inherit;background:#24584a;color:white;cursor:pointer}button:disabled{opacity:.45;cursor:default}pre{white-space:pre-wrap;overflow-wrap:anywhere;padding:20px;background:white;border-left:3px solid #24584a}small{color:#586660}#message{min-height:2em}
-</style>
-<main><small>LOCAL SERVICE DESK LAB</small><h1>Review a resolution proposal</h1>
-<p>Read the proposed action before approving it. Approval permits a separate execution step; it does not perform the action.</p>
-<label for="token">Supervisor access token</label><input id="token" type="password" autocomplete="off" spellcheck="false">
-<small>The token is kept only on this page and is cleared when you leave.</small>
-<label for="case">Case ID</label><input id="case" autocomplete="off" spellcheck="false">
-<button id="load" type="button">Load proposal</button><button id="approve" type="button" disabled>Approve this proposal</button>
-<p id="message" role="status" aria-live="polite"></p><pre id="proposal">No proposal loaded.</pre>
-<script src="/approval.js" defer></script></main></html>
+<html lang="en" data-color-mode="light" data-light-theme="light"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Service desk · Case review</title>
+<link rel="stylesheet" href="/primer.css"><link rel="stylesheet" href="/workspace.css">
+<script src="/approval.js" defer></script></head><body>
+<a class="skip" href="#main">Skip to case review</a>
+<header class="topbar"><a class="brand" href="/"><span class="mark">SD</span> Service desk <span class="brand-detail">/ Operations workspace</span></a><span class="Label">Local lab</span></header>
+<nav class="tabs" aria-label="Workspace"><a href="/" aria-current="page">Case review</a><a href="http://127.0.0.1:5682/practice">AI practice</a></nav>
+<main id="main" class="workspace">
+<div class="page-heading"><div><p class="eyebrow">HUMAN APPROVAL</p><h1>Review before resolution.</h1><p class="muted">A clear proposal. An explicit decision. A result verified at the source.</p></div><span id="status" class="Label">No case selected</span></div>
+<div class="review-layout">
+<aside class="connection panel"><div class="panel-heading"><span class="step">01</span><h2>Open a case</h2></div>
+<label for="token">Supervisor access token</label><input class="form-control" id="token" type="password" autocomplete="off" spellcheck="false" aria-describedby="token-help">
+<p id="token-help" class="hint">Kept only on this page. Cleared when you leave.</p>
+<label for="case">Case ID</label><input class="form-control" id="case" autocomplete="off" spellcheck="false" placeholder="Paste the case ID">
+<button class="btn" id="load" type="button">Load proposal</button>
+<div class="boundary"><h3>Your decision has a boundary</h3><p>Approval permits a separate execution step. It does not perform the action.</p><p>Only target verification can confirm a resolution.</p></div></aside>
+<div class="case-column">
+<section class="panel case-panel" aria-labelledby="case-heading"><div class="panel-heading"><span class="step">02</span><h2 id="case-heading">Resolution proposal</h2></div>
+<div id="empty" class="empty"><span class="empty-number">01 / 03</span><h3>Start with the case.</h3><p>Enter your access token and case ID to review the requested action, policy, and verification status.</p></div>
+<div id="case-detail" hidden><div class="case-summary"><p id="category" class="eyebrow"></p><h3 id="case-title"></h3><p id="case-meta" class="hint"></p></div><dl id="fields" class="fields"></dl>
+<details><summary>View technical evidence</summary><pre id="proposal"></pre></details></div></section>
+<section class="panel decision" aria-labelledby="decision-heading"><div class="panel-heading"><span class="step">03</span><h2 id="decision-heading">Next step</h2></div><h3 id="next-title">Load a proposal to continue</h3><p id="next-reason" class="muted">The action and its current state will appear above.</p><button class="btn btn-primary" id="approve" type="button" disabled>Approve this proposal</button><p id="message" role="status" aria-live="polite"></p></section>
+</div></div><footer>Evidence informs the decision. Approval authorizes the action. Verification closes the case.</footer>
+</main></body></html>

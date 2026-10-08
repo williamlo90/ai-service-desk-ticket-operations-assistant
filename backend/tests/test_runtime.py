@@ -75,6 +75,16 @@ class RuntimeTests(unittest.TestCase):
         self.assertEqual(result['status'],201)
         self.assertEqual(self.call('/v1/cases',payload,'auditor',HTTP_IDEMPOTENCY_KEY='two')['status'],403)
 
+    def test_styles_are_local_bounded_and_allowlisted(self):
+        for path in ('/primer.css','/workspace.css'):
+            response=self.call(path,REQUEST_METHOD='GET',HTTP_AUTHORIZATION='')
+            self.assertEqual(response['status'],200)
+            self.assertEqual(response['headers']['Content-Type'],'text/css; charset=utf-8')
+            self.assertIn("style-src 'self'",response['headers']['Content-Security-Policy'])
+        for path in ('/../auth.py','/vendor/primer-LICENSE','/.env'):
+            self.assertNotEqual(self.call(path,REQUEST_METHOD='GET')['status'],200)
+        self.assertEqual(self.call('/workspace.css',REQUEST_METHOD='GET',HTTP_ORIGIN='https://external.invalid')['status'],403)
+
     def test_review_page_csp_and_readiness_failure(self):
         result=self.call('/',REQUEST_METHOD='GET')
         self.assertEqual(result['status'],200)

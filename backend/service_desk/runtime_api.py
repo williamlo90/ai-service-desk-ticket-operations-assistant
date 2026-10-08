@@ -64,11 +64,13 @@ class RuntimeAPI:
             return self.intake(env,correlated)
         try:
             method,path=env.get('REQUEST_METHOD'),env.get('PATH_INFO')
-            if method=='GET' and path in ('/','/approval.js'):
-                filename='approval.html' if path=='/' else 'approval.js'
+            assets={'/':('approval.html','text/html'),'/approval.js':('approval.js','text/javascript'),
+                    '/workspace.css':('workspace.css','text/css'),'/primer.css':('vendor/primer.css','text/css')}
+            if method=='GET' and path in assets:
+                filename,media=assets[path]
                 content=(Path(__file__).parent/'web'/filename).read_bytes()
                 return self.reply(start_response,200,content,correlation,
-                                  'text/html; charset=utf-8' if path=='/' else 'text/javascript; charset=utf-8')
+                                  media+'; charset=utf-8')
             if method=='GET' and path=='/healthz':
                 return self.reply(start_response,200,{'status':'ok','mode':self.mode},correlation)
             if method=='GET' and path=='/readyz':
@@ -114,11 +116,11 @@ class RuntimeAPI:
     @staticmethod
     def reply(start_response,status,body,correlation,media='application/json; charset=utf-8'):
         encoded=body if isinstance(body,bytes) else json.dumps(body,allow_nan=False).encode()
-        if len(encoded)>60000:status,encoded=500,b'{"error":"output_limit"}'
+        if len(encoded)>(200000 if media=='text/css; charset=utf-8' else 60000):status,encoded=500,b'{"error":"output_limit"}'
         start_response(f'{status} {HTTPStatus(status).phrase}',[
             ('Content-Type',media),('Content-Length',str(len(encoded))),('Cache-Control','no-store'),
             ('X-Content-Type-Options','nosniff'),('X-Correlation-ID',correlation),
-            ('Content-Security-Policy',"default-src 'none'; script-src 'self'; connect-src 'self'; style-src 'unsafe-inline'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'")])
+            ('Content-Security-Policy',"default-src 'none'; script-src 'self'; connect-src 'self'; style-src 'self' 'unsafe-inline'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'")])
         return [encoded]
 
 

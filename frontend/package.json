@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@primer/css": "22.3.2"
+  },
+  "name": "service-desk-workspace-styles",
+  "private": true,
+  "scripts": {
+    "build": "node build.mjs"
+  }
+}

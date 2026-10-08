@@ -52,3 +52,10 @@ menjadi acuan hasil dan pekerjaan selanjutnya.
 
 [Catatan Phase 8](phase-8.md): instalasi sumber bersih, demo, manifest dan handover.
 Phase 7 dan 8 memiliki commit penutupan terpisah; Azure ditunda.
+
+## Post-handover UI delivery
+
+The browser workspace now presents structured case evidence and explicit next-step
+recommendations. [UI tour and validation](../WEB-UI.md) records the design choices,
+regression checks and responsive browser checks. This is a separate learning commit
+after Phase 8; Azure remains deferred.

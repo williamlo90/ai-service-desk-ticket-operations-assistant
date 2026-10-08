@@ -1,0 +1,11 @@
+import { readFileSync, writeFileSync, mkdirSync, copyFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+const root = fileURLToPath(new URL('../', import.meta.url));
+const source = root + 'frontend/node_modules/@primer/css/';
+const dest = root + 'backend/service_desk/web/vendor/';
+mkdirSync(dest, { recursive: true });
+const colors = readFileSync(source + 'dist/color-modes.css', 'utf8');
+const light = colors.slice(0, colors.indexOf('}') + 1);
+const parts = ['primitives', 'base', 'buttons', 'forms', 'box', 'labels'];
+writeFileSync(dest + 'primer.css', '/* Primer CSS 22.3.2, MIT; see primer-LICENSE */\n' + light + '\n' + parts.map(p => readFileSync(source + 'dist/' + p + '.css', 'utf8').replace(/\/\*# sourceMappingURL=.*?\*\//g, '')).join('\n'));
+copyFileSync(source + 'LICENSE', dest + 'primer-LICENSE');

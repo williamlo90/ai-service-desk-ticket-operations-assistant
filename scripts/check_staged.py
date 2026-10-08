@@ -11,7 +11,7 @@ for path in filter(None, paths):
             or set(path.split('/')) & {'local','node_modules','dist','__pycache__','.venv'}):
         bad.append(path)
         continue
-    if path.endswith('.png'):
+    if path.endswith(('.png','.jpg','.jpeg')):
         continue
     text = subprocess.check_output(['git','show',':'+path]).decode('utf-8', errors='replace')
     if re.search(r'ATATT3[A-Za-z0-9_=-]{30,}|sk-(?:proj-|ant-)?[A-Za-z0-9_-]{30,}|-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----', text):

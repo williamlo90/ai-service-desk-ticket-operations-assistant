@@ -114,6 +114,9 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header('Content-Length',str(len(body)));self.end_headers();self.wfile.write(body)
     def do_GET(self):
         if self.headers.get('Host')!=f'127.0.0.1:{PORT}':return self.send(403,{'error':'host'})
+        if self.path in ('/workspace.css','/primer.css'):
+            asset='workspace.css' if self.path=='/workspace.css' else 'vendor/primer.css'
+            return self.send(200,(ROOT/'backend/service_desk/web'/asset).read_bytes(),'text/css; charset=utf-8')
         if self.path=='/':return self.send(200,PAGE.read_bytes(),'text/html; charset=utf-8')
         if self.path=='/quote-tools.js':return self.send(200,(PAGE.parent/'quote-tools.js').read_bytes(),'text/javascript; charset=utf-8')
         if self.path=='/practice':return self.send(200,(PAGE.parent/'practice.html').read_bytes(),'text/html; charset=utf-8')
