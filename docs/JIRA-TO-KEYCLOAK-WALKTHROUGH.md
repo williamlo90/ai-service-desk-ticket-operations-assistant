@@ -24,7 +24,7 @@ MCP is the tool protocol between an AI client and this service. The [eight ticke
 
 For IT-1, the [human journey report](phase-5/human-approved-access.json) records `Human browser approval -> MCP -> HTTP API -> PostgreSQL -> Keycloak read-back`. That is the demonstrated connected path. The screenshot below is a **synthetic UI preview**, included to show the shape of the review screen; it is **not** a capture of William's historical approval session.
 
-![Synthetic approval screen illustrating the proposal a supervisor reviews](assets/case-review.jpg)
+![Synthetic approval screen illustrating the proposal a supervisor reviews](assets/case-review.png)
 
 ## The outcome, without a target UI screenshot
 

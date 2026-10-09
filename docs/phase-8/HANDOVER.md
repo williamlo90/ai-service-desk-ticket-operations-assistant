@@ -50,19 +50,11 @@ access grant remains in place. Local closure does not imply a Jira workflow-stat
 transition. Expanding ticket/user/group scope needs a deliberate configuration and
 acceptance change; arbitrary tickets are not automatically enrolled.
 
-## AI practice and short demo
+## Short offline demo
 
-Open `http://127.0.0.1:5682/practice`. If that server is stopped:
-
-```powershell
-Start-Process -FilePath '.\.venv\Scripts\python.exe' -ArgumentList '-B','scripts/business_pilot.py' -WorkingDirectory (Get-Location).Path -WindowStyle Hidden
-```
-
-Select one cached OpenAI example, inspect its source evidence, select an exact quote,
-and choose a next step. Missing information means **clarify**; complete triage means
-**prepare for approval**. The recommendation includes a reason; the final choice is
-yours. Practice is untimed, saves no answers and makes no model/business calls.
-The completed eight-task human pilot must not be reset to manufacture new results.
+The Phase 6 human pilot is retained as an evaluation artifact; it is not part of
+daily operator use. The operator-facing browser page at port 5681 only handles
+independent human approval.
 
 For a reproducible terminal demo without credentials or Docker:
 

@@ -114,17 +114,8 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header('Content-Length',str(len(body)));self.end_headers();self.wfile.write(body)
     def do_GET(self):
         if self.headers.get('Host')!=f'127.0.0.1:{PORT}':return self.send(403,{'error':'host'})
-        if self.path in ('/workspace.css','/primer.css'):
-            asset='workspace.css' if self.path=='/workspace.css' else 'vendor/primer.css'
-            return self.send(200,(ROOT/'backend/service_desk/web'/asset).read_bytes(),'text/css; charset=utf-8')
         if self.path=='/':return self.send(200,PAGE.read_bytes(),'text/html; charset=utf-8')
         if self.path=='/quote-tools.js':return self.send(200,(PAGE.parent/'quote-tools.js').read_bytes(),'text/javascript; charset=utf-8')
-        if self.path=='/practice':return self.send(200,(PAGE.parent/'practice.html').read_bytes(),'text/html; charset=utf-8')
-        if self.path=='/practice-data':
-            cases={c['id']:c for c in json.loads((ROOT/'evals/phase6-evidence-v1/dataset.json').read_text())['cases']}
-            report=json.loads((ROOT/'docs/phase-6/evidence-v1/openai-development.json').read_text())
-            items=[{'text':cases[row['id']]['text'],'result':row['result']} for row in report['rows'] if row['result']]
-            return self.send(200,{'items':items,'fields':CLARIFICATION_LABELS})
         if self.path=='/state':
             with self.server.study_lock:state=self.server.study.state()
             return self.send(200,state)

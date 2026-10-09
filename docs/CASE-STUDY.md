@@ -31,7 +31,7 @@ n8n remains useful for supporting integrations, but is not a second authority ov
 the case lifecycle. [ADR 003](architecture/ADR-003-selected-code-led.md) records the
 comparison and tradeoffs.
 
-The small browser page provides independent human approval. Jira remains the request surface; the custom MCP server is the tool interface for AI clients. Cached AI practice is a supporting exercise and does not add provider calls.
+The small browser page provides independent human approval. Jira remains the request surface; the custom MCP server is the tool interface for AI clients. The diagnostic AI pilot is separate from the operator runtime.
 
 ## Evidence
 

@@ -68,13 +68,14 @@ William completed eight diagnostic tasks. No manual/assisted pair both met the f
 correctness rubric, so no efficiency gain or ROI is claimed. Original observations
 remain unchanged; [business results](BUSINESS-RESULTS.md) explain the denominator.
 
-Both modes now offer equal source-selection/copy tools. AI mode explains the
-suggested next step, without selecting or executing it automatically. These UX
-improvements were not part of the completed pilot and have no assigned productivity
-claim. A fresh correctness-matched study is needed if such a claim is desired.
+The later pilot UI offered equal source-selection/copy tools in both modes. AI
+mode explained the suggested next step without selecting or executing it. These
+UX improvements were not part of the completed pilot and have no assigned
+productivity claim. A fresh correctness-matched study is needed for such a claim.
 
-The untimed [practice page](http://127.0.0.1:5682/practice) uses four cached OpenAI
-examples. It saves no answers, makes no model calls and performs no business actions.
+The earlier untimed practice page used four cached OpenAI examples. It made no
+model calls or business changes. That page has been removed from the current
+operator interface; the pilot data and evaluation scripts remain in the repository.
 
 ## Costs and reproducibility
 

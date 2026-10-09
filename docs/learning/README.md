@@ -53,9 +53,8 @@ menjadi acuan hasil dan pekerjaan selanjutnya.
 [Catatan Phase 8](phase-8.md): instalasi sumber bersih, demo, manifest dan handover.
 Phase 7 dan 8 memiliki commit penutupan terpisah; Azure ditunda.
 
-## Post-handover UI delivery
+## Post-handover approval page
 
-The browser workspace now presents structured case evidence and explicit next-step
-recommendations. [UI tour and validation](../WEB-UI.md) records the design choices,
-regression checks and responsive browser checks. This is a separate learning commit
-after Phase 8; Azure remains deferred.
+The operator runtime keeps a focused [human approval page](../WEB-UI.md).
+The earlier AI practice screen was removed from daily use; the Phase 6 pilot
+and its evidence remain as historical learning material. Azure remains deferred.

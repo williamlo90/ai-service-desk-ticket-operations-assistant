@@ -27,7 +27,7 @@ open for reconciliation. Only verified outcomes permit local closure.
 
 | Area | Result | Evidence |
 | --- | --- | --- |
-| Current regression suite | 183 Python tests, 8 MCP tests, 14 guidance assertions, 7 approval UI tests | [UI validation](docs/WEB-UI.md#validation-2026-10-09), [CI](https://github.com/williamlo90/ai-service-desk-ticket-operations-assistant/actions) |
+| Current regression suite | Python, MCP, guidance and approval-page checks | [CI](https://github.com/williamlo90/ai-service-desk-ticket-operations-assistant/actions) |
 | AI triage | OpenAI passed 16/16 held-out synthetic cases | [Evaluation](docs/phase-6/evidence-v1/openai-heldout.json) |
 | Bounded release exercise | 48 synthetic HTTP journeys plus fault/recovery fixtures | [Release report](docs/phase-7/release-lab.json) |
 | Human approval | Browser-approved Jira IT-1 access grant verified in Keycloak | [Connected evidence](docs/phase-5/human-approved-access.json) |
@@ -50,7 +50,7 @@ profile. Ollama remains experimental; additional providers and Azure are deferre
 5. **Verify and close.** Persist the verified result and audit. Write bounded Jira
    result metadata; local closure does not change the Jira workflow status.
 
-The [IT-1 walkthrough](docs/JIRA-TO-KEYCLOAK-WALKTHROUGH.md) shows the connected path. The [AI practice page](docs/WEB-UI.md#ai-practice) is a supporting exercise using cached suggestions; it is not the main operator interface.
+The [IT-1 walkthrough](docs/JIRA-TO-KEYCLOAK-WALKTHROUGH.md) shows the connected path. Jira is the request surface, MCP exposes bounded tools, and a small browser page records independent human approval.
 
 ## Architecture
 
@@ -71,7 +71,7 @@ flowchart LR
 
 | Layer | Responsibility |
 | --- | --- |
-| Browser approval | Human review of a version-bound proposal; AI practice is a separate exercise |
+| Browser approval | Human review of a version-bound proposal; no action is executed by the page |
 | TypeScript MCP | Strict tool schemas, scoped calls and a reference client |
 | Python domain service | Policy, tenant boundaries, proposal versions and lifecycle |
 | PostgreSQL | Durable state, compare-and-swap, audit and job ownership |
@@ -99,7 +99,7 @@ python scripts/preview_workspace.py
 
 Open the URL printed by the preview. Its public fixture token is `preview-only-`
 followed by 32 `x` characters. This disposable in-memory preview has no execution
-worker or external targets. See the [UI tour](docs/WEB-UI.md) for cached AI practice.
+worker or external targets. See the [approval-page guide](docs/WEB-UI.md).
 
 Run the offline checks with Python and Node.js 22:
 
@@ -121,7 +121,7 @@ follow [deployment setup](deploy/README.md) and the [operator handover](docs/pha
 - [Connected Jira to Keycloak walkthrough](docs/JIRA-TO-KEYCLOAK-WALKTHROUGH.md)
 - [Case study: approval and uncertain outcomes](docs/CASE-STUDY.md)
 - [Security boundaries and disclosure](SECURITY.md)
-- [UI design, responsive checks and screenshots](docs/WEB-UI.md)
+- [Human approval page](docs/WEB-UI.md)
 - [Phase 7 release and recovery evidence](docs/phase-7/CURRENT.md)
 - [Phase-by-phase learning guide](docs/learning/README.md)
 - [Delivery scope and deferred Azure phase](PHASES.md)

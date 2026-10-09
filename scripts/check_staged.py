@@ -3,7 +3,7 @@ import re
 import subprocess
 import sys
 
-paths = subprocess.check_output(['git','diff','--cached','--name-only','-z']).decode().split('\0')
+paths = subprocess.check_output(['git','diff','--cached','--diff-filter=ACMR','--name-only','-z']).decode().split('\0')
 bad = []
 for path in filter(None, paths):
     leaf = path.rsplit('/',1)[-1]

@@ -21,9 +21,9 @@ failures, and deferred Claude/Grok live canaries.
 5. `scripts/check_local_evidence_v4.py`: verify model/license, warm up, gate development
    before held-out inference, observe actual offload, and unload/reload only the
    selected model. Do not stop a shared daemon to test recovery.
-6. `scripts/business_pilot.py` and `evals/phase6-v2/`: show evidence and next-step
-   reasons, offer equal quote-selection tools, and leave the final choice to the
-   operator. Untimed practice saves no answers and executes no business action.
+6. `scripts/business_pilot.py` and `evals/phase6-v2/`: reproduce the
+   diagnostic human pilot with equal quote-selection tools. This evaluation
+   remains separate from the operator approval page and performs no business action.
 7. `scripts/check_ai_controls.py` and `scripts/check_phase6_gate.py`: replay actual
    model outputs against domain boundaries, verify frozen evidence and run tests.
 

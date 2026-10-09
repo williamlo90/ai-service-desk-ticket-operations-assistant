@@ -5,10 +5,10 @@
 <link rel="stylesheet" href="/primer.css"><link rel="stylesheet" href="/workspace.css">
 <script src="/approval.js" defer></script></head><body>
 <a class="skip" href="#main">Skip to case review</a>
-<header class="topbar"><a class="brand" href="/"><span class="mark">SD</span> Service desk <span class="brand-detail">Operations workspace</span></a><span class="Label">Local lab</span><nav class="tabs" aria-label="Workspace"><a href="/" aria-current="page">Case review</a><a href="http://127.0.0.1:5682/practice">AI practice</a></nav></header>
+<header class="topbar"><span class="brand"><span class="mark">SD</span> Service desk approval</span><span class="Label">Local lab</span></header>
 
 <main id="main" class="workspace">
-<div class="page-heading"><div><p class="eyebrow">HUMAN APPROVAL</p><h1>Review before resolution.</h1><p class="muted">A clear proposal. An explicit decision. A result verified at the source.</p></div><span id="status" class="Label">No case selected</span></div>
+<div class="page-heading"><div><p class="eyebrow">HUMAN APPROVAL</p><h1>Review the proposed action</h1><p class="muted">Approval records your decision. A separate worker acts, then verifies the result.</p></div><span id="status" class="Label">No case selected</span></div>
 <div class="review-layout">
 <aside class="connection panel"><div class="panel-heading"><span class="step">01</span><h2>Open a case</h2></div>
 <label for="token">Supervisor access token</label><input class="form-control" id="token" type="password" autocomplete="off" spellcheck="false" aria-describedby="token-help">
@@ -21,6 +21,6 @@
 <div id="empty" class="empty"><span class="empty-number">01 / 03</span><h3>Start with the case.</h3><p>Enter your access token and case ID to review the requested action, policy, and verification status.</p></div>
 <div id="case-detail" hidden><div class="case-summary"><p id="category" class="eyebrow"></p><h3 id="case-title"></h3><p id="case-meta" class="hint"></p></div><dl id="fields" class="fields"></dl>
 <details><summary>View technical evidence</summary><pre id="proposal"></pre></details></div></section>
-<section class="panel decision" aria-labelledby="decision-heading"><div class="panel-heading"><span class="step">03</span><h2 id="decision-heading">Next step</h2></div><h3 id="next-title">Load a proposal to continue</h3><p id="next-reason" class="muted">The action and its current state will appear above.</p><button class="btn btn-primary" id="approve" type="button" disabled>Approve this proposal</button><p id="message" role="status" aria-live="polite"></p></section>
+<section class="panel decision" aria-labelledby="decision-heading"><div class="panel-heading"><span class="step">03</span><h2 id="decision-heading">Next step</h2></div><h3 id="next-title">Load a proposal to continue</h3><p id="next-reason" class="muted">The action and its current state will appear above.</p><button class="btn btn-primary" id="approve" type="button" disabled>Approve this proposal</button><p id="message" role="status" aria-live="polite"></p><p class="decision-note">Approval is bound to the reviewed version. If the request changes, load and review it again.</p></section>
 </div></div><footer>Evidence informs the decision. Approval authorizes the action. Verification closes the case.</footer>
 </main></body></html>

@@ -3,7 +3,7 @@
 | Start here | Purpose |
 | --- | --- |
 | [Jira to Keycloak walkthrough](JIRA-TO-KEYCLOAK-WALKTHROUGH.md) | Actual IT-1 ticket, MCP boundary, human approval and verified result |
-| [Browser workspace](WEB-UI.md) | Supporting approval preview and AI practice |
+| [Human approval page](WEB-UI.md) | Focused supervisor review and credential-free preview |
 | [Case study](CASE-STUDY.md) | Problem, implementation and engineering choices |
 | [Operator handover](phase-8/HANDOVER.md) | Startup, status, credentials, recovery and ownership |
 | [Deployment setup](../deploy/README.md) | PostgreSQL and target sandbox setup |
@@ -23,7 +23,7 @@
 - [Accepted AI evaluation](phase-6/CURRENT.md)
 - [Release and recovery](phase-7/CURRENT.md)
 - [Clean delivery and acceptance](phase-8/README.md)
-- [Current UI regression and browser checks](WEB-UI.md#validation-2026-10-09)
+- [Approval-page checks](WEB-UI.md#validation)
 
 Phase reports are snapshots of the revisions they name. They do not replace the
 current CI checks. Root planning documents contain the broader learning roadmap;
