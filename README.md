@@ -1,18 +1,16 @@
-# AI Service Desk & Ticket Operations Assistant
+# Jira Service Desk Automation & MCP Server
 
 [![CI](https://github.com/williamlo90/ai-service-desk-ticket-operations-assistant/actions/workflows/ci.yml/badge.svg)](https://github.com/williamlo90/ai-service-desk-ticket-operations-assistant/actions/workflows/ci.yml)
 
-AI-assisted ticket operations with an evidence-first browser workspace, a custom
-MCP server, human approval, tenant isolation, and verified action recovery.
+A Jira service request becomes a controlled action in Keycloak, verified at the target and recorded back in Jira. A custom TypeScript MCP server gives AI clients bounded ticket tools; Python policy, PostgreSQL state, and human approval govern execution.
 
-**From a Jira request to an approved action and a verified result.** AI helps the
-operator identify facts and the next step; deterministic services enforce who may
-act, what was approved, and when a case can close.
+[See the IT-1 integration walkthrough](docs/JIRA-TO-KEYCLOAK-WALKTHROUGH.md) · [MCP tool contract](mcp-server/README.md) · [Operator guide](docs/phase-8/HANDOVER.md) · [Documentation](docs/README.md)
 
-[UI tour](docs/WEB-UI.md) · [Case study](docs/CASE-STUDY.md) ·
-[Operator guide](docs/phase-8/HANDOVER.md) · [Documentation](docs/README.md)
+![Actual Jira IT-1 lab request](docs/assets/jira-it1-request.jpg)
 
-![Service desk proposal review using synthetic demo data](docs/assets/case-review.jpg)
+In the [connected local lab](docs/phase-5/human-approved-access.json), William approved a read-only grant for `requester-a` to `reports`. Keycloak read-back confirmed membership in `reports-reader`; the local case closed. A later [Jira issue property write](docs/phase-5/jira-result-write.json) stored the verified result. Jira's workflow status and comments were not changed.
+
+The screenshot is the actual **synthetic test ticket**. [Walk through the evidence and boundaries](docs/JIRA-TO-KEYCLOAK-WALKTHROUGH.md).
 
 ## Why this project
 
@@ -40,7 +38,7 @@ These are local lab results. The held-out set is synthetic and internally design
 no production performance or business ROI is claimed. OpenAI is the accepted lab
 profile. Ollama remains experimental; additional providers and Azure are deferred.
 
-## From request to verified resolution
+## IT-1: request to verified access
 
 1. **Read and clarify.** Ingest a bounded Jira request, extract source-backed facts,
    and ask for missing information.
@@ -52,8 +50,7 @@ profile. Ollama remains experimental; additional providers and Azure are deferre
 5. **Verify and close.** Persist the verified result and audit. Write bounded Jira
    result metadata; local closure does not change the Jira workflow status.
 
-The [AI practice workspace](docs/WEB-UI.md#ai-practice) makes the next step explicit,
-with field-level quotes, clarification questions and a reason for the recommendation.
+The [IT-1 walkthrough](docs/JIRA-TO-KEYCLOAK-WALKTHROUGH.md) shows the connected path. The [AI practice page](docs/WEB-UI.md#ai-practice) is a supporting exercise using cached suggestions; it is not the main operator interface.
 
 ## Architecture
 
@@ -74,7 +71,7 @@ flowchart LR
 
 | Layer | Responsibility |
 | --- | --- |
-| Browser workspace | Evidence, proposal review, approval and guided practice |
+| Browser approval | Human review of a version-bound proposal; AI practice is a separate exercise |
 | TypeScript MCP | Strict tool schemas, scoped calls and a reference client |
 | Python domain service | Policy, tenant boundaries, proposal versions and lifecycle |
 | PostgreSQL | Durable state, compare-and-swap, audit and job ownership |
@@ -121,6 +118,7 @@ follow [deployment setup](deploy/README.md) and the [operator handover](docs/pha
 
 ## Engineering notes
 
+- [Connected Jira to Keycloak walkthrough](docs/JIRA-TO-KEYCLOAK-WALKTHROUGH.md)
 - [Case study: approval and uncertain outcomes](docs/CASE-STUDY.md)
 - [Security boundaries and disclosure](SECURITY.md)
 - [UI design, responsive checks and screenshots](docs/WEB-UI.md)
@@ -131,3 +129,11 @@ follow [deployment setup](deploy/README.md) and the [operator handover](docs/pha
 Historical phase gates describe their recorded source revisions. Current regression
 checks run in CI. Credentials and runtime state remain outside version control;
 CI scans Git history and enforces forbidden-path checks.
+
+## Delivery scope
+
+The accepted local lab has operator documentation, recovery procedures and named
+support ownership. Cloud hosting is optional and requires separate acceptance.
+Future changes start with native tests, then use a reserved runtime session for
+affected integrations. Historical results retain their original environment and
+phase references.

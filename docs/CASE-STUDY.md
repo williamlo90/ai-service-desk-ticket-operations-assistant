@@ -1,4 +1,6 @@
-# Case study: a ticket is not an authorization
+# Case study: Jira ticket to verified Keycloak access
+
+The [IT-1 integration walkthrough](JIRA-TO-KEYCLOAK-WALKTHROUGH.md) is the concrete service desk example: a Jira request led to a William-approved report-access grant, Keycloak membership read-back and a separate Jira result-property write. It keeps the actual connected evidence distinct from the synthetic UI illustration and offline recovery tests.
 
 ## Problem
 
@@ -29,9 +31,7 @@ n8n remains useful for supporting integrations, but is not a second authority ov
 the case lifecycle. [ADR 003](architecture/ADR-003-selected-code-led.md) records the
 comparison and tradeoffs.
 
-The browser uses native HTML/JavaScript and official Primer CSS. The small local
-surface does not need a separate application server or frontend framework. Cached
-AI practice makes the recommended next step visible without adding provider calls.
+The small browser page provides independent human approval. Jira remains the request surface; the custom MCP server is the tool interface for AI clients. Cached AI practice is a supporting exercise and does not add provider calls.
 
 ## Evidence
 
@@ -50,5 +50,14 @@ pilot was diagnostic and does not establish productivity improvement.
 
 The delivered system is a local lab with explicit startup and operator ownership.
 Its health check is a point-in-time diagnostic. Long endurance, physical host reboot,
-production deployment and Azure validation remain future work. These boundaries
-keep the demonstrated behavior reproducible and the operational claims concrete.
+production qualification remain separate. Azure hosting is an optional final
+extension. These boundaries keep the demonstrated behavior reproducible and the
+operational claims concrete.
+
+## Delivery choice
+
+The local lab handover includes an English operator guide, recovery demonstration
+and named ownership. New work starts with native tests, then uses a reserved
+runtime session for affected integrations. Connected evidence remains tied to
+its original environment. Azure is optional; a hosted claim requires fresh
+cloud acceptance.

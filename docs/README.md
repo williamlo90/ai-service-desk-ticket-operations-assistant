@@ -2,7 +2,8 @@
 
 | Start here | Purpose |
 | --- | --- |
-| [Browser workspace](WEB-UI.md) | Screens, preview and current UI validation |
+| [Jira to Keycloak walkthrough](JIRA-TO-KEYCLOAK-WALKTHROUGH.md) | Actual IT-1 ticket, MCP boundary, human approval and verified result |
+| [Browser workspace](WEB-UI.md) | Supporting approval preview and AI practice |
 | [Case study](CASE-STUDY.md) | Problem, implementation and engineering choices |
 | [Operator handover](phase-8/HANDOVER.md) | Startup, status, credentials, recovery and ownership |
 | [Deployment setup](../deploy/README.md) | PostgreSQL and target sandbox setup |
