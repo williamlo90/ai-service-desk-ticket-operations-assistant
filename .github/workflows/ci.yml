@@ -26,6 +26,7 @@ jobs:
       - run: node scripts/check_quote_tools.cjs
       - run: node --test scripts/check_approval_ui.cjs
       - run: python scripts/demo_handover.py
+      - run: python scripts/check_markdown_links.py
       - name: Audit every committed tree
         run: python scripts/check_public_history.py
       - name: Scan full history with verified Gitleaks binary

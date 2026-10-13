@@ -1,69 +1,59 @@
-# Backend core and container-free API
+# Service desk backend
 
-Current AI evaluation and lab scope: [Phase 6](../docs/phase-6/CURRENT.md).
-Earlier test counts below refer to their implementation checkpoints.
+The selected local runtime is Python/PostgreSQL. The backend owns tenant
+authorization, proposal versions, human-approval checks, dispatch ownership,
+target read-back, case state and audit. The TypeScript MCP server calls this
+service through a bounded loopback HTTP adapter; MCP cannot approve a proposal.
 
-Python 3.12 or 3.13, standard library only. No installation, credentials, Docker,
-database, model call or persistent server is needed for unit verification.
+## Verify without credentials
 
-From this directory:
+Python 3.12 or 3.13 is sufficient for the offline unit suite. From this folder:
 
 ```powershell
-python -B -m unittest discover -s tests -v
+python -B -m unittest discover -s tests
 ```
 
-Implemented modules:
+At the current portfolio revision, **183 Python tests** and **8 MCP tests**
+pass in [CI](../.github/workflows/ci.yml). CI also checks the approval
+controller, grounded next-step guidance, the offline recovery demo and Git
+history. The offline suite uses synthetic targets and does not read `.env`,
+contact Jira or Keycloak, or prove production operations.
 
-- `contracts.py`: typed ticket, trusted actor context and staff/tenant boundary.
-- `jira.py`: GET-only reader with configured tenant/project binding, fixed Atlassian
-  gateway, no redirects/retries, response bound and sanitized errors.
-- `lifecycle.py`: pure approval/expiry, verified-closure, safe-retry and reopen predicates.
-- `auth.py`: explicit local bearer-token bindings to trusted server identity.
-- `cases.py`: synthetic intake, repository protocol and bounded memory implementation.
-- `api.py`: WSGI create/read API tested without running a server. See [API.md](API.md).
+## Main components
 
-- `journeys.py`, `policy.py`, `store.py`, `simulator.py`: shared deterministic journeys,
-  bounded memory state and an independent synthetic target/effect ledger.
-- `postgres.py`, `migrations.py`, `migrations/`: transactional repositories and schema.
-- `jira_update.py`, `events.py`: guarded update/reconciliation and signed callback hints.
-- `skills.py`, `ai.py`: reusable handlers and four structured-data provider adapters.
-- `bridge.py`: synthetic JSON-lines subprocess API for the TypeScript MCP harness.
+| Component | Responsibility |
+| --- | --- |
+| `contracts.py`, `auth.py`, `policy.py`, `lifecycle.py` | Trusted actor and tenant boundaries, deterministic proposals, approval expiry and verified closure |
+| `journeys.py`, `store.py`, `postgres.py`, `migrations.py` | Case lifecycle, compare-and-swap persistence, tenant RLS and audit |
+| `runtime_api.py`, `skills.py` | Loopback HTTP API, separate supervisor approval route and bounded tool handlers |
+| `jira.py`, `jira_update.py`, `jira_links.py` | Scoped Jira reads, guarded result writes and related-ticket links |
+| `simulator.py`, `durable_target.py` | Synthetic target effects and independent read-back for offline/recovery checks |
+| `bridge.py` | Disposable JSON-lines subprocess for the MCP protocol harness |
 
-Current suite: 74 Python tests; 6 MCP tests run separately in ../mcp-server.
-PostgreSQL adapter uses pinned optional requirements-postgres.txt only during
-runtime integration; unit tests use stdlib spies. No API listener or real local
-API credentials are configured. See ../docs/phase-5/HANDOFF.md for connected gates.
+The subprocess bridge owns a **separate in-memory synthetic store** in its
+offline mode. Connected MCP mode calls the HTTP API and shares its PostgreSQL
+case state instead. See the [MCP contract](../mcp-server/README.md) and
+[API contract](API.md).
 
-Construct `JiraConnection` from trusted server configuration and an `Actor` only
-after authentication. Ticket text is untrusted data and cannot assign tenant or role.
-The reader has no .env loader and does not call the network until `read` is invoked.
-Credentials are omitted from repr, but remain secrets in memory: do not dump objects,
-request headers, traceback locals or dataclass dictionaries.
+The API binds to `127.0.0.1`, consumes explicit server-side configuration and
+keeps caller identity outside tool arguments. The browser page records a
+version- and payload-bound human approval; a separate worker executes and
+verifies. Ticket text cannot assign a tenant, role or approval. Do not log
+headers, tokens, traceback locals or raw credential-bearing configuration.
 
-JourneyService binds the pure predicates to state/version updates and target
-read-back. SQL adapters express transactions, but real PostgreSQL concurrency,
-audit rollback, restarts and RLS are not proven by spies or memory-store tests.
-Do not expose a network endpoint that accepts an Actor/Approval/VerifiedOutcome
-directly from client data. FastAPI deployment, production identity integration,
-actual migrations and connected n8n/code-led comparison remain pending. The WSGI
-adapter uses explicit development identity bindings. The MCP bridge has a separate
-in-memory journey store; connecting entry points to one durable store is Phase 5.
+## Connected local evidence
 
-The existing `../scripts/check_jira_read.py` remains the separately authorized
-live diagnostic. It is not run by this unit suite, and its previous live result is
-not a live validation of the new adapter. No .env was inspected during Phase 1A.
+The [Phase 5 gate](../docs/phase-5/CURRENT-GATES.md) covers PostgreSQL
+migrations/RLS, real HTTP/MCP calls, scoped Jira operations, a William-approved
+IT-1 access grant and Keycloak membership read-back. The Jira result is an
+issue property; it did not transition the ticket or add a comment.
 
-## Phase 5 local integration
+The [Phase 7 exercise](../docs/phase-7/CURRENT.md) covers a lost receipt,
+worker/API restart, concurrent replay, database outage and a bounded synthetic
+HTTP workload. The [Phase 8 handover](../docs/phase-8/README.md) records the
+accepted local source delivery and operator procedures. These reports describe
+their own recorded revisions; they are not new live runs performed by CI.
 
-runtime_api.py composes PostgreSQL repositories, expiring trusted identities,
-journey endpoints and a separate supervisor approval route. It serves a small
-proposal-review page and binds only 127.0.0.1. Configuration arrives as one JSON
-line on stdin; there is no .env loader. The process must use a constrained runtime
-DB role and explicit synthetic mode. Credentials are not echoed or logged.
-
-durable_target.py stores independent synthetic effects in SQLite. This permits
-abrupt-worker and API restart checks without asserting application state is the
-source of target truth. It never changes actual access or services. Unit suite is
-now 81 tests; connected check results are in ../docs/phase-5/. No test server remains
-running after the harness. Final FastAPI/React deployment and intake-to-journey
-mapping remain future integration work.
+For setup and day-to-day use, start with [local deployment](../deploy/README.md)
+and the [operator guide](../docs/phase-8/HANDOVER.md). Azure hosting, production
+identity, high availability and long-duration capacity have not been accepted.

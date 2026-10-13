@@ -1,36 +1,86 @@
-# Local runtime
+# Local code-led runtime
 
-Run commands from this project's root in PowerShell. Requires Docker Desktop in
-Linux mode and Python 3.12+. This is a local prototype, not a production deployment.
+Run commands from this project's root in PowerShell. The selected runtime uses
+Python/PostgreSQL, the TypeScript MCP server, and the separate Keycloak/demo
+target sandbox. It requires Docker Desktop in Linux mode, Python 3.12/3.13 and
+Node.js 22. This is a bounded local lab, not a production deployment.
+
+## First-time setup
+
+On a new checkout, prepare the isolated database and install the runtime
+dependencies. The `prepare` command creates private local database secrets
+without printing them:
 
 ```powershell
-powershell -NoProfile -File scripts/runtime.ps1 prepare
-powershell -NoProfile -File scripts/runtime.ps1 start-db
-python -B scripts/check_database.py
-powershell -NoProfile -File scripts/runtime.ps1 start-n8n
-powershell -NoProfile -File scripts/runtime.ps1 status
+python -m venv .venv
+& ./.venv/Scripts/python.exe -m pip install -r backend/requirements-postgres.txt
+npm ci --prefix mcp-server --ignore-scripts --no-audit --no-fund
+npm run build --prefix mcp-server
+./scripts/runtime.ps1 prepare
+./scripts/runtime.ps1 start-db
+python -B scripts/cache_keycloak_image.py
+python -B scripts/setup_target_sandbox.py
+& ./.venv/Scripts/python.exe -B scripts/operator_lab.py setup
 ```
 
-Open http://localhost:5678 and create the instance owner account yourself. Keep
-its password private. This is a local n8n account, separate from Atlassian. Owner
-setup, service identity and workflow configuration are not implied by health checks.
+On an already-provisioned lab, reuse the existing `.venv`, private secret
+files and data volumes; do not create a replacement identity or database.
+The target setup above is scoped to this project's Keycloak and demo service.
+To import Jira IT-1, configure your own authorized sandbox credentials in
+the ignored local `.env` using [the example](../.env.example), then follow
+the bounded [operator lab procedure](../docs/phase-5/OPERATOR-LAB.md).
+That import is a Jira read, not an approval or target action.
+
+## Start an already-provisioned lab
+
+Start only this project's database and target sandbox, then the supervised API,
+worker and bounded poller. Port 5681 must be free:
+
+```powershell
+./scripts/runtime.ps1 start-db
+docker compose --env-file deploy/compose.empty.env -f deploy/targets.compose.yaml -p service-desk-targets up -d
+./scripts/operator-service.ps1 Start
+& ./.venv/Scripts/python.exe -B scripts/operator_health.py
+```
+
+Read [the operator guide](../docs/phase-8/HANDOVER.md) for daily use, status
+meanings, identity renewal, backup/recovery and safe shutdown. `ready` is a
+point-in-time diagnostic, not proof that every open case is resolved.
 
 Stop only this project's services, without deleting data:
 
 ```powershell
-powershell -NoProfile -File scripts/runtime.ps1 stop-n8n
-powershell -NoProfile -File scripts/runtime.ps1 stop-db
+./scripts/operator-service.ps1 Stop
+docker compose --env-file deploy/compose.empty.env -f deploy/targets.compose.yaml -p service-desk-targets stop
+./scripts/runtime.ps1 stop-db
 ```
 
-Both services use `restart: no` so restarting Docker does not automatically start
-this lab. Start database first and n8n second. No other project's services are changed.
+No other project's containers are changed. A host reboot does not automatically
+start the supervisor; restart the owned services as described in the operator
+guide.
+
+## Optional n8n comparison
+
+n8n is **not required** for the delivered code-led runtime. If you explicitly
+want to inspect the retained workflow prototypes, start this project's n8n
+only after the database is healthy:
+
+```powershell
+./scripts/runtime.ps1 start-n8n
+```
+
+Open `http://localhost:5678` and create its local instance owner account
+yourself. The n8n account is separate from Atlassian. Stop it with
+`./scripts/runtime.ps1 stop-n8n`; this does not stop the code-led operator.
 
 ## Storage and credentials
 
 - Project/network: `service-desk-lab`, `service-desk-lab_service_desk`.
-- Data volumes: `service-desk-lab_postgres_data`, `service-desk-lab_n8n_data`.
-- External private secret volumes: `service-desk-lab_secrets` and
-  `service-desk-lab_n8n_secrets`. The latter contains only n8n's DB password and key.
+- Data volumes: `service-desk-lab_postgres_data`; optional n8n uses
+  `service-desk-lab_n8n_data`.
+- External private secret volumes: `service-desk-lab_secrets` and, when n8n is
+  enabled, `service-desk-lab_n8n_secrets`. The latter contains only n8n's DB
+  password and key.
 - Generated source secrets: `%LOCALAPPDATA%\ServiceDeskLab\secrets`, outside OneDrive
   and Git, with restricted Windows directory permissions. Never print their contents.
 - Compose always receives the explicit empty `deploy/compose.empty.env`; it never
@@ -45,7 +95,9 @@ this lab. Start database first and n8n second. No other project's services are c
 Separate DB owners `service_desk_app` and `service_desk_n8n` have no superuser,
 create-role or create-database privileges. Cross-database connections are denied.
 DB ownership supports future migrations; it is not a final least-privilege API role.
-Application tenant authorization is still a separate implementation task.
+The local API binds trusted identities to tenants and enforces tenant checks;
+the PostgreSQL runtime has RLS and cross-tenant denial tests. Those controls
+do not constitute a production identity provider or enterprise access review.
 
 ## Resource policy
 

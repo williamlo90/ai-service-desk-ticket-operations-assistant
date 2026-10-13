@@ -137,3 +137,8 @@ support ownership. Cloud hosting is optional and requires separate acceptance.
 Future changes start with native tests, then use a reserved runtime session for
 affected integrations. Historical results retain their original environment and
 phase references.
+
+## License
+
+Original project code and documentation are available under the [MIT License](LICENSE).
+The vendored Primer CSS retains its [separate MIT license](backend/service_desk/web/vendor/primer-LICENSE).

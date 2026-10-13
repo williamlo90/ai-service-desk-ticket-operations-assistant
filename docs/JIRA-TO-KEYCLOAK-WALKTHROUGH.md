@@ -26,6 +26,11 @@ For IT-1, the [human journey report](phase-5/human-approved-access.json) records
 
 ![Synthetic approval screen illustrating the proposal a supervisor reviews](assets/case-review.png)
 
+The [approval-page tour](WEB-UI.md#three-states-after-review) shows separate
+synthetic examples of approval recorded, verified closure and an uncertain
+outcome. The IT-1 connected evidence above remains the source for the real lab
+grant.
+
 ## The outcome, without a target UI screenshot
 
 The Keycloak lab container is not running for this documentation pass. Instead of presenting a recreated console screen, this excerpt reproduces selected fields from the [connected acceptance record](phase-5/human-approved-access.json):

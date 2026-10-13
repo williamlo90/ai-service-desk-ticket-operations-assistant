@@ -1,8 +1,10 @@
 # Local MCP reference implementation
 
-Eight strict tools call the shared Python service through a bounded JSON-lines
-subprocess. The MCP boundary itself is the SDK stdio transport; the private
-Python bridge is not a second MCP implementation. No Docker or network listener.
+Eight strict tools expose bounded service-desk operations through the SDK's
+MCP stdio transport. The offline test mode calls a disposable Python JSON-lines
+bridge; connected local mode calls the loopback HTTP API backed by PostgreSQL.
+The private bridge is not a second MCP implementation. Neither mode gives the
+tool caller approval authority.
 
 Prerequisites: Python 3.12/3.13 on PATH, Node 22 (tested 22.19.0), npm. From here:
 
@@ -47,12 +49,10 @@ Requests are capped at 16 KiB, outputs at 60 KiB, pending calls at 16 and bridge
 waits at 5 seconds. There is no retry. A cancelled/timed-out dispatched call is
 reported as outcome unknown; cancellation does not promise rollback.
 
-Covered: initialization/discovery, schema rejection, tenant filtering, auditor
-write denial, proposal approval boundary, verified close, replay, adverse-evidence
-reopen denial, CLI client and cancellation before/after dispatch. Runtime identity
-rotation/expiry, persisted restart, backend timeout recovery, remote transport,
-Jira connection and end-to-end correlation remain Phase 5/7 work. Stdio identity
-is an explicit process binding, not a production credential lifecycle.
+The eight offline Node tests cover initialization/discovery, schema rejection,
+tenant filtering, auditor write denial, proposal approval boundary, verified
+close, replay, adverse-evidence reopen denial, CLI client and cancellation
+before/after dispatch. They do not themselves contact Jira or Keycloak.
 
 ## Connected local mode (Phase 5)
 
@@ -68,3 +68,15 @@ unknown commands, bounds streamed responses, and never retries. Cancellation or
 transport ambiguity requires read-back. Eight local Node tests cover both modes;
 the real PostgreSQL + HTTP + MCP scenario is run separately by
 scripts/check_postgres_contracts.py (which invokes test/connected.mjs).
+
+The [Phase 5 local gate](../docs/phase-5/CURRENT-GATES.md) records connected
+Jira/Keycloak acceptance, including William's browser-approved IT-1 grant and
+target read-back. The [Phase 7 exercise](../docs/phase-7/CURRENT.md) covers
+persisted restart, lost receipts and concurrent replay on isolated synthetic
+targets; the [Phase 8 handover](../docs/phase-8/README.md) covers bounded local
+identity renewal and operating procedures. These are linked lab evidence,
+not claims that the eight offline MCP tests repeat the live integrations.
+
+Remote MCP transport/OAuth, production identity lifecycle, hosted deployment
+and long-running capacity are outside the accepted local scope. Stdio identity
+remains an explicit process binding.
